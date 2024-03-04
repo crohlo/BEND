@@ -1,14 +1,21 @@
 Package: BEND
-Title: What the Package Does (One Line, Title Case)
+Title: Bayesian Estimation of Nonlinear Data (BEND)
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+  person("Corissa T.", "Rohloff", email = "corissa.wurth@gmail.com", role = c("aut","cre"), comment = c(ORCID = "0000-0003-3228-4653")),
+  person("Rik", "Lamm", email = " rzlamm@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-3317-6243")),
+  person("Yadira", "Peralta", email = "XXX ", role = "aut", comment = c(ORCID = "0000-0003-4823-6939")),
+  person("Nidhi", "Kohli", email = "nkohli@umn.edu", role = "aut", comment = c(ORCID = "0000-0003-4690-2854")),
+  person("Eric F.", "Lock", email = "elock@umn.edu", role = "aut", comment = c(ORCID = "0000-0003-4663-2356")))
+Description: Provides a set of models to estimate nonlinear longitudinal data using Bayesian estimation methods. These models include the: 1) Bayesian Piecewise Random Effects Model (Bayes_PREM) which estimates a piecewise random effects (mixture) model for a given number of latent classes and a latent number of possible changepoints in each class, and can incorporate class and outcome predictive covariates, 2) Bayesian Crossed Random Effects Model (Bayes_CREM) which estimates a linear, quadratic, exponential, or piecewise crossed random effects models where individuals are changing groups over time (e.g., students and schools), and 3) Bayesian Bivariate Piecewise Random Effects Model (Bayes_BPREM) which estimates a bivariate piecewise random effects model to jointly model two related outcomes (e.g., reading and math achievement). 
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 URL: https://github.com/crohlo/BEND
 BugReports: https://github.com/crohlo/BEND/issues
+Depends: R (>= 3.6.3)
+Imports: 
+    coda (>= 0.19.4),
+    label.switching (>= 1.8),
+    rjags (>= 4.14)
