@@ -25,6 +25,8 @@
 #'
 #' @examples
 #'
+#' @import stats
+#'
 #' @export
 Bayes_BPREM <- function(data,
                         id_var, time_var, y1_var, y2_var,

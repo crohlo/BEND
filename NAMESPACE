@@ -3,3 +3,4 @@
 export(Bayes_BPREM)
 export(Bayes_CREM)
 export(Bayes_PREM)
+import(stats)

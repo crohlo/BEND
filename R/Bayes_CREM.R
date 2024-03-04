@@ -27,6 +27,8 @@
 #'
 #' @examples
 #'
+#' @import stats
+#'
 #' @export
 Bayes_CREM <- function(data,
                        ind_id_var, cross_id_var, time_var, y_var,
@@ -110,7 +112,9 @@ Bayes_CREM <- function(data,
 
   ## Compile Info for Initial Values
   initial_vals <- vector('list', n_chains)
-  for(i in 1:n_chains){initial_vals[[i]]$beta_mean <- fixed_effects}
+  if(!is.null(fixed_effects)){
+    for(i in 1:n_chains){initial_vals[[i]]$beta_mean <- fixed_effects}
+  }
 
   cat("Calibrating MCMC...\n")
   if(!is.null(fixed_effects)) full_model <- rjags::jags.model(full_spec,

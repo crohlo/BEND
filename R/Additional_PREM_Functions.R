@@ -60,7 +60,7 @@ Realign_ECR <- function(output, n_class, model=NULL){
   for(i in 1:n_subj){
     class_matrix[,i] <- as.vector(output$class[i,,])
   }
-  permutes <- ecr.iterative.1(class_matrix, n_class)$permutations
+  permutes <- label.switching::ecr.iterative.1(class_matrix, n_class)$permutations
 
   perm_chain <- list()
   perm_chain[[1]] <- permutes[1:n_iter,]
@@ -92,7 +92,7 @@ Realign_ECR <- function(output, n_class, model=NULL){
   for(i in 1:n_subj){
     class_matrix[,i] <- as.vector(output$class[i,,])
   }
-  permutes <- ecr.iterative.1(class_matrix, n_class)$permutations
+  permutes <- label.switching::ecr.iterative.1(class_matrix, n_class)$permutations
 
   perm_chain <- list()
   perm_chain[[1]] <- permutes[1:n_iter,]

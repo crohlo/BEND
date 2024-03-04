@@ -32,6 +32,8 @@
 #'
 #' @examples
 #'
+#' @import stats
+#'
 #' @export
 Bayes_PREM <- function(data,
                        id_var, time_var, y_var,
@@ -51,7 +53,7 @@ Bayes_PREM <- function(data,
   run_time_total_start <- Sys.time()
 
   ## Load module to compute DIC
-  load.module('dic')
+  rjags::load.module('dic')
 
   ## Set number of chains - will use 3 chains across all models
   n_chains <- 3
@@ -174,19 +176,19 @@ Bayes_PREM <- function(data,
     if(n_cov_outcome_predictive>0) data_list$outcome_predictive_covariates <- outcome_predictive_covariates
 
     cat('Computing initial values...\n')
-    init_fixed_model <- jags.model(init_fixed_spec,
-                                   data=data_list,
-                                   n.chains=n_chains,
-                                   n.adapt=500,
-                                   quiet=TRUE)
+    init_fixed_model <- rjags::jags.model(init_fixed_spec,
+                                          data=data_list,
+                                          n.chains=n_chains,
+                                          n.adapt=500,
+                                          quiet=TRUE)
     ## burn-in
     update(init_fixed_model, 2000)
 
     ## sampling
-    init_fixed_out <- jags.samples(init_fixed_model,
-                                   variable.names=param_recovery_init,
-                                   n.iter=2000,
-                                   thin=4)
+    init_fixed_out <- rjags::jags.samples(init_fixed_model,
+                                          variable.names=param_recovery_init,
+                                          n.iter=2000,
+                                          thin=4)
 
     ### Compiling Initialization Results ----
 
@@ -290,12 +292,12 @@ Bayes_PREM <- function(data,
     if(n_cov_outcome_predictive>0) data_list$outcome_predictive_covariates <- outcome_predictive_covariates
 
     cat('Calibrating MCMC...\n')
-    full_model <- jags.model(full_spec,
-                             data=data_list,
-                             inits=initial_vals,
-                             n.chains=n_chains,
-                             n.adapt=iters_adapt,
-                             quiet=TRUE)
+    full_model <- rjags::jags.model(full_spec,
+                                    data=data_list,
+                                    inits=initial_vals,
+                                    n.chains=n_chains,
+                                    n.adapt=iters_adapt,
+                                    quiet=TRUE)
 
     # burn-in
     cat('Running burn-in...\n')
@@ -303,10 +305,10 @@ Bayes_PREM <- function(data,
 
     # sampling
     cat('Collecting samples...\n')
-    full_out <- jags.samples(full_model,
-                             variable.names=param_recovery_full,
-                             n.iter=iters_sampling,
-                             thin=thin)
+    full_out <- rjags::jags.samples(full_model,
+                                    variable.names=param_recovery_full,
+                                    n.iter=iters_sampling,
+                                    thin=thin)
 
     ## Permute changepoint labels, if necessary, so they are ordered correctly
     full_out <- Permute_CP(output=full_out,
@@ -340,19 +342,19 @@ Bayes_PREM <- function(data,
       if(cp_prior=='uniform') data_list$aux_prob <- aux_prob
 
       cat('Computing initial values...\n')
-      init_fixed_model <- jags.model(init_fixed_spec,
-                                     data=data_list,
-                                     n.chains=n_chains,
-                                     n.adapt=500,
-                                     quiet=TRUE)
+      init_fixed_model <- rjags::jags.model(init_fixed_spec,
+                                            data=data_list,
+                                            n.chains=n_chains,
+                                            n.adapt=500,
+                                            quiet=TRUE)
       ## burn-in
       update(init_fixed_model, 2000)
 
       ## sampling
-      init_fixed_out <- jags.samples(init_fixed_model,
-                                     variable.names=param_recovery_init,
-                                     n.iter=2000,
-                                     thin=4)
+      init_fixed_out <- rjags::jags.samples(init_fixed_model,
+                                            variable.names=param_recovery_init,
+                                            n.iter=2000,
+                                            thin=4)
 
       ### Compiling Initialization Results ----
 
@@ -448,12 +450,12 @@ Bayes_PREM <- function(data,
       if(cp_prior=='uniform') data_list$aux_prob <- aux_prob
 
       cat('Calibrating MCMC...\n')
-      full_model <- jags.model(full_spec,
-                               data=data_list,
-                               inits=initial_vals,
-                               n.chains=n_chains,
-                               n.adapt=iters_adapt,
-                               quiet=TRUE)
+      full_model <- rjags::jags.model(full_spec,
+                                      data=data_list,
+                                      inits=initial_vals,
+                                      n.chains=n_chains,
+                                      n.adapt=iters_adapt,
+                                      quiet=TRUE)
 
       # burn-in
       cat('Running burn-in...\n')
@@ -461,10 +463,10 @@ Bayes_PREM <- function(data,
 
       # sampling
       cat('Collecting samples...\n')
-      full_out <- jags.samples(full_model,
-                               variable.names=param_recovery_full,
-                               n.iter=iters_sampling,
-                               thin=thin)
+      full_out <- rjags::jags.samples(full_model,
+                                      variable.names=param_recovery_full,
+                                      n.iter=iters_sampling,
+                                      thin=thin)
 
       ## Permute changepoint labels, if necessary, so they are ordered correctly
       full_out <- Permute_CP(output=full_out,
@@ -515,19 +517,19 @@ Bayes_PREM <- function(data,
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
 
       cat('Computing initial values...\n')
-      init_fixed_model <- jags.model(init_fixed_spec,
-                                     data=data_list,
-                                     n.chains=n_chains,
-                                     n.adapt=500,
-                                     quiet=TRUE)
+      init_fixed_model <- rjags::jags.model(init_fixed_spec,
+                                            data=data_list,
+                                            n.chains=n_chains,
+                                            n.adapt=500,
+                                            quiet=TRUE)
       ## burn-in
       update(init_fixed_model, 2000)
 
       ## sampling
-      init_fixed_out <- jags.samples(init_fixed_model,
-                                     variable.names=param_recovery_init,
-                                     n.iter=2000,
-                                     thin=4)
+      init_fixed_out <- rjags::jags.samples(init_fixed_model,
+                                            variable.names=param_recovery_init,
+                                            n.iter=2000,
+                                            thin=4)
 
       ### Compiling Initialization Results ----
 
@@ -655,12 +657,12 @@ Bayes_PREM <- function(data,
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
 
       cat('Calibrating MCMC...\n')
-      full_model <- jags.model(full_spec,
-                               data=data_list,
-                               inits=initial_vals,
-                               n.chains=n_chains,
-                               n.adapt=iters_adapt,
-                               quiet=TRUE)
+      full_model <- rjags::jags.model(full_spec,
+                                      data=data_list,
+                                      inits=initial_vals,
+                                      n.chains=n_chains,
+                                      n.adapt=iters_adapt,
+                                      quiet=TRUE)
 
       # burn-in
       cat('Running burn-in...\n')
@@ -668,10 +670,10 @@ Bayes_PREM <- function(data,
 
       # sampling
       cat('Collecting samples...\n')
-      full_out <- jags.samples(full_model,
-                               variable.names=param_recovery_full,
-                               n.iter=iters_sampling,
-                               thin=thin)
+      full_out <- rjags::jags.samples(full_model,
+                                      variable.names=param_recovery_full,
+                                      n.iter=iters_sampling,
+                                      thin=thin)
 
       ## Permute changepoint labels, if necessary, so they are ordered correctly
       full_out <- Permute_CP(output=full_out,
@@ -708,8 +710,8 @@ Bayes_PREM <- function(data,
   # error variance
   full_out$for_conv[n_params,,] <- full_out$sigma2_error
 
-  mcmc_list <- as.mcmc.list(full_out$for_conv)
-  gelman_msrf <- gelman.diag(mcmc_list)
+  mcmc_list <- coda::as.mcmc.list(full_out$for_conv)
+  gelman_msrf <- coda::gelman.diag(mcmc_list)
 
   # Initialize the parameter vector
   param_names <- c('NA')
