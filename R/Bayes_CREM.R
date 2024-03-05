@@ -199,8 +199,8 @@ Bayes_CREM <- function(data,
                      'Functional_Form'=form,
                      'Parameter_Estimates'=param_est,
                      'Run_Time'=format(run_time_total))
-  if(save_full_chains==TRUE){my_results$mcmc_chains=full_out}
-  if(save_conv_chains==TRUE){my_results$mcmc_list=mcmc_list}
+  if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
+  if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list}
   class(my_results) <- 'CREM'
   return(my_results)
 }

@@ -190,9 +190,8 @@ Bayes_BPREM <- function(data,
                      'Fitted_Values'=y_mean,
                      'Parameter_Estimates'=param_est,
                      'Run_Time'=format(run_time_total))
-
-  if(save_full_chains==TRUE){my_results$mcmc_chains=full_out}
-  if(save_conv_chains==TRUE){my_results$mcmc_list=mcmc_list}  # TODO update to only include conv params
+  if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
+  if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list[,1:47]}
   class(my_results) <- 'BPREM'
   return(my_results)
 }
