@@ -19,3 +19,4 @@ Imports:
     coda (>= 0.19.4),
     label.switching (>= 1.8),
     rjags (>= 4.14)
+LazyData: true
