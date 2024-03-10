@@ -1,34 +1,51 @@
 #' Bayesian Piecewise Random Effects Model (PREM) + Extensions
 #'
-#' @description
-#' A short description...
+#' @description Estimates a Bayesian piecewise random effects model (Bayes_PREM), with some useful extensions. There are three model options included in this function:
+#' * `PREM` estimates a Bayesian piecewise random effects model with a latent number of changepoints. Allows the inclusion of outcome-predictive covariates (CI-PREM).
+#' * `PREMM` estimates a piecewise random effects mixture model for a given number of latent classes and a latent number of possible changepoints in each class.
+#' * `CI-PREMM` estimates a covariate influenced piecewise random effects mixture model for a given number of latent classes and a latent number of possible changepoints in each class. Allows the inclusion of outcome- and/or class-predictive covariates.
+#' See Lock et al. (2018) and Lamm (2022) for more details.
 #'
-#' @param data
-#' @param id_var
-#' @param time_var
-#' @param y_var
-#' @param n_class
-#' @param max_cp
-#' @param class_predictive_vars
-#' @param outcome_predictive_vars
-#' @param scale_prior
-#' @param alpha
-#' @param cp_prior
-#' @param binom_prob
-#' @param iters_adapt
-#' @param iters_burn_in
-#' @param iters_sampling
-#' @param thin
-#' @param save_full_chains
-#' @param save_conv_chains
+#' @param data Data frame in long format, where each row describes a measurement occasion for a given individual. It is assumed that each individual has the same number of assigned timepoints (a.k.a., rows). There can be missingness in the outcome (`y_var`), but there cannot be missingness in time (`time_var`).
+#' @param id_var Name of column that contains ids for individuals with repeated measures in a longitudinal dataset.
+#' @param time_var Name of column that contains the time variable. This column cannot contain any missing values.
+#' @param y_var Name of column that contains the outcome variable. Missing values should be denoted by NA.
+#' @param n_class Number of latent classes (default = 1). Note, CI-PREMM only allows for two classes.
+#' @param max_cp Maximum number of changepoints in each latent class (default = 2).
+#' @param class_predictive_vars Name(s) of column(s) that contain class-predictive covariates (time-invariant only). Give a vector of names if multiple covariates. Note, there cannot be any missingness in the covariates.
+#' @param outcome_predictive_vars Name(s) of column(s) that contain outcome-predictive covariates (time-varying or -invariant). Give a vector of names if multiple covariates. Note, there cannot be any missingness in the covariates.
+#' @param scale_prior Prior for the scale parameter for the hierarchical random effects. Options include: ‘uniform’ (scaled uniform prior; default) or ‘hc’ (scaled half-cauchy prior).
+#' @param alpha Concentration parameter for Dirichlet prior for latent classes (default = 1). This can be a vector of values corresponding to the number of classes (specified by n_class). Note, this is not used for CI-PGMM.
+#' @param cp_prior Prior for the number of changepoints in each class. Options include: 'binomial' (default) or 'uniform'.
+#' @param binom_prob Probability for binomial prior, if specified (default = 0.5).
+#' @param iters_adapt (optional) Number of iterations for adaptation of jags model (default = 1000).
+#' @param iters_burn_in (optional) Number of iterations for burn-in (default = 20000).
+#' @param iters_sampling (optional) Number of iterations for posterior sampling (default = 30000).
+#' @param thin (optional) Thinning interval for posterior sampling (default = 15).
+#' @param save_full_chains Logical indicating whether the MCMC chains from rjags should be saved (default = FALSE). Note, this should not be used regularly as it will result in an object with a large file size.
+#' @param save_conv_chains Logical indicating whether the MCMC chains from rjags should be saved but only for the parameters monitored for convergence (default = FALSE). This would be useful for plotting traceplots for relevant model parameters to evaluate convergence behavior. Note, this should not be used regularly as it will result in an object with a large file size.
 #'
-#' @return
+#' @returns A list (an object of class `PREM`) with elements:
+#' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
+#' \item{Model_Fit}{Deviance (`deviance`), effective number of parameters (`pD`), and Deviance information criterion (`dic`) to assess model fit.}
+#' \item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+#' \item{Parameter_Estimates}{Data frame with posterior mean and 95% credible intervals for each model parameter.}
+#' \item{Run_Time}{Total run time for model fitting.}
+#' \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
+#' \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
+#' `Class_Information` contains a list with elements:
+#' \item{class_membership}{Vector of length n with class membership assignments for each individual.}
+#' \item{individ_class_probability}{nxC matrix with each individual’s probabilities of belonging to each class conditional on their class-predictive covariates (when applicable) and growth curve.}
+#' \item{unconditional_class_probability}{This output will differ based on which model was fit. For a PREM or CI-PREM, this will equal 1 as there is only one class. For a PREMM or CI-PREMM with only outcome-predictive covariates, this will be a vector of length C denoting the population probability of belonging to each class. For a CI-PREMM with class-predictive covariates, this will be a vector of length n denoting the probability of each individual belonging to the non-reference class (Class 2) based on their class-predictive covariates only.}
 #'
-#' @section Details:
+#' @details
+#' For more information on the model equation and priors implemented in this function, see Lamm et al. (2022; CI-PREMM) and Lock et al. (2018; PREMM).
 #'
-#' @author Corissa T. Rohloff
+#' @author Corissa T. Rohloff, Rik Lamm, Eric F. Lock
 #'
-#' @references reference
+#' @references Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. http://conservancy.umn.edu/handle/11299/252533
+#'
+#' Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random changepoints in Bayesian piecewise growth mixture models. Psychometrika, 83(3), 733–750. https://doi.org/10.1007/s11336-017-9594-5
 #'
 #' @examples
 #'

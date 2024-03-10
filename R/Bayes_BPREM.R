@@ -1,27 +1,34 @@
 #' Bayesian Bivariate Piecewise Random Effects Model (BPREM)
 #'
-#' @description
-#' A short description...
+#' @description Estimates a Bayesian bivariate piecewise random effects models (BPREM) for longitudinal data with two interrelated outcomes. See Peralta et al. (2022) for more details.
 #'
-#' @param data
-#' @param id_var
-#' @param time_var
-#' @param y1_var
-#' @param y2_var
-#' @param iters_adapt
-#' @param iters_burn_in
-#' @param iters_sampling
-#' @param thin
-#' @param save_full_chains
-#' @param save_conv_chains
+#' @param data Data frame in long format, where each row describes a measurement occasion for a given individual. It is assumed that each individual has the same number of assigned timepoints (a.k.a., rows). There can be missingness in the outcomes (`y1_var` and ` y2_var`), but there cannot be missingness in time (`time_var`).
+#' @param id_var Name of column that contains ids for individuals with repeated measures in a longitudinal dataset.
+#' @param time_var Name of column that contains the time variable. This column cannot contain any missing values.
+#' @param y1_var Name of column that contains the first outcome variable. Missing values should be denoted by NA.
+#' @param y2_var Name of column that contains the second outcome variable. Missing values should be denoted by NA.
+#' @param iters_adapt (optional) Number of iterations for adaptation of jags model (default = 5000).
+#' @param iters_burn_in (optional) Number of iterations for burn-in (default = 100000).
+#' @param iters_sampling (optional) Number of iterations for posterior sampling (default = 50000).
+#' @param thin (optional) Thinning interval for posterior sampling (default = 15).
+#' @param save_full_chains Logical indicating whether the MCMC chains from rjags should be saved (default = FALSE). Note, this should not be used regularly as it will result in an object with a large file size.
+#' @param save_conv_chains Logical indicating whether the MCMC chains from rjags should be saved but only for the parameters monitored for convergence (default = FALSE). This would be useful for plotting traceplots for relevant model parameters to evaluate convergence behavior. Note, this should not be used regularly as it will result in an object with a large file size.
 #'
-#' @return
+#' @returns A list (an object of class `BPREM`) with elements:
+#' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
+#' \item{Model_Fit}{Deviance (`deviance`), effective number of parameters (`pD`), and Deviance information criterion (`dic`) to assess model fit.}
+#' \item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+#' \item{Parameter_Estimates}{Data frame with posterior mean and 95% credible intervals for each model parameter.}
+#' \item{Run_Time}{Total run time for model fitting.}
+#' \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
+#' \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
 #'
-#' @section Details:
+#' @details
+#' For more information on the model equation and priors implemented in this function, see Peralta et al. (2022).
 #'
-#' @author Corissa T. Rohloff
+#' @author Corissa T. Rohloff, Yadira Peralta
 #'
-#' @references reference
+#' @references Peralta, Y., Kohli, N., Lock, E. F., & Davison, M. L. (2022). Bayesian modeling of associations in bivariate piecewise linear mixed-effects models. Psychological Methods, 27(1), 44–64. https://doi.org/10.1037/met0000358
 #'
 #' @examples
 #'
