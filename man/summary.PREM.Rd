@@ -17,6 +17,20 @@ Prints estimates for key parameters in the PREM. Also returns a list of these va
 \description{
 Provides a summary of a PREM model, as returned by \code{Bayes_PREM()}.
 }
+\examples{
+\dontrun{
+# load simulated data
+data(SimData_PREM)
+# fit Bayes_PREM
+results_prem <- Bayes_PREM(data = SimData_PREM,
+                           id_var = "id",
+                           time_var = "time",
+                           y_var = "y")
+# result summary
+summary(results_prem)
+}
+
+}
 \author{
 Corissa T. Rohloff
 }

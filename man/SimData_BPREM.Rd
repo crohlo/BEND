@@ -5,20 +5,20 @@
 \alias{SimData_BPREM}
 \title{Simulated data for a BPREM}
 \format{
-A data frame with 210 rows and 4 variables
+A data frame with 210 rows and 4 variables.
 }
 \usage{
 data(SimData_BPREM)
 }
 \description{
-Simulated data for a bivariate piecewise random effects model (BPREM) with 7 timepoints collected on 30 individuals. The variables are as follows:
+Simulated data for a bivariate piecewise random effects model (BPREM) with 7 timepoints collected on 30 individuals.
 }
 \details{
 \itemize{
-\item id - id for each individual
-\item time - timepoints for each individual
-\item y1 - outcome 1
-\item y2 - outcome 2
+\item \code{id} ID for each individual.
+\item \code{time} Timepoints for each individual.
+\item \code{y1} Outcome 1.
+\item \code{y2} Outcome 2.
 }
 }
 \keyword{datasets}

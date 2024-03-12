@@ -5,20 +5,20 @@
 \alias{SimData_PCREM}
 \title{Simulated data for a PCREM}
 \format{
-A data frame with 210 rows and 4 variables
+A data frame with 210 rows and 4 variables.
 }
 \usage{
 data(SimData_PCREM)
 }
 \description{
-Simulated data for a piecewise crossed random effects model (PCREM) with 7 timepoints collected on 30 individuals. The variables are as follows:
+Simulated data for a piecewise crossed random effects model (PCREM) with 7 timepoints collected on 30 individuals.
 }
 \details{
 \itemize{
-\item id - id for each individual
-\item teacherid - id for each teacher
-\item time - timepoints for each individual
-\item y - outcome
+\item \code{id} ID for each individual.
+\item \code{teacherid} ID for each teacher.
+\item \code{time} Timepoints for each individual.
+\item \code{y} Outcome.
 }
 }
 \keyword{datasets}

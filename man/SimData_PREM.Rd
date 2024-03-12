@@ -5,19 +5,19 @@
 \alias{SimData_PREM}
 \title{Simulated data for a PREM}
 \format{
-A data frame with 200 rows and 3 variables
+A data frame with 200 rows and 3 variables.
 }
 \usage{
 data(SimData_PREM)
 }
 \description{
-Simulated data for a piecewise random effects model (PREM) with 10 timepoints collected on 20 individuals. The variables are as follows:
+Simulated data for a piecewise random effects model (PREM) with 10 timepoints collected on 20 individuals.
 }
 \details{
 \itemize{
-\item id - id for each individual
-\item time - timepoints for each individual
-\item y - outcome
+\item \code{id} ID for each individual.
+\item \code{time} Timepoints for each individual.
+\item \code{y} Outcome.
 }
 }
 \keyword{datasets}

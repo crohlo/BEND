@@ -11,6 +11,17 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \dontrun{
+#' # load simulated data
+#' data(SimData_PREM)
+#' # fit Bayes_PREM
+#' results_prem <- Bayes_PREM(data = SimData_PREM,
+#'                            id_var = "id",
+#'                            time_var = "time",
+#'                            y_var = "y")
+#' # result summary
+#' summary(results_prem)
+#' }
 #'
 #' @export
 summary.PREM <- function(object, ...){
@@ -38,20 +49,20 @@ summary.PREM <- function(object, ...){
     class_num <- paste0("Class_", i)
     cp_num <- paste0("K_", changepoints)[i]
     # fixed effects
-    coeff_mat[1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[1]
-    coeff_mat[2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[2]
+    coeff_mat[1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[1]
+    coeff_mat[2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[2]
     # random effects
-    coeff_mat[max_cp*2+2+1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_var[1]
-    coeff_mat[max_cp*2+2+2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_var[2]
+    coeff_mat[max_cp*2+2+1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[1]
+    coeff_mat[max_cp*2+2+2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[2]
     # if there are changepoints (beyond linear)
     if(changepoints[i]>0){
       for(k in 1:changepoints[i]){
         # fixed effects
         coeff_mat[2*k+1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_mean[k]
-        coeff_mat[2*k+2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[k+2]
+        coeff_mat[2*k+2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[k+2]
         # random effects
         coeff_mat[k*2+(max_cp*2+2+1),i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_var[k]
-        coeff_mat[k*2+(max_cp*2+2+2),i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_var[k+2]
+        coeff_mat[k*2+(max_cp*2+2+2),i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[k+2]
       }
     }
   }
@@ -63,8 +74,8 @@ summary.PREM <- function(object, ...){
   my_rownames[max_cp*2+2+1] = "Interept Var"
   my_rownames[max_cp*2+2+2] = "Slope Var"
   for(k in 1:max_cp){
-    my_rownames[2*k+1] = paste0("Changepoint Mean ", k)
-    my_rownames[2*k+2] = paste0("Change in Slope Mean ", k)
+    my_rownames[2*k+1] = paste0("Changepoint ", k, " Mean")
+    my_rownames[2*k+2] = paste0("Change in Slope ", k, " Mean")
     my_rownames[k*2+(max_cp*2+2+1)] = paste0("Changepoint ", k, " Var")
     my_rownames[k*2+(max_cp*2+2+2)] = paste0("Change in Slope ", k, " Var")
   }
@@ -99,7 +110,7 @@ summary.PREM <- function(object, ...){
 
   # PRINT output -----
   cat("Class Dependent Parameters:\n")
-  print(coeff_mat, digits=3)
+  print(coeff_mat, digits=3, na.print="")
   cat("\n")
   cat("Class Independent Parameters:\n")
   print(coeff_addit, digits=3)

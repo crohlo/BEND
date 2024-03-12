@@ -11,6 +11,19 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \dontrun{
+#' # load simulated data
+#' data(SimData_PCREM)
+#' # fit Bayes_CREM
+#' results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+#'                             ind_id_var = "id",
+#'                             cross_id_var = "teacherid",
+#'                             time_var = "time",
+#'                             y_var = "y",
+#'                             form="piecewise")
+#' # result summary
+#' # summary(results_pcrem)
+#' }
 #'
 #' @export
 summary.CREM <- function(object, ...){

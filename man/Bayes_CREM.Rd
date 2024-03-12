@@ -66,6 +66,31 @@ For more information on the model equation and priors implemented in this functi
 
 Note, this function differs from the above reference by estimating the covariances between the random effects parameters. The variance-covariance matrices of the individual and group random effects have a scaled inverse-Wishart prior (see Peralta et al., 2022).
 }
+\examples{
+# load simulated data
+data(SimData_PCREM)
+# plot observed data
+plot_BEND(data = SimData_PCREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y")
+# fit Bayes_CREM
+results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+                            ind_id_var = "id",
+                            cross_id_var = "teacherid",
+                            time_var = "time",
+                            y_var = "y",
+                            form="piecewise")
+# result summary
+summary(results_pcrem)
+# plot fitted results
+plot_BEND(data = SimData_PCREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_pcrem)
+
+}
 \references{
 Peralta, Y., Kohli, N., Lock, E. F., & Davison, M. L. (2022). Bayesian modeling of associations in bivariate piecewise linear mixed-effects models. Psychological Methods, 27(1), 44–64. https://doi.org/10.1037/met0000358
 

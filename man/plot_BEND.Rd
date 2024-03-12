@@ -47,6 +47,30 @@ plot_BEND(
 \description{
 Generates a "spaghetti plot" of observed longitudinal trajectories for each individual. If the results from a \code{BEND} function are supplied, the trajectory defined by the mean parameters is shown in bold. If fitting a mixture (\code{PREMM} or \code{CI-PREMM}) or bivariate model (\code{BPREM}), the mean trajectories for classes or outcomes will be distinguished by color.
 }
+\examples{
+\dontrun{
+# load simulated data
+data(SimData_PREM)
+# plot observed data
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y")
+
+# fit Bayes_PREM
+results_prem <- Bayes_PREM(data = SimData_PREM,
+                           id_var = "id",
+                           time_var = "time",
+                           y_var = "y")
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_prem)
+}
+
+}
 \author{
 Corissa T. Rohloff
 }

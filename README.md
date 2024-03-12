@@ -6,7 +6,52 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of BEND is to …
+The goal of BEND is to provide a set of models to estimate nonlinear
+longitudinal data using Bayesian estimation methods. These models
+include the:
+
+1.  Bayesian Piecewise Random Effects Model (`Bayes_PREM`) which
+    estimates a piecewise random effects (mixture) model for a given
+    number of latent classes and a latent number of possible
+    changepoints in each class, and can incorporate class and outcome
+    predictive covariates (see Lamm, 2022 and Lock et al., 2018 for more
+    details).
+
+2.  Bayesian Crossed Random Effects Model (`Bayes_CREM`) which estimates
+    a linear, quadratic, exponential, or piecewise crossed random
+    effects models where individuals are changing groups over time
+    (e.g., students and schools; see Rohloff et al., 2024 for more
+    details).
+
+3.  Bayesian Bivariate Piecewise Random Effects Model (`Bayes_BPREM`)
+    which estimates a bivariate piecewise random effects model to
+    jointly model two related outcomes (e.g., reading and math
+    achievement; see Peralta et al., 2022 for more details).
+
+This package requires Just Another Gibbs Sampler (JAGS) to be installed
+on your computer (<http://mcmc-jags.sourceforge.net/>), and depends on
+the packages `rjags` and `label.switching`.
+
+### References
+
+Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise
+growth mixture models.
+<a href="http://conservancy.umn.edu/handle/11299/252533Lock"
+class="uri">http://conservancy.umn.edu/handle/11299/252533</a>
+
+Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random
+changepoints in Bayesian piecewise growth mixture models. Psychometrika,
+83(3), 733–750. <https://doi.org/10.1007/s11336-017-9594-5>
+
+Peralta, Y., Kohli, N., Lock, E. F., & Davison, M. L. (2022). Bayesian
+modeling of associations in bivariate piecewise linear mixed-effects
+models. Psychological Methods, 27(1), 44–64.
+<https://doi.org/10.1037/met0000358>
+
+Rohloff, C. T., Kohli, N., & Lock, E. F. (2024). Identifiability and
+estimability of Bayesian linear and nonlinear crossed random effects
+models. British Journal of Mathematical and Statistical Psychology.
+<https://doi.org/10.1111/bmsp.12334>
 
 ## Installation
 
@@ -15,38 +60,6 @@ You can install the development version of BEND from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("crohlo/BEND")
+library(devtools)
+install_github("crohlo/BEND")
 ```
-
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-# library(BEND)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

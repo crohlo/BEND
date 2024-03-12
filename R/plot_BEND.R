@@ -19,6 +19,27 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \dontrun{
+#' # load simulated data
+#' data(SimData_PREM)
+#' # plot observed data
+#' plot_BEND(data = SimData_PREM,
+#'           id_var = "id",
+#'           time_var = "time",
+#'           y_var = "y")
+#'
+#' # fit Bayes_PREM
+#' results_prem <- Bayes_PREM(data = SimData_PREM,
+#'                            id_var = "id",
+#'                            time_var = "time",
+#'                            y_var = "y")
+#' # plot fitted results
+#' plot_BEND(data = SimData_PREM,
+#'           id_var = "id",
+#'           time_var = "time",
+#'           y_var = "y",
+#'           results = results_prem)
+#' }
 #'
 #' @import graphics
 #'
@@ -132,13 +153,13 @@ plot_BEND <- function(data,
         if(k==0) I <- rep(0, max_cp)
         if(k>0) I <- c(rep(1,k), rep(0,max_cp-k+2))
         # i = k+1
-        int <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[1]
-        slope1 <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[2]
+        int <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[1]
+        slope1 <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[2]
 
         slope_cp <- rep(0,max_cp)
         cp <- rep(0,max_cp)
         if(k>0){
-          slope_cp[1:k] <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$b_mean[3:(k+2)]
+          slope_cp[1:k] <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[3:(k+2)]
           cp[1:k] <- results$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_mean[1:k]
         }
 

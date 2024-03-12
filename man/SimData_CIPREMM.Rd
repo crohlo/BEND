@@ -5,22 +5,22 @@
 \alias{SimData_CIPREMM}
 \title{Simulated data for a CI-PREMM}
 \format{
-A data frame with 540 rows and 6 variables
+A data frame with 540 rows and 6 variables.
 }
 \usage{
 data(SimData_CIPREMM)
 }
 \description{
-Simulated data for a covariate-influenced piecewise random effects mixture model (CI-PREMM) with 18 timepoints collected on 30 individuals. The variables are as follows:
+Simulated data for a covariate-influenced piecewise random effects mixture model (CI-PREMM) with 18 timepoints collected on 30 individuals.
 }
 \details{
 \itemize{
-\item id - id for each individual
-\item time - timepoints for each individual
-\item y - outcome
-\item class_pred_1 - first class predictive covariate (time-invariant)
-\item class_pred_2 - second class predictive covariate (time-invariant)
-\item outcome_pred_1 - outcome predictive covariate (time-varying)
+\item \code{id} ID for each individual.
+\item \code{time} Timepoints for each individual.
+\item \code{y} Outcome.
+\item \code{class_pred_1} First class predictive covariate (time-invariant).
+\item \code{class_pred_2} Second class predictive covariate (time-invariant).
+\item \code{outcome_pred_1} Outcome predictive covariate (time-varying).
 }
 }
 \keyword{datasets}

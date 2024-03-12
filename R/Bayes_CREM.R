@@ -40,6 +40,28 @@
 #' Rohloff, C. T., Kohli, N., & Lock, E. F. (2024). Identifiability and estimability of Bayesian linear and nonlinear crossed random effects models. British Journal of Mathematical and Statistical Psychology. https://doi.org/10.1111/bmsp.12334
 #'
 #' @examples
+#' # load simulated data
+#' data(SimData_PCREM)
+#' # plot observed data
+#' plot_BEND(data = SimData_PCREM,
+#'           id_var = "id",
+#'           time_var = "time",
+#'           y_var = "y")
+#' # fit Bayes_CREM
+#' results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+#'                             ind_id_var = "id",
+#'                             cross_id_var = "teacherid",
+#'                             time_var = "time",
+#'                             y_var = "y",
+#'                             form="piecewise")
+#' # result summary
+#' summary(results_pcrem)
+#' # plot fitted results
+#' plot_BEND(data = SimData_PCREM,
+#'           id_var = "id",
+#'           time_var = "time",
+#'           y_var = "y",
+#'           results = results_pcrem)
 #'
 #' @import stats
 #'
@@ -60,7 +82,7 @@ Bayes_CREM <- function(data,
   run_time_total_start <- Sys.time()
 
   ## Load module to compute DIC
-  rjags::load.module('dic')
+  suppressMessages(rjags::load.module('dic'))
 
   ## Set number of chains - will use 3 chains across all models
   n_chains <- 3

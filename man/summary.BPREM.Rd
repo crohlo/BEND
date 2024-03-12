@@ -17,6 +17,21 @@ Prints estimates for key parameters in the BPREM. Also returns a list of these v
 \description{
 Provides a summary of a BPREM model, as returned by \code{Bayes_BPREM()}.
 }
+\examples{
+\dontrun{
+# load simulated data
+data(SimData_BPREM)
+# fit Bayes_BPREM
+results_bprem <- Bayes_BPREM(data = SimData_BPREM,
+                             id_var = "id",
+                             time_var = "time",
+                             y1_var = "y1",
+                             y2_var = "y2")
+# result summary
+summary(results_bprem)
+}
+
+}
 \author{
 Corissa T. Rohloff
 }
