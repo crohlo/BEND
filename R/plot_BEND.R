@@ -11,8 +11,8 @@
 #' @param results The output of `BEND` model to the data. If results=NULL, only a spaghetti plot of the data will be generated.
 #' @param xlab X-axis label for the generated plot.
 #' @param ylab Y-axis label for the generated plot.
-#' @param colors Colors for each class (`PREMM` or `CI-PREMM`) or outcome (`BPREM`). By default, up to 5 colors are provided in the following order: “blue” (for class 1 and outcome 1), “red” (class 2 and outcome 2), “green” (class 3), “gold” (class 4), “gray” (class 5).
-#' @param mean_colors Colors for the trajectory defined by the mean parameters for each class (`PREMM` or `CI-PREMM`) or outcome (`BPREM`). By default, up to 5 colors are provided in the following order: “darkblue” (for class 1 and outcome 1), “darkred” (class 2 and outcome 2), “darkgreen” (class 3), “gold4” (class 4), “darkgray” (class 5).
+#' @param colors Colors for each class (`PREMM` or `CI-PREMM`) or outcome (`BPREM`). By default, up to 5 colors are provided in the following order: “blue” (class 1 and outcome 1), “red” (class 2 and outcome 2), “green” (class 3), “gold” (class 4), “gray” (class 5).
+#' @param mean_colors Colors for the trajectory defined by the mean parameters for each class (`PREMM` or `CI-PREMM`) or outcome (`BPREM`). By default, up to 5 colors are provided in the following order: “darkblue” (class 1 and outcome 1), “darkred” (class 2 and outcome 2), “darkgreen” (class 3), “gold4” (class 4), “darkgray” (class 5).
 #' @param legend_pos (optional) Option to change legend position (default = "topright").
 #' @param ... (optional) Other parameters to pass to the `plot()` function.
 #'

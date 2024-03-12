@@ -48,7 +48,6 @@
 #' Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random changepoints in Bayesian piecewise growth mixture models. Psychometrika, 83(3), 733–750. https://doi.org/10.1007/s11336-017-9594-5
 #'
 #' @examples
-#' \dontrun{
 #' # load simulated data
 #' data(SimData_PREM)
 #' # plot observed data
@@ -122,7 +121,6 @@
 #'           time_var = "time",
 #'           y_var = "y",
 #'           results = results_cipremm)
-#' }
 #'
 #' @import stats
 #'

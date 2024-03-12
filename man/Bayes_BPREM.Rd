@@ -58,7 +58,6 @@ Estimates a Bayesian bivariate piecewise random effects models (BPREM) for longi
 For more information on the model equation and priors implemented in this function, see Peralta et al. (2022).
 }
 \examples{
-\dontrun{
 # load simulated data
 data(SimData_BPREM)
 # plot observed data
@@ -72,7 +71,8 @@ results_bprem <- Bayes_BPREM(data = SimData_BPREM,
                              id_var = "id",
                              time_var = "time",
                              y1_var = "y1",
-                             y2_var = "y2")
+                             y2_var = "y2",
+                             iters_burn_in=50000)
 # result summary
 summary(results_bprem)
 # plot fitted results
@@ -82,7 +82,6 @@ plot_BEND(data = SimData_BPREM,
           y_var = "y1",
           y2_var = "y2",
           results = results_bprem)
-}
 
 }
 \references{

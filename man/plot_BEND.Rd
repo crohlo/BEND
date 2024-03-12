@@ -36,9 +36,9 @@ plot_BEND(
 
 \item{ylab}{Y-axis label for the generated plot.}
 
-\item{colors}{Colors for each class (\code{PREMM} or \code{CI-PREMM}) or outcome (\code{BPREM}). By default, up to 5 colors are provided in the following order: “blue” (for class 1 and outcome 1), “red” (class 2 and outcome 2), “green” (class 3), “gold” (class 4), “gray” (class 5).}
+\item{colors}{Colors for each class (\code{PREMM} or \code{CI-PREMM}) or outcome (\code{BPREM}). By default, up to 5 colors are provided in the following order: “blue” (class 1 and outcome 1), “red” (class 2 and outcome 2), “green” (class 3), “gold” (class 4), “gray” (class 5).}
 
-\item{mean_colors}{Colors for the trajectory defined by the mean parameters for each class (\code{PREMM} or \code{CI-PREMM}) or outcome (\code{BPREM}). By default, up to 5 colors are provided in the following order: “darkblue” (for class 1 and outcome 1), “darkred” (class 2 and outcome 2), “darkgreen” (class 3), “gold4” (class 4), “darkgray” (class 5).}
+\item{mean_colors}{Colors for the trajectory defined by the mean parameters for each class (\code{PREMM} or \code{CI-PREMM}) or outcome (\code{BPREM}). By default, up to 5 colors are provided in the following order: “darkblue” (class 1 and outcome 1), “darkred” (class 2 and outcome 2), “darkgreen” (class 3), “gold4” (class 4), “darkgray” (class 5).}
 
 \item{legend_pos}{(optional) Option to change legend position (default = "topright").}
 
