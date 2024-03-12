@@ -1,23 +1,6 @@
-#' Simulated data for a PREM
+#' Simulated data for a PREM + Extensions
 #'
-#' Simulated data for a piecewise random effects model (PREM) with 10 timepoints collected on 20 individuals.
-#'
-#' \itemize{
-#'   \item `id` ID for each individual.
-#'   \item `time` Timepoints for each individual.
-#'   \item `y` Outcome.
-#' }
-#'
-#' @docType data
-#' @keywords datasets
-#' @name SimData_PREM
-#' @usage data(SimData_PREM)
-#' @format A data frame with 200 rows and 3 variables.
-NULL
-
-#' Simulated data for a CI-PREMM
-#'
-#' Simulated data for a covariate-influenced piecewise random effects mixture model (CI-PREMM) with 18 timepoints collected on 30 individuals.
+#' Simulated data for a piecewise random effects model (PREM) and useful extensions (CI-PREM, PREMM, CI-PREMM) with 18 timepoints collected on 30 individuals.
 #'
 #' \itemize{
 #'   \item `id` ID for each individual.
@@ -30,8 +13,8 @@ NULL
 #'
 #' @docType data
 #' @keywords datasets
-#' @name SimData_CIPREMM
-#' @usage data(SimData_CIPREMM)
+#' @name SimData_PREM
+#' @usage data(SimData_PREM)
 #' @format A data frame with 540 rows and 6 variables.
 NULL
 
