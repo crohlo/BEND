@@ -40,6 +40,7 @@
 #' Rohloff, C. T., Kohli, N., & Lock, E. F. (2024). Identifiability and estimability of Bayesian linear and nonlinear crossed random effects models. British Journal of Mathematical and Statistical Psychology. https://doi.org/10.1111/bmsp.12334
 #'
 #' @examples
+#' \dontrun{
 #' # load simulated data
 #' data(SimData_PCREM)
 #' # plot observed data
@@ -62,6 +63,7 @@
 #'           time_var = "time",
 #'           y_var = "y",
 #'           results = results_pcrem)
+#' }
 #'
 #' @import stats
 #'

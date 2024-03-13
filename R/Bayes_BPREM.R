@@ -31,6 +31,7 @@
 #' @references Peralta, Y., Kohli, N., Lock, E. F., & Davison, M. L. (2022). Bayesian modeling of associations in bivariate piecewise linear mixed-effects models. Psychological Methods, 27(1), 44–64. https://doi.org/10.1037/met0000358
 #'
 #' @examples
+#' \dontrun{
 #' # load simulated data
 #' data(SimData_BPREM)
 #' # plot observed data
@@ -55,6 +56,7 @@
 #'           y_var = "y1",
 #'           y2_var = "y2",
 #'           results = results_bprem)
+#' }
 #'
 #' @import stats
 #'
