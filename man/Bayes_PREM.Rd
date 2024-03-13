@@ -89,6 +89,7 @@ See Lock et al. (2018) and Lamm (2022) for more details.
 For more information on the model equation and priors implemented in this function, see Lamm et al. (2022; CI-PREMM) and Lock et al. (2018; PREMM).
 }
 \examples{
+\dontrun{
 # load simulated data
 data(SimData_PREM)
 # plot observed data
@@ -162,6 +163,7 @@ plot_BEND(data = SimData_PREM,
           time_var = "time",
           y_var = "y",
           results = results_cipremm)
+}
 
 }
 \references{
