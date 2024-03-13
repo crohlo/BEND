@@ -10,20 +10,20 @@ The goal of BEND is to provide a set of models to estimate nonlinear
 longitudinal data using Bayesian estimation methods. These models
 include the:
 
-1.  Bayesian Piecewise Random Effects Model (`Bayes_PREM`) which
+1.  Bayesian Piecewise Random Effects Model (`Bayes_PREM()`) which
     estimates a piecewise random effects (mixture) model for a given
     number of latent classes and a latent number of possible
     changepoints in each class, and can incorporate class and outcome
     predictive covariates (see Lamm, 2022 and Lock et al., 2018 for more
     details).
 
-2.  Bayesian Crossed Random Effects Model (`Bayes_CREM`) which estimates
-    a linear, quadratic, exponential, or piecewise crossed random
-    effects models where individuals are changing groups over time
-    (e.g., students and schools; see Rohloff et al., 2024 for more
+2.  Bayesian Crossed Random Effects Model (`Bayes_CREM()`) which
+    estimates a linear, quadratic, exponential, or piecewise crossed
+    random effects models where individuals are changing groups over
+    time (e.g., students and schools; see Rohloff et al., 2024 for more
     details).
 
-3.  Bayesian Bivariate Piecewise Random Effects Model (`Bayes_BPREM`)
+3.  Bayesian Bivariate Piecewise Random Effects Model (`Bayes_BPREM()`)
     which estimates a bivariate piecewise random effects model to
     jointly model two related outcomes (e.g., reading and math
     achievement; see Peralta et al., 2022 for more details).

@@ -1,0 +1,15 @@
+Bayes_BPREM             Bayesian Bivariate Piecewise Random Effects
+                        Model (BPREM)
+Bayes_CREM              Bayesian Crossed Random Effects Model (CREM)
+Bayes_PREM              Bayesian Piecewise Random Effects Model (PREM)
+                        + Extensions
+SimData_BPREM           Simulated data for a BPREM
+SimData_PCREM           Simulated data for a PCREM
+SimData_PREM            Simulated data for a PREM + Extensions
+plot_BEND               Plot a BEND Model (PREM, CREM, BPREM)
+summary.BPREM           Summarize the results of a bivariate piecewise
+                        random effects model (BPREM)
+summary.CREM            Summarize the results of a crossed random
+                        effects model (CREM)
+summary.PREM            Summarize the results of a piecewise random
+                        effects model (PREM)
