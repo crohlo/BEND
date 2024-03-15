@@ -1,0 +1,368 @@
+
+R version 4.3.2 (2023-10-31) -- "Eye Holes"
+Copyright (C) 2023 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin20 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "BEND"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "BEND-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('BEND')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Bayes_BPREM")
+> ### * Bayes_BPREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: Bayes_BPREM
+> ### Title: Bayesian Bivariate Piecewise Random Effects Model (BPREM)
+> ### Aliases: Bayes_BPREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_BPREM)
+> ##D # plot observed data
+> ##D plot_BEND(data = SimData_BPREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y1",
+> ##D           y2_var = "y2")
+> ##D # fit Bayes_BPREM()
+> ##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
+> ##D                              id_var = "id",
+> ##D                              time_var = "time",
+> ##D                              y1_var = "y1",
+> ##D                              y2_var = "y2")
+> ##D # result summary
+> ##D summary(results_bprem)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_BPREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y1",
+> ##D           y2_var = "y2",
+> ##D           results = results_bprem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Bayes_BPREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("Bayes_CREM")
+> ### * Bayes_CREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: Bayes_CREM
+> ### Title: Bayesian Crossed Random Effects Model (CREM)
+> ### Aliases: Bayes_CREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_PCREM)
+> ##D # plot observed data
+> ##D plot_BEND(data = SimData_PCREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y")
+> ##D # fit Bayes_CREM()
+> ##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+> ##D                             ind_id_var = "id",
+> ##D                             cross_id_var = "teacherid",
+> ##D                             time_var = "time",
+> ##D                             y_var = "y",
+> ##D                             form="piecewise")
+> ##D # result summary
+> ##D summary(results_pcrem)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PCREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_pcrem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Bayes_CREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("Bayes_PREM")
+> ### * Bayes_PREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: Bayes_PREM
+> ### Title: Bayesian Piecewise Random Effects Model (PREM) + Extensions
+> ### Aliases: Bayes_PREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_PREM)
+> ##D # plot observed data
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y")
+> ##D 
+> ##D # PREM ---------------------------------------------------------------------------------
+> ##D # fit Bayes_PREM()
+> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
+> ##D                            id_var = "id",
+> ##D                            time_var = "time",
+> ##D                            y_var = "y")
+> ##D # result summary
+> ##D summary(results_prem)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_prem)
+> ##D 
+> ##D # CI-PREM ---------------------------------------------------------------------------------
+> ##D # fit Bayes_PREM()
+> ##D results_ciprem <- Bayes_PREM(data = SimData_PREM,
+> ##D                              id_var = "id",
+> ##D                              time_var = "time",
+> ##D                              y_var = "y",
+> ##D                              outcome_predictive_vars = "outcome_pred_1")
+> ##D # result summary
+> ##D summary(results_ciprem)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_ciprem)
+> ##D 
+> ##D # PREMM ---------------------------------------------------------------------------------
+> ##D # fit Bayes_PREM()
+> ##D results_premm <- Bayes_PREM(data = SimData_PREM,
+> ##D                             id_var = "id",
+> ##D                             time_var = "time",
+> ##D                             y_var = "y",
+> ##D                             n_class = 2)
+> ##D # result summary
+> ##D summary(results_premm)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_premm)
+> ##D 
+> ##D 
+> ##D # CI-PREMM ---------------------------------------------------------------------------------
+> ##D # fit Bayes_PREM()
+> ##D results_cipremm <- Bayes_PREM(data = SimData_PREM,
+> ##D                               id_var = "id",
+> ##D                               time_var = "time",
+> ##D                               y_var = "y",
+> ##D                               n_class = 2,
+> ##D                               class_predictive_vars = c("class_pred_1", "class_pred_2"),
+> ##D                               outcome_predictive_vars = "outcome_pred_1")
+> ##D # result summary
+> ##D summary(results_cipremm)
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_cipremm)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Bayes_PREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("plot_BEND")
+> ### * plot_BEND
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: plot_BEND
+> ### Title: Plot a BEND Model (PREM, CREM, BPREM)
+> ### Aliases: plot_BEND
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_PREM)
+> ##D # plot observed data
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y")
+> ##D 
+> ##D # fit Bayes_PREM()
+> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
+> ##D                            id_var = "id",
+> ##D                            time_var = "time",
+> ##D                            y_var = "y")
+> ##D # plot fitted results
+> ##D plot_BEND(data = SimData_PREM,
+> ##D           id_var = "id",
+> ##D           time_var = "time",
+> ##D           y_var = "y",
+> ##D           results = results_prem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("plot_BEND", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("summary.BPREM")
+> ### * summary.BPREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: summary.BPREM
+> ### Title: Summarize the results of a bivariate piecewise random effects
+> ###   model (BPREM)
+> ### Aliases: summary.BPREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_BPREM)
+> ##D # fit Bayes_BPREM()
+> ##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
+> ##D                              id_var = "id",
+> ##D                              time_var = "time",
+> ##D                              y1_var = "y1",
+> ##D                              y2_var = "y2")
+> ##D # result summary
+> ##D summary(results_bprem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("summary.BPREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("summary.CREM")
+> ### * summary.CREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: summary.CREM
+> ### Title: Summarize the results of a crossed random effects model (CREM)
+> ### Aliases: summary.CREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_PCREM)
+> ##D # fit Bayes_CREM()
+> ##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+> ##D                             ind_id_var = "id",
+> ##D                             cross_id_var = "teacherid",
+> ##D                             time_var = "time",
+> ##D                             y_var = "y",
+> ##D                             form="piecewise")
+> ##D # result summary
+> ##D # summary(results_pcrem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("summary.CREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("summary.PREM")
+> ### * summary.PREM
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: summary.PREM
+> ### Title: Summarize the results of a piecewise random effects model (PREM)
+> ### Aliases: summary.PREM
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D # load simulated data
+> ##D data(SimData_PREM)
+> ##D # fit Bayes_PREM()
+> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
+> ##D                            id_var = "id",
+> ##D                            time_var = "time",
+> ##D                            y_var = "y")
+> ##D # result summary
+> ##D summary(results_prem)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("summary.PREM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.421 0.027 0.499 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

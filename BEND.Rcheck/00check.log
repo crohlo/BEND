@@ -10,7 +10,7 @@
 * checking for file ‘BEND/DESCRIPTION’ ... OK
 * this is package ‘BEND’ version ‘0.0.0.9000’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [6s/15s] NOTE
+* checking CRAN incoming feasibility ... [6s/42s] NOTE
 Maintainer: ‘Corissa T. Rohloff <corissa.wurth@gmail.com>’
 
 New submission
@@ -41,4 +41,153 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking use of S3 registration ...
+* checking use of S3 registration ... OK
+* checking dependencies in R code ... OK
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... OK
+* checking Rd files ... OK
+* checking Rd metadata ... OK
+* checking Rd line widths ... OK
+* checking Rd cross-references ... OK
+* checking for missing documentation entries ... OK
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking PDF version of manual ... OK
+* checking HTML version of manual ... NOTE
+Found the following HTML validation problems:
+Bayes_BPREM.html:145:192 (Bayes_BPREM.Rd:89): Warning: replacing invalid character code 128
+Bayes_BPREM.html:145:193 (Bayes_BPREM.Rd:89): Warning: replacing invalid character code 147
+Bayes_BPREM.html:4:1 (Bayes_BPREM.Rd:5): Warning: <link> inserting "type" attribute
+Bayes_BPREM.html:12:1 (Bayes_BPREM.Rd:5): Warning: <script> proprietary attribute "onload"
+Bayes_BPREM.html:12:1 (Bayes_BPREM.Rd:5): Warning: <script> inserting "type" attribute
+Bayes_BPREM.html:17:1 (Bayes_BPREM.Rd:5): Warning: <table> lacks "summary" attribute
+Bayes_BPREM.html:47:1 (Bayes_BPREM.Rd:22): Warning: <table> lacks "summary" attribute
+Bayes_BPREM.html:105:1 (Bayes_BPREM.Rd:46): Warning: <table> lacks "summary" attribute
+Bayes_CREM.html:72:54 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:55 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 152
+Bayes_CREM.html:72:63 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:64 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 153
+Bayes_CREM.html:72:78 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:79 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 152
+Bayes_CREM.html:72:90 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:91 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 153
+Bayes_CREM.html:72:95 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:96 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 152
+Bayes_CREM.html:72:109 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:110 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 153
+Bayes_CREM.html:72:114 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:115 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 152
+Bayes_CREM.html:72:126 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 128
+Bayes_CREM.html:72:127 (Bayes_CREM.Rd:34): Warning: replacing invalid character code 153
+Bayes_CREM.html:161:192 (Bayes_CREM.Rd:97): Warning: replacing invalid character code 128
+Bayes_CREM.html:161:193 (Bayes_CREM.Rd:97): Warning: replacing invalid character code 147
+Bayes_CREM.html:4:1 (Bayes_CREM.Rd:5): Warning: <link> inserting "type" attribute
+Bayes_CREM.html:12:1 (Bayes_CREM.Rd:5): Warning: <script> proprietary attribute "onload"
+Bayes_CREM.html:12:1 (Bayes_CREM.Rd:5): Warning: <script> inserting "type" attribute
+Bayes_CREM.html:17:1 (Bayes_CREM.Rd:5): Warning: <table> lacks "summary" attribute
+Bayes_CREM.html:49:1 (Bayes_CREM.Rd:24): Warning: <table> lacks "summary" attribute
+Bayes_CREM.html:117:1 (Bayes_CREM.Rd:52): Warning: <table> lacks "summary" attribute
+Bayes_PREM.html:102:92 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 128
+Bayes_PREM.html:102:93 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 152
+Bayes_PREM.html:102:102 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 128
+Bayes_PREM.html:102:103 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 153
+Bayes_PREM.html:102:141 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 128
+Bayes_PREM.html:102:142 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 152
+Bayes_PREM.html:102:146 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 128
+Bayes_PREM.html:102:147 (Bayes_PREM.Rd:45): Warning: replacing invalid character code 153
+Bayes_PREM.html:192:39 (Bayes_PREM.Rd:76): Warning: replacing invalid character code 128
+Bayes_PREM.html:192:40 (Bayes_PREM.Rd:76): Warning: replacing invalid character code 153
+Bayes_PREM.html:211:164 (Bayes_PREM.Rd:172): Warning: replacing invalid character code 128
+Bayes_PREM.html:211:165 (Bayes_PREM.Rd:172): Warning: replacing invalid character code 147
+Bayes_PREM.html:4:1 (Bayes_PREM.Rd:5): Warning: <link> inserting "type" attribute
+Bayes_PREM.html:12:1 (Bayes_PREM.Rd:5): Warning: <script> proprietary attribute "onload"
+Bayes_PREM.html:12:1 (Bayes_PREM.Rd:5): Warning: <script> inserting "type" attribute
+Bayes_PREM.html:17:1 (Bayes_PREM.Rd:5): Warning: <table> lacks "summary" attribute
+Bayes_PREM.html:67:1 (Bayes_PREM.Rd:29): Warning: <table> lacks "summary" attribute
+Bayes_PREM.html:153:1 (Bayes_PREM.Rd:67): Warning: <table> lacks "summary" attribute
+Bayes_PREM.html:185:1 (Bayes_PREM.Rd:75): Warning: <table> lacks "summary" attribute
+SimData_BPREM.html:4:1 (SimData_BPREM.Rd:6): Warning: <link> inserting "type" attribute
+SimData_BPREM.html:12:1 (SimData_BPREM.Rd:6): Warning: <script> proprietary attribute "onload"
+SimData_BPREM.html:12:1 (SimData_BPREM.Rd:6): Warning: <script> inserting "type" attribute
+SimData_BPREM.html:17:1 (SimData_BPREM.Rd:6): Warning: <table> lacks "summary" attribute
+SimData_PCREM.html:4:1 (SimData_PCREM.Rd:6): Warning: <link> inserting "type" attribute
+SimData_PCREM.html:12:1 (SimData_PCREM.Rd:6): Warning: <script> proprietary attribute "onload"
+SimData_PCREM.html:12:1 (SimData_PCREM.Rd:6): Warning: <script> inserting "type" attribute
+SimData_PCREM.html:17:1 (SimData_PCREM.Rd:6): Warning: <table> lacks "summary" attribute
+SimData_PREM.html:4:1 (SimData_PREM.Rd:6): Warning: <link> inserting "type" attribute
+SimData_PREM.html:12:1 (SimData_PREM.Rd:6): Warning: <script> proprietary attribute "onload"
+SimData_PREM.html:12:1 (SimData_PREM.Rd:6): Warning: <script> inserting "type" attribute
+SimData_PREM.html:17:1 (SimData_PREM.Rd:6): Warning: <table> lacks "summary" attribute
+plot_BEND.html:83:185 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:186 (plot_BEND.Rd:39): Warning: replacing invalid character code 156
+plot_BEND.html:83:192 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:193 (plot_BEND.Rd:39): Warning: discarding invalid character code 157
+plot_BEND.html:83:220 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:221 (plot_BEND.Rd:39): Warning: replacing invalid character code 156
+plot_BEND.html:83:226 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:227 (plot_BEND.Rd:39): Warning: discarding invalid character code 157
+plot_BEND.html:83:254 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:255 (plot_BEND.Rd:39): Warning: replacing invalid character code 156
+plot_BEND.html:83:262 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:263 (plot_BEND.Rd:39): Warning: discarding invalid character code 157
+plot_BEND.html:83:276 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:277 (plot_BEND.Rd:39): Warning: replacing invalid character code 156
+plot_BEND.html:83:283 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:284 (plot_BEND.Rd:39): Warning: discarding invalid character code 157
+plot_BEND.html:83:297 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:298 (plot_BEND.Rd:39): Warning: replacing invalid character code 156
+plot_BEND.html:83:304 (plot_BEND.Rd:39): Warning: replacing invalid character code 128
+plot_BEND.html:83:305 (plot_BEND.Rd:39): Warning: discarding invalid character code 157
+plot_BEND.html:87:235 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:236 (plot_BEND.Rd:41): Warning: replacing invalid character code 156
+plot_BEND.html:87:246 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:247 (plot_BEND.Rd:41): Warning: discarding invalid character code 157
+plot_BEND.html:87:274 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:275 (plot_BEND.Rd:41): Warning: replacing invalid character code 156
+plot_BEND.html:87:284 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:285 (plot_BEND.Rd:41): Warning: discarding invalid character code 157
+plot_BEND.html:87:312 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:313 (plot_BEND.Rd:41): Warning: replacing invalid character code 156
+plot_BEND.html:87:324 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:325 (plot_BEND.Rd:41): Warning: discarding invalid character code 157
+plot_BEND.html:87:338 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:339 (plot_BEND.Rd:41): Warning: replacing invalid character code 156
+plot_BEND.html:87:346 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:347 (plot_BEND.Rd:41): Warning: discarding invalid character code 157
+plot_BEND.html:87:360 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:361 (plot_BEND.Rd:41): Warning: replacing invalid character code 156
+plot_BEND.html:87:371 (plot_BEND.Rd:41): Warning: replacing invalid character code 128
+plot_BEND.html:87:372 (plot_BEND.Rd:41): Warning: discarding invalid character code 157
+plot_BEND.html:4:1 (plot_BEND.Rd:5): Warning: <link> inserting "type" attribute
+plot_BEND.html:12:1 (plot_BEND.Rd:5): Warning: <script> proprietary attribute "onload"
+plot_BEND.html:12:1 (plot_BEND.Rd:5): Warning: <script> inserting "type" attribute
+plot_BEND.html:17:1 (plot_BEND.Rd:5): Warning: <table> lacks "summary" attribute
+plot_BEND.html:48:1 (plot_BEND.Rd:23): Warning: <table> lacks "summary" attribute
+summary.BPREM.html:4:1 (summary.BPREM.Rd:5): Warning: <link> inserting "type" attribute
+summary.BPREM.html:12:1 (summary.BPREM.Rd:5): Warning: <script> proprietary attribute "onload"
+summary.BPREM.html:12:1 (summary.BPREM.Rd:5): Warning: <script> inserting "type" attribute
+summary.BPREM.html:17:1 (summary.BPREM.Rd:5): Warning: <table> lacks "summary" attribute
+summary.BPREM.html:36:1 (summary.BPREM.Rd:10): Warning: <table> lacks "summary" attribute
+summary.CREM.html:4:1 (summary.CREM.Rd:5): Warning: <link> inserting "type" attribute
+summary.CREM.html:12:1 (summary.CREM.Rd:5): Warning: <script> proprietary attribute "onload"
+summary.CREM.html:12:1 (summary.CREM.Rd:5): Warning: <script> inserting "type" attribute
+summary.CREM.html:17:1 (summary.CREM.Rd:5): Warning: <table> lacks "summary" attribute
+summary.CREM.html:36:1 (summary.CREM.Rd:10): Warning: <table> lacks "summary" attribute
+summary.PREM.html:4:1 (summary.PREM.Rd:5): Warning: <link> inserting "type" attribute
+summary.PREM.html:12:1 (summary.PREM.Rd:5): Warning: <script> proprietary attribute "onload"
+summary.PREM.html:12:1 (summary.PREM.Rd:5): Warning: <script> inserting "type" attribute
+summary.PREM.html:17:1 (summary.PREM.Rd:5): Warning: <table> lacks "summary" attribute
+summary.PREM.html:36:1 (summary.PREM.Rd:10): Warning: <table> lacks "summary" attribute
+* checking for non-standard things in the check directory ... OK
+* checking for detritus in the temp directory ... OK
+* DONE
+Status: 3 NOTEs

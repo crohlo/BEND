@@ -14,7 +14,7 @@
 #' \dontrun{
 #' # load simulated data
 #' data(SimData_PREM)
-#' # fit Bayes_PREM
+#' # fit Bayes_PREM()
 #' results_prem <- Bayes_PREM(data = SimData_PREM,
 #'                            id_var = "id",
 #'                            time_var = "time",
