@@ -77,7 +77,7 @@ A list (an object of class \code{PREM}) with elements:
 \item{unconditional_class_probability}{This output will differ based on which model was fit. For a PREM or CI-PREM, this will equal 1 as there is only one class. For a PREMM or CI-PREMM with only outcome-predictive covariates, this will be a vector of length C denoting the population probability of belonging to each class. For a CI-PREMM with class-predictive covariates, this will be a vector of length n denoting the probability of each individual belonging to the non-reference class (Class 2) based on their class-predictive covariates only.}
 }
 \description{
-Estimates a Bayesian piecewise random effects model (Bayes_PREM), with some useful extensions. There are three model options included in this function:
+Estimates a Bayesian piecewise random effects model (PREM), with some useful extensions. There are three model options included in this function:
 \itemize{
 \item \code{PREM} estimates a Bayesian piecewise random effects model with a latent number of changepoints (default). Allows the inclusion of outcome-predictive covariates (\code{CI-PREM}).
 \item \code{PREMM} estimates a piecewise random effects mixture model for a given number of latent classes and a latent number of possible changepoints in each class.
@@ -99,7 +99,7 @@ plot_BEND(data = SimData_PREM,
           y_var = "y")
 
 # PREM ---------------------------------------------------------------------------------
-# fit Bayes_PREM
+# fit Bayes_PREM()
 results_prem <- Bayes_PREM(data = SimData_PREM,
                            id_var = "id",
                            time_var = "time",
@@ -114,7 +114,7 @@ plot_BEND(data = SimData_PREM,
           results = results_prem)
 
 # CI-PREM ---------------------------------------------------------------------------------
-# fit Bayes_PREM
+# fit Bayes_PREM()
 results_ciprem <- Bayes_PREM(data = SimData_PREM,
                              id_var = "id",
                              time_var = "time",
@@ -130,7 +130,7 @@ plot_BEND(data = SimData_PREM,
           results = results_ciprem)
 
 # PREMM ---------------------------------------------------------------------------------
-# fit Bayes_PREM
+# fit Bayes_PREM()
 results_premm <- Bayes_PREM(data = SimData_PREM,
                             id_var = "id",
                             time_var = "time",
@@ -147,7 +147,7 @@ plot_BEND(data = SimData_PREM,
 
 
 # CI-PREMM ---------------------------------------------------------------------------------
-# fit Bayes_PREM
+# fit Bayes_PREM()
 results_cipremm <- Bayes_PREM(data = SimData_PREM,
                               id_var = "id",
                               time_var = "time",
@@ -167,7 +167,7 @@ plot_BEND(data = SimData_PREM,
 
 }
 \references{
-Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. http://conservancy.umn.edu/handle/11299/252533
+Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. https://hdl.handle.net/11299/252533
 
 Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random changepoints in Bayesian piecewise growth mixture models. Psychometrika, 83(3), 733–750. https://doi.org/10.1007/s11336-017-9594-5
 }

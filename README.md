@@ -29,15 +29,13 @@ include the:
     achievement; see Peralta et al., 2022 for more details).
 
 This package requires Just Another Gibbs Sampler (JAGS) to be installed
-on your computer (<http://mcmc-jags.sourceforge.net/>), and depends on
+on your computer (<https://mcmc-jags.sourceforge.io/>), and depends on
 the packages `rjags` and `label.switching`.
 
 ### References
 
 Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise
-growth mixture models.
-<a href="http://conservancy.umn.edu/handle/11299/252533Lock"
-class="uri">http://conservancy.umn.edu/handle/11299/252533</a>
+growth mixture models. <https://hdl.handle.net/11299/252533>
 
 Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random
 changepoints in Bayesian piecewise growth mixture models. Psychometrika,

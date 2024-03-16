@@ -1,9 +1,9 @@
 Package: BEND
 Title: Bayesian Estimation of Nonlinear Data (BEND)
-Version: 0.0.0.9000
+Version: 1.0
 Authors@R: c(
   person("Corissa T.", "Rohloff", email = "corissa.wurth@gmail.com", role = c("aut","cre"), comment = c(ORCID = "0000-0003-3228-4653")),
-  person("Rik", "Lamm", email = " rzlamm@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-3317-6243")),
+  person("Rik", "Lamm", email = "rzlamm@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-3317-6243")),
   person("Yadira", "Peralta", email = "yadirap@stanford.edu", role = "aut", comment = c(ORCID = "0000-0003-4823-6939")),
   person("Nidhi", "Kohli", email = "nkohli@umn.edu", role = "aut", comment = c(ORCID = "0000-0003-4690-2854")),
   person("Eric F.", "Lock", email = "elock@umn.edu", role = "aut", comment = c(ORCID = "0000-0003-4663-2356")))

@@ -40,13 +40,12 @@
 #'           time_var = "time",
 #'           y_var = "y1",
 #'           y2_var = "y2")
-#' # fit Bayes_BPREM
+#' # fit Bayes_BPREM()
 #' results_bprem <- Bayes_BPREM(data = SimData_BPREM,
 #'                              id_var = "id",
 #'                              time_var = "time",
 #'                              y1_var = "y1",
-#'                              y2_var = "y2",
-#'                              iters_burn_in=50000)
+#'                              y2_var = "y2")
 #' # result summary
 #' summary(results_bprem)
 #' # plot fitted results

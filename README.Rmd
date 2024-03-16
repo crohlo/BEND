@@ -27,11 +27,11 @@ The goal of BEND is to provide a set of models to estimate nonlinear longitudina
 
 3.  Bayesian Bivariate Piecewise Random Effects Model (`Bayes_BPREM()`) which estimates a bivariate piecewise random effects model to jointly model two related outcomes (e.g., reading and math achievement; see Peralta et al., 2022 for more details).
 
-This package requires Just Another Gibbs Sampler (JAGS) to be installed on your computer (<http://mcmc-jags.sourceforge.net/>), and depends on the packages `rjags` and `label.switching`.
+This package requires Just Another Gibbs Sampler (JAGS) to be installed on your computer (<https://mcmc-jags.sourceforge.io/>), and depends on the packages `rjags` and `label.switching`.
 
 ### References
 
-Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. [http://conservancy.umn.edu/handle/11299/252533](http://conservancy.umn.edu/handle/11299/252533Lock){.uri}
+Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. <https://hdl.handle.net/11299/252533>
 
 Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random changepoints in Bayesian piecewise growth mixture models. Psychometrika, 83(3), 733–750. <https://doi.org/10.1007/s11336-017-9594-5>
 

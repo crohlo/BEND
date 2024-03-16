@@ -1,6 +1,6 @@
 #' Bayesian Piecewise Random Effects Model (PREM) + Extensions
 #'
-#' @description Estimates a Bayesian piecewise random effects model (Bayes_PREM), with some useful extensions. There are three model options included in this function:
+#' @description Estimates a Bayesian piecewise random effects model (PREM), with some useful extensions. There are three model options included in this function:
 #' * `PREM` estimates a Bayesian piecewise random effects model with a latent number of changepoints (default). Allows the inclusion of outcome-predictive covariates (`CI-PREM`).
 #' * `PREMM` estimates a piecewise random effects mixture model for a given number of latent classes and a latent number of possible changepoints in each class.
 #' * `CI-PREMM` estimates a covariate influenced piecewise random effects mixture model for a given number of latent classes and a latent number of possible changepoints in each class. Allows the inclusion of outcome- and/or class-predictive covariates.
@@ -43,7 +43,7 @@
 #'
 #' @author Corissa T. Rohloff, Rik Lamm, Eric F. Lock
 #'
-#' @references Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. http://conservancy.umn.edu/handle/11299/252533
+#' @references Lamm, R. (2022). Incorporation of covariates in Bayesian piecewise growth mixture models. https://hdl.handle.net/11299/252533
 #'
 #' Lock, E. F., Kohli, N., & Bose, M. (2018). Detecting multiple random changepoints in Bayesian piecewise growth mixture models. Psychometrika, 83(3), 733–750. https://doi.org/10.1007/s11336-017-9594-5
 #'
@@ -58,7 +58,7 @@
 #'           y_var = "y")
 #'
 #' # PREM ---------------------------------------------------------------------------------
-#' # fit Bayes_PREM
+#' # fit Bayes_PREM()
 #' results_prem <- Bayes_PREM(data = SimData_PREM,
 #'                            id_var = "id",
 #'                            time_var = "time",
@@ -73,7 +73,7 @@
 #'           results = results_prem)
 #'
 #' # CI-PREM ---------------------------------------------------------------------------------
-#' # fit Bayes_PREM
+#' # fit Bayes_PREM()
 #' results_ciprem <- Bayes_PREM(data = SimData_PREM,
 #'                              id_var = "id",
 #'                              time_var = "time",
@@ -89,7 +89,7 @@
 #'           results = results_ciprem)
 #'
 #' # PREMM ---------------------------------------------------------------------------------
-#' # fit Bayes_PREM
+#' # fit Bayes_PREM()
 #' results_premm <- Bayes_PREM(data = SimData_PREM,
 #'                             id_var = "id",
 #'                             time_var = "time",
@@ -106,7 +106,7 @@
 #'
 #'
 #' # CI-PREMM ---------------------------------------------------------------------------------
-#' # fit Bayes_PREM
+#' # fit Bayes_PREM()
 #' results_cipremm <- Bayes_PREM(data = SimData_PREM,
 #'                               id_var = "id",
 #'                               time_var = "time",
