@@ -21,7 +21,6 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \donttest{
 #' # load simulated data
 #' data(SimData_PREM)
 #' # plot observed data
@@ -30,14 +29,13 @@
 #'           time_var = "time",
 #'           y_var = "y")
 #' # load fitted model results
-#' load(results_prem)
+#' data(results_prem)
 #' # plot fitted results
 #' plot_BEND(data = SimData_PREM,
 #'           id_var = "id",
 #'           time_var = "time",
 #'           y_var = "y",
 #'           results = results_prem)
-#' }
 #'
 #' @import graphics
 #'

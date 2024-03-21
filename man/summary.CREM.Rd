@@ -18,12 +18,10 @@ Prints estimates for key parameters in the CREM. Also returns a list of these va
 Provides a summary of a CREM model, as returned by \code{Bayes_CREM()}.
 }
 \examples{
-\donttest{
 # load fitted model results
-load(results_pcrem)
+data(results_pcrem)
 # result summary
 summary(results_pcrem)
-}
 
 }
 \author{

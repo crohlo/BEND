@@ -51,7 +51,6 @@ No return value, called to generate plot.
 Generates a "spaghetti plot" of observed longitudinal trajectories for each individual. If the results from a \code{BEND} function are supplied, the trajectory defined by the mean parameters is shown in bold. If fitting a mixture (\code{PREMM} or \code{CI-PREMM}) or bivariate model (\code{BPREM}), the mean trajectories for classes or outcomes will be distinguished by color.
 }
 \examples{
-\donttest{
 # load simulated data
 data(SimData_PREM)
 # plot observed data
@@ -60,14 +59,13 @@ plot_BEND(data = SimData_PREM,
           time_var = "time",
           y_var = "y")
 # load fitted model results
-load(results_prem)
+data(results_prem)
 # plot fitted results
 plot_BEND(data = SimData_PREM,
           id_var = "id",
           time_var = "time",
           y_var = "y",
           results = results_prem)
-}
 
 }
 \author{

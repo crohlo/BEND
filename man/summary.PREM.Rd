@@ -18,12 +18,10 @@ Prints estimates for key parameters in the PREM. Also returns a list of these va
 Provides a summary of a PREM model, as returned by \code{Bayes_PREM()}.
 }
 \examples{
-\donttest{
 # load fitted model results
-load(results_prem)
+data(results_prem)
 # result summary
 summary(results_prem)
-}
 
 }
 \author{

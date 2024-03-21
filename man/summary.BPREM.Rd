@@ -18,12 +18,10 @@ Prints estimates for key parameters in the BPREM. Also returns a list of these v
 Provides a summary of a BPREM model, as returned by \code{Bayes_BPREM()}.
 }
 \examples{
-\donttest{
 # load fitted model results
-load(results_bprem)
+data(results_bprem)
 # result summary
 summary(results_bprem)
-}
 
 }
 \author{

@@ -11,12 +11,10 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \donttest{
 #' # load fitted model results
-#' load(results_prem)
+#' data(results_prem)
 #' # result summary
 #' summary(results_prem)
-#' }
 #'
 #' @export
 summary.PREM <- function(object, ...){

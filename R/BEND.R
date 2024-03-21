@@ -53,3 +53,36 @@ NULL
 #' @usage data(SimData_BPREM)
 #' @format A data frame with 210 rows and 4 variables.
 NULL
+
+#' Fitted results for a PREM
+#'
+#' Fitted results for a piecewise random effects model (PREM) using `SimData_PREM`. Included to demonstrate the use of `plot_BEND()` and `summary.PREM()`.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name results_prem
+#' @usage data(results_prem)
+#' @format A list (an object of class `PREM`) with fitted model results.
+NULL
+
+#' Fitted results for a PCREM
+#'
+#' Simulated data for a piecewise crossed random effects model (PCREM) using `SimData_CREM`. Included to demonstrate the use of `summary.CREM()`.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name results_pcrem
+#' @usage data(results_pcrem)
+#' @format A list (an object of class `CREM`) with fitted model results.
+NULL
+
+#' Fitted results for a BPREM
+#'
+#' Simulated data for a bivariate piecewise random effects model (BPREM) using `SimData_BPREM`. Included to demonstrate the use of `summary.BPREM()`.
+#'
+#' @docType data
+#' @keywords datasets
+#' @name results_bprem
+#' @usage data(results_bprem)
+#' @format A list (an object of class `BPREM`) with fitted model results.
+NULL
