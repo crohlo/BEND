@@ -11,10 +11,12 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \donttest{
 #' # load fitted model results
 #' load(results_pcrem)
 #' # result summary
 #' summary(results_pcrem)
+#' }
 #'
 #' @export
 summary.CREM <- function(object, ...){

@@ -21,6 +21,7 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \donttest{
 #' # load simulated data
 #' data(SimData_PREM)
 #' # plot observed data
@@ -36,6 +37,7 @@
 #'           time_var = "time",
 #'           y_var = "y",
 #'           results = results_prem)
+#' }
 #'
 #' @import graphics
 #'

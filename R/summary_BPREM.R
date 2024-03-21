@@ -11,10 +11,12 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
+#' \donttest{
 #' # load fitted model results
 #' load(results_bprem)
 #' # result summary
 #' summary(results_bprem)
+#' }
 #'
 #' @export
 summary.BPREM <- function(object, ...){
