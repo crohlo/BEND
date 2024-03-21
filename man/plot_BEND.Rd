@@ -59,12 +59,8 @@ plot_BEND(data = SimData_PREM,
           id_var = "id",
           time_var = "time",
           y_var = "y")
-
-# fit Bayes_PREM()
-results_prem <- Bayes_PREM(data = SimData_PREM,
-                           id_var = "id",
-                           time_var = "time",
-                           y_var = "y")
+# load fitted model results
+load(results_prem)
 # plot fitted results
 plot_BEND(data = SimData_PREM,
           id_var = "id",

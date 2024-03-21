@@ -17,7 +17,8 @@ Bayes_CREM(
   iters_sampling = 50000,
   thin = 15,
   save_full_chains = FALSE,
-  save_conv_chains = FALSE
+  save_conv_chains = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ Bayes_CREM(
 \item{save_full_chains}{Logical indicating whether the MCMC chains from rjags should be saved (default = FALSE). Note, this should not be used regularly as it will result in an object with a large file size.}
 
 \item{save_conv_chains}{Logical indicating whether the MCMC chains from rjags should be saved but only for the parameters monitored for convergence (default = FALSE). This would be useful for plotting traceplots for relevant model parameters to evaluate convergence behavior. Note, this should not be used regularly as it will result in an object with a large file size.}
+
+\item{verbose}{Logical controlling whether progress messages/bars are generated (default = TRUE).}
 }
 \value{
 A list (an object of class \code{CREM}) with elements:
