@@ -11,17 +11,10 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \dontrun{
-#' # load simulated data
-#' data(SimData_PREM)
-#' # fit Bayes_PREM()
-#' results_prem <- Bayes_PREM(data = SimData_PREM,
-#'                            id_var = "id",
-#'                            time_var = "time",
-#'                            y_var = "y")
+#' # load fitted model results
+#' data(results_prem)
 #' # result summary
 #' summary(results_prem)
-#' }
 #'
 #' @export
 summary.PREM <- function(object, ...){

@@ -18,19 +18,10 @@ Prints estimates for key parameters in the CREM. Also returns a list of these va
 Provides a summary of a CREM model, as returned by \code{Bayes_CREM()}.
 }
 \examples{
-\dontrun{
-# load simulated data
-data(SimData_PCREM)
-# fit Bayes_CREM()
-results_pcrem <- Bayes_CREM(data = SimData_PCREM,
-                            ind_id_var = "id",
-                            cross_id_var = "teacherid",
-                            time_var = "time",
-                            y_var = "y",
-                            form="piecewise")
+# load fitted model results
+data(results_pcrem)
 # result summary
-# summary(results_pcrem)
-}
+summary(results_pcrem)
 
 }
 \author{

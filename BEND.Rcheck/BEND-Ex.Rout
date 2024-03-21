@@ -49,31 +49,134 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_BPREM)
-> ##D # plot observed data
-> ##D plot_BEND(data = SimData_BPREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y1",
-> ##D           y2_var = "y2")
-> ##D # fit Bayes_BPREM()
-> ##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
-> ##D                              id_var = "id",
-> ##D                              time_var = "time",
-> ##D                              y1_var = "y1",
-> ##D                              y2_var = "y2")
-> ##D # result summary
-> ##D summary(results_bprem)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_BPREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y1",
-> ##D           y2_var = "y2",
-> ##D           results = results_bprem)
-> ## End(Not run)
+> ## No test: 
+> # load simulated data
+> data(SimData_BPREM)
+> # plot observed data
+> plot_BEND(data = SimData_BPREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y1",
++           y2_var = "y2")
+[1] "Observed trajectories"
+> # fit Bayes_BPREM()
+> results_bprem <- Bayes_BPREM(data = SimData_BPREM,
++                              id_var = "id",
++                              time_var = "time",
++                              y1_var = "y1",
++                              y2_var = "y2")
+Calibrating MCMC...
+Warning in rjags::jags.model(full_spec, data = data_list, n.chains = n_chains,  :
+  Adaptation incomplete
+Running burn-in...
+Collecting samples...
+NOTE: Stopping adaptation
+
+
+> # result summary
+> summary(results_bprem)
+Fixed Effect Parameters:
+                     Outcome 1 Outcome 2
+Intercept Mean           37.70      31.0
+Slope Mean               44.73      34.2
+Change in Slope Mean    -34.77     -25.4
+Changepoint Mean          2.56       2.8
+
+Random Effect Parameters:
+Covariance Matrix:
+                           Outcome 1: Intercept Outcome 1: Slope
+Outcome 1: Intercept                     124.98                 
+Outcome 1: Slope                          60.45            95.42
+Outcome 1: Change in Slope               -59.44           -74.45
+Outcome 1: Changepoint                    -3.50            -4.44
+Outcome 2: Intercept                      54.52            46.72
+Outcome 2: Slope                          33.91            36.65
+Outcome 2: Change in Slope               -40.20           -38.96
+Outcome 2: Changepoint                    -1.48            -1.34
+                           Outcome 1: Change in Slope Outcome 1: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                     103.75                       
+Outcome 1: Changepoint                           3.44                  0.486
+Outcome 2: Intercept                           -41.62                 -2.864
+Outcome 2: Slope                               -19.47                 -2.456
+Outcome 2: Change in Slope                      18.74                  3.030
+Outcome 2: Changepoint                           1.70                  0.131
+                           Outcome 2: Intercept Outcome 2: Slope
+Outcome 1: Intercept                                            
+Outcome 1: Slope                                                
+Outcome 1: Change in Slope                                      
+Outcome 1: Changepoint                                          
+Outcome 2: Intercept                      57.88                 
+Outcome 2: Slope                          29.91             55.7
+Outcome 2: Change in Slope               -37.54            -53.8
+Outcome 2: Changepoint                    -1.54             -2.8
+                           Outcome 2: Change in Slope Outcome 2: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                                                  
+Outcome 1: Changepoint                                                      
+Outcome 2: Intercept                                                        
+Outcome 2: Slope                                                            
+Outcome 2: Change in Slope                      78.33                       
+Outcome 2: Changepoint                           1.63                  0.441
+
+Correlation Matrix:
+                           Outcome 1: Intercept Outcome 1: Slope
+Outcome 1: Intercept                      1.000                 
+Outcome 1: Slope                          0.604            1.000
+Outcome 1: Change in Slope               -0.565           -0.707
+Outcome 1: Changepoint                   -0.484           -0.604
+Outcome 2: Intercept                      0.663            0.647
+Outcome 2: Slope                          0.420            0.526
+Outcome 2: Change in Slope               -0.421           -0.474
+Outcome 2: Changepoint                   -0.204           -0.219
+                           Outcome 1: Change in Slope Outcome 1: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                      1.000                       
+Outcome 1: Changepoint                          0.445                  1.000
+Outcome 2: Intercept                           -0.551                 -0.558
+Outcome 2: Slope                               -0.259                 -0.483
+Outcome 2: Change in Slope                      0.214                  0.507
+Outcome 2: Changepoint                          0.272                  0.299
+                           Outcome 2: Intercept Outcome 2: Slope
+Outcome 1: Intercept                                            
+Outcome 1: Slope                                                
+Outcome 1: Change in Slope                                      
+Outcome 1: Changepoint                                          
+Outcome 2: Intercept                      1.000                 
+Outcome 2: Slope                          0.562            1.000
+Outcome 2: Change in Slope               -0.590           -0.812
+Outcome 2: Changepoint                   -0.321           -0.480
+                           Outcome 2: Change in Slope Outcome 2: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                                                  
+Outcome 1: Changepoint                                                      
+Outcome 2: Intercept                                                        
+Outcome 2: Slope                                                            
+Outcome 2: Change in Slope                      1.000                       
+Outcome 2: Changepoint                          0.256                      1
+
+Error:
+Covariance Matrix:
+                 Outcome 1: Error Outcome 2: Error
+Outcome 1: Error             92.3                 
+Outcome 2: Error             13.0             54.4
+
+Error Corr: 0.1834783 
+Gelman's msrf: 1.239 
+Mean psrf: 1.037 
+DIC: 3134.401> # plot fitted results
+> plot_BEND(data = SimData_BPREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y1",
++           y2_var = "y2",
++           results = results_bprem)
+[1] "Observed trajectories with fitted results"
+> ## End(No test)
 > 
 > 
 > 
@@ -93,30 +196,65 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_PCREM)
-> ##D # plot observed data
-> ##D plot_BEND(data = SimData_PCREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y")
-> ##D # fit Bayes_CREM()
-> ##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
-> ##D                             ind_id_var = "id",
-> ##D                             cross_id_var = "teacherid",
-> ##D                             time_var = "time",
-> ##D                             y_var = "y",
-> ##D                             form="piecewise")
-> ##D # result summary
-> ##D summary(results_pcrem)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PCREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_pcrem)
-> ## End(Not run)
+> ## No test: 
+> # load simulated data
+> data(SimData_PCREM)
+> # plot observed data
+> plot_BEND(data = SimData_PCREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y")
+[1] "Observed trajectories"
+> # fit Bayes_CREM()
+> results_pcrem <- Bayes_CREM(data = SimData_PCREM,
++                             ind_id_var = "id",
++                             cross_id_var = "teacherid",
++                             time_var = "time",
++                             y_var = "y",
++                             form="piecewise")
+Calibrating MCMC...
+Warning in rjags::jags.model(full_spec, data = data_list, n.chains = n_chains,  :
+  Adaptation incomplete
+Burn in of jags model...
+Collecting samples...
+NOTE: Stopping adaptation
+
+
+> # result summary
+> summary(results_pcrem)
+Fixed Effect Parameters:
+                     Estimate
+Intercept Mean          37.13
+Slope Mean              28.66
+Change in Slope Mean   -22.03
+Changepoint Mean         3.74
+
+Random Effect Parameters:
+Individual Random Effects Covariance Matrix:
+                Intercept   Slope Change in Slope Changepoint
+Intercept           23.82                                    
+Slope                4.46 12.9249                            
+Change in Slope      1.04 -4.1556            9.27            
+Changepoint         -0.56  0.0192           -1.19       0.739
+
+Group Random Effects Covariance Matrix:
+                Intercept  Slope Change in Slope Changepoint
+Intercept         18.2145                                   
+Slope             -2.6983  4.745                            
+Change in Slope   -0.0381 -0.813           7.014            
+Changepoint        1.0794 -0.540          -0.379       0.415
+
+Error Var: 13.27011 
+Gelman's msrf: 1.225 
+Mean psrf: 1.038 
+DIC: 1287.305> # plot fitted results
+> plot_BEND(data = SimData_PCREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_pcrem)
+[1] "Observed trajectories with fitted results"
+> ## End(No test)
 > 
 > 
 > 
@@ -136,81 +274,187 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_PREM)
-> ##D # plot observed data
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y")
-> ##D 
-> ##D # PREM ---------------------------------------------------------------------------------
-> ##D # fit Bayes_PREM()
-> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
-> ##D                            id_var = "id",
-> ##D                            time_var = "time",
-> ##D                            y_var = "y")
-> ##D # result summary
-> ##D summary(results_prem)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_prem)
-> ##D 
-> ##D # CI-PREM ---------------------------------------------------------------------------------
-> ##D # fit Bayes_PREM()
-> ##D results_ciprem <- Bayes_PREM(data = SimData_PREM,
-> ##D                              id_var = "id",
-> ##D                              time_var = "time",
-> ##D                              y_var = "y",
-> ##D                              outcome_predictive_vars = "outcome_pred_1")
-> ##D # result summary
-> ##D summary(results_ciprem)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_ciprem)
-> ##D 
-> ##D # PREMM ---------------------------------------------------------------------------------
-> ##D # fit Bayes_PREM()
-> ##D results_premm <- Bayes_PREM(data = SimData_PREM,
-> ##D                             id_var = "id",
-> ##D                             time_var = "time",
-> ##D                             y_var = "y",
-> ##D                             n_class = 2)
-> ##D # result summary
-> ##D summary(results_premm)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_premm)
-> ##D 
-> ##D 
-> ##D # CI-PREMM ---------------------------------------------------------------------------------
-> ##D # fit Bayes_PREM()
-> ##D results_cipremm <- Bayes_PREM(data = SimData_PREM,
-> ##D                               id_var = "id",
-> ##D                               time_var = "time",
-> ##D                               y_var = "y",
-> ##D                               n_class = 2,
-> ##D                               class_predictive_vars = c("class_pred_1", "class_pred_2"),
-> ##D                               outcome_predictive_vars = "outcome_pred_1")
-> ##D # result summary
-> ##D summary(results_cipremm)
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_cipremm)
-> ## End(Not run)
+> ## No test: 
+> # load simulated data
+> data(SimData_PREM)
+> # plot observed data
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y")
+[1] "Observed trajectories"
+> 
+> # PREM ---------------------------------------------------------------------------------
+> # fit Bayes_PREM()
+> results_prem <- Bayes_PREM(data = SimData_PREM,
++                            id_var = "id",
++                            time_var = "time",
++                            y_var = "y")
+Computing initial values...
+Calibrating MCMC...
+Running burn-in...
+Collecting samples...
+> # result summary
+> summary(results_prem)
+Class Dependent Parameters:
+                                Class 1
+Empirical Class Probabilities  1.000000
+Number of Changepoints         2.000000
+Intercept Mean                 9.528336
+Slope Mean                    -0.071919
+Changepoint 1 Mean             3.301289
+Change in Slope 1 Mean         0.407493
+Changepoint 2 Mean             2.783752
+Change in Slope 2 Mean        -0.220180
+Interept Var                   1.380570
+Slope Var                      0.000446
+Changepoint 1 Var             19.182409
+Change in Slope 1 Var          0.001859
+Changepoint 2 Var              1.375015
+Change in Slope 2 Var          0.001746
+
+Class Independent Parameters:
+          Estimate
+Error Var    0.338
+
+Gelman's msrf: 3.232 
+Mean psrf: 1.493 
+DIC: 1029.934> # plot fitted results
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_prem)
+[1] "Observed trajectories with fitted results"
+> 
+> # CI-PREM ---------------------------------------------------------------------------------
+> # fit Bayes_PREM()
+> results_ciprem <- Bayes_PREM(data = SimData_PREM,
++                              id_var = "id",
++                              time_var = "time",
++                              y_var = "y",
++                              outcome_predictive_vars = "outcome_pred_1")
+Computing initial values...
+Calibrating MCMC...
+Running burn-in...
+Collecting samples...
+> # result summary
+> summary(results_ciprem)
+Class Dependent Parameters:
+                                Class 1
+Empirical Class Probabilities  1.000000
+Number of Changepoints         1.000000
+Intercept Mean                 9.171917
+Slope Mean                    -0.234998
+Changepoint 1 Mean             2.798042
+Change in Slope 1 Mean         0.353177
+Interept Var                   1.517032
+Slope Var                      0.000988
+Changepoint 1 Var             20.743226
+Change in Slope 1 Var          0.002372
+
+Class Independent Parameters:
+               Estimate
+Error Var        0.3358
+outcome_pred_1   0.0832
+
+Gelman's msrf: 1.07 
+Mean psrf: 1.01 
+DIC: 1021.928> # plot fitted results
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_ciprem)
+[1] "Observed trajectories with fitted results"
+> 
+> # PREMM ---------------------------------------------------------------------------------
+> # fit Bayes_PREM()
+> results_premm <- Bayes_PREM(data = SimData_PREM,
++                             id_var = "id",
++                             time_var = "time",
++                             y_var = "y",
++                             n_class = 2)
+Computing initial values...
+Calibrating MCMC...
+Running burn-in...
+Collecting samples...
+> # result summary
+> summary(results_premm)
+Class Dependent Parameters:
+                               Class 1 Class 2
+Empirical Class Probabilities  0.56667  0.4333
+Number of Changepoints         1.00000  0.0000
+Intercept Mean                 8.84283 10.6261
+Slope Mean                    -0.21446  0.0728
+Changepoint 1 Mean             7.79411        
+Change in Slope 1 Mean         0.38746        
+Interept Var                   0.29077  0.1462
+Slope Var                      0.00125  0.0018
+Changepoint 1 Var             15.21291        
+Change in Slope 1 Var          0.00144        
+
+Class Independent Parameters:
+          Estimate
+Error Var    0.338
+
+Gelman's msrf: 1.023 
+Mean psrf: 1.002 
+DIC: 1011.899> # plot fitted results
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_premm)
+[1] "Observed trajectories with fitted results"
+> 
+> 
+> # CI-PREMM ---------------------------------------------------------------------------------
+> # fit Bayes_PREM()
+> results_cipremm <- Bayes_PREM(data = SimData_PREM,
++                               id_var = "id",
++                               time_var = "time",
++                               y_var = "y",
++                               n_class = 2,
++                               class_predictive_vars = c("class_pred_1", "class_pred_2"),
++                               outcome_predictive_vars = "outcome_pred_1")
+Computing initial values...
+Calibrating MCMC...
+Running burn-in...
+Collecting samples...
+> # result summary
+> summary(results_cipremm)
+Class Dependent Parameters:
+                               Class 1  Class 2
+Empirical Class Probabilities  0.56667  0.43333
+Number of Changepoints         1.00000  0.00000
+Intercept Mean                 8.72446 10.06985
+Slope Mean                    -0.22211  0.07247
+Changepoint 1 Mean             6.31873         
+Change in Slope 1 Mean         0.37662         
+Interept Var                   0.63063  0.48212
+Slope Var                      0.00129  0.00933
+Changepoint 1 Var             16.19928         
+Change in Slope 1 Var          0.00174         
+
+Class Independent Parameters:
+                                 Estimate
+Error Var                          0.3332
+outcome_pred_1                     0.0638
+class_pred_1 (in log-odds units)  -3.1637
+class_pred_2 (in log-odds units)  -0.9971
+Logistic Intercept                -1.1711
+
+Gelman's msrf: 4.877 
+Mean psrf: 1.486 
+DIC: 1016.335> # plot fitted results
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_cipremm)
+[1] "Observed trajectories with fitted results"
+> ## End(No test)
 > 
 > 
 > 
@@ -230,27 +474,23 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_PREM)
-> ##D # plot observed data
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y")
-> ##D 
-> ##D # fit Bayes_PREM()
-> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
-> ##D                            id_var = "id",
-> ##D                            time_var = "time",
-> ##D                            y_var = "y")
-> ##D # plot fitted results
-> ##D plot_BEND(data = SimData_PREM,
-> ##D           id_var = "id",
-> ##D           time_var = "time",
-> ##D           y_var = "y",
-> ##D           results = results_prem)
-> ## End(Not run)
+> # load simulated data
+> data(SimData_PREM)
+> # plot observed data
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y")
+[1] "Observed trajectories"
+> # load fitted model results
+> data(results_prem)
+> # plot fitted results
+> plot_BEND(data = SimData_PREM,
++           id_var = "id",
++           time_var = "time",
++           y_var = "y",
++           results = results_prem)
+[1] "Observed trajectories with fitted results"
 > 
 > 
 > 
@@ -271,19 +511,104 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_BPREM)
-> ##D # fit Bayes_BPREM()
-> ##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
-> ##D                              id_var = "id",
-> ##D                              time_var = "time",
-> ##D                              y1_var = "y1",
-> ##D                              y2_var = "y2")
-> ##D # result summary
-> ##D summary(results_bprem)
-> ## End(Not run)
-> 
+> # load fitted model results
+> data(results_bprem)
+> # result summary
+> summary(results_bprem)
+Fixed Effect Parameters:
+                     Outcome 1 Outcome 2
+Intercept Mean           37.88     31.09
+Slope Mean               45.23     34.37
+Change in Slope Mean    -35.25    -25.62
+Changepoint Mean          2.55      2.79
+
+Random Effect Parameters:
+Covariance Matrix:
+                           Outcome 1: Intercept Outcome 1: Slope
+Outcome 1: Intercept                     116.50                 
+Outcome 1: Slope                          64.01           102.36
+Outcome 1: Change in Slope               -63.21           -80.33
+Outcome 1: Changepoint                    -3.77            -4.86
+Outcome 2: Intercept                      53.11            48.35
+Outcome 2: Slope                          32.92            37.84
+Outcome 2: Change in Slope               -38.98           -39.73
+Outcome 2: Changepoint                    -1.47            -1.45
+                           Outcome 1: Change in Slope Outcome 1: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                     105.85                       
+Outcome 1: Changepoint                           3.90                  0.493
+Outcome 2: Intercept                           -42.70                 -2.969
+Outcome 2: Slope                               -21.41                 -2.532
+Outcome 2: Change in Slope                      21.01                  3.042
+Outcome 2: Changepoint                           1.77                  0.142
+                           Outcome 2: Intercept Outcome 2: Slope
+Outcome 1: Intercept                                            
+Outcome 1: Slope                                                
+Outcome 1: Change in Slope                                      
+Outcome 1: Changepoint                                          
+Outcome 2: Intercept                      57.71                 
+Outcome 2: Slope                          30.05            56.55
+Outcome 2: Change in Slope               -37.52           -53.54
+Outcome 2: Changepoint                    -1.53            -2.99
+                           Outcome 2: Change in Slope Outcome 2: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                                                  
+Outcome 1: Changepoint                                                      
+Outcome 2: Intercept                                                        
+Outcome 2: Slope                                                            
+Outcome 2: Change in Slope                      78.01                       
+Outcome 2: Changepoint                           1.73                  0.483
+
+Correlation Matrix:
+                           Outcome 1: Intercept Outcome 1: Slope
+Outcome 1: Intercept                      1.000                 
+Outcome 1: Slope                          0.641            1.000
+Outcome 1: Change in Slope               -0.621           -0.731
+Outcome 1: Changepoint                   -0.538           -0.643
+Outcome 2: Intercept                      0.668            0.650
+Outcome 2: Slope                          0.420            0.514
+Outcome 2: Change in Slope               -0.425           -0.463
+Outcome 2: Changepoint                   -0.197           -0.199
+                           Outcome 1: Change in Slope Outcome 1: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                      1.000                       
+Outcome 1: Changepoint                          0.505                  1.000
+Outcome 2: Intercept                           -0.565                 -0.575
+Outcome 2: Slope                               -0.272                 -0.487
+Outcome 2: Change in Slope                      0.232                  0.502
+Outcome 2: Changepoint                          0.252                  0.290
+                           Outcome 2: Intercept Outcome 2: Slope
+Outcome 1: Intercept                                            
+Outcome 1: Slope                                                
+Outcome 1: Change in Slope                                      
+Outcome 1: Changepoint                                          
+Outcome 2: Intercept                      1.000                 
+Outcome 2: Slope                          0.560            1.000
+Outcome 2: Change in Slope               -0.590           -0.805
+Outcome 2: Changepoint                   -0.296           -0.493
+                           Outcome 2: Change in Slope Outcome 2: Changepoint
+Outcome 1: Intercept                                                        
+Outcome 1: Slope                                                            
+Outcome 1: Change in Slope                                                  
+Outcome 1: Changepoint                                                      
+Outcome 2: Intercept                                                        
+Outcome 2: Slope                                                            
+Outcome 2: Change in Slope                      1.000                       
+Outcome 2: Changepoint                          0.262                      1
+
+Error:
+Covariance Matrix:
+                 Outcome 1: Error Outcome 2: Error
+Outcome 1: Error             92.4                 
+Outcome 2: Error             12.9             53.9
+
+Error Corr: 0.1824013 
+Gelman's msrf: 1.313 
+Mean psrf: 1.029 
+DIC: 3132.108> 
 > 
 > 
 > 
@@ -302,20 +627,36 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_PCREM)
-> ##D # fit Bayes_CREM()
-> ##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
-> ##D                             ind_id_var = "id",
-> ##D                             cross_id_var = "teacherid",
-> ##D                             time_var = "time",
-> ##D                             y_var = "y",
-> ##D                             form="piecewise")
-> ##D # result summary
-> ##D # summary(results_pcrem)
-> ## End(Not run)
-> 
+> # load fitted model results
+> data(results_pcrem)
+> # result summary
+> summary(results_pcrem)
+Fixed Effect Parameters:
+                     Estimate
+Intercept Mean          37.05
+Slope Mean              28.75
+Change in Slope Mean   -22.12
+Changepoint Mean         3.72
+
+Random Effect Parameters:
+Individual Random Effects Covariance Matrix:
+                Intercept  Slope Change in Slope Changepoint
+Intercept          23.405                                   
+Slope               4.582 12.764                            
+Change in Slope     0.540 -3.607            8.51            
+Changepoint        -0.435 -0.203           -1.08       0.853
+
+Group Random Effects Covariance Matrix:
+                Intercept  Slope Change in Slope Changepoint
+Intercept         18.5688                                   
+Slope             -2.5827  4.623                            
+Change in Slope   -0.0886 -0.499           6.343            
+Changepoint        1.0370 -0.507          -0.392        0.37
+
+Error Var: 13.05503 
+Gelman's msrf: 1.197 
+Mean psrf: 1.029 
+DIC: 1282.769> 
 > 
 > 
 > 
@@ -334,18 +675,30 @@ Type 'q()' to quit R.
 > 
 > ### ** Examples
 > 
-> ## Not run: 
-> ##D # load simulated data
-> ##D data(SimData_PREM)
-> ##D # fit Bayes_PREM()
-> ##D results_prem <- Bayes_PREM(data = SimData_PREM,
-> ##D                            id_var = "id",
-> ##D                            time_var = "time",
-> ##D                            y_var = "y")
-> ##D # result summary
-> ##D summary(results_prem)
-> ## End(Not run)
-> 
+> # load fitted model results
+> data(results_prem)
+> # result summary
+> summary(results_prem)
+Class Dependent Parameters:
+                               Class 1
+Empirical Class Probabilities  1.00000
+Number of Changepoints         1.00000
+Intercept Mean                 9.73078
+Slope Mean                    -0.23180
+Changepoint 1 Mean             2.80825
+Change in Slope 1 Mean         0.35093
+Interept Var                   1.44092
+Slope Var                      0.00112
+Changepoint 1 Var             20.88636
+Change in Slope 1 Var          0.00243
+
+Class Independent Parameters:
+          Estimate
+Error Var    0.344
+
+Gelman's msrf: 1.682 
+Mean psrf: 1.17 
+DIC: 1032.806> 
 > 
 > 
 > 
@@ -356,7 +709,7 @@ Type 'q()' to quit R.
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  0.339 0.026 0.445 0 0 
+Time elapsed:  22665.09 97.598 22930.42 0 0 
 > grDevices::dev.off()
 null device 
           1 

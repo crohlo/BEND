@@ -2,6 +2,9 @@ Bayes_BPREM	Bayes_BPREM
 Bayes_CREM	Bayes_CREM
 Bayes_PREM	Bayes_PREM
 plot_BEND	plot_BEND
+results_bprem	results_bprem
+results_pcrem	results_pcrem
+results_prem	results_prem
 SimData_BPREM	SimData_BPREM
 SimData_PCREM	SimData_PCREM
 SimData_PREM	SimData_PREM

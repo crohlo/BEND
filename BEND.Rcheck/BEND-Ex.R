@@ -30,31 +30,31 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_BPREM)
-##D # plot observed data
-##D plot_BEND(data = SimData_BPREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y1",
-##D           y2_var = "y2")
-##D # fit Bayes_BPREM()
-##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
-##D                              id_var = "id",
-##D                              time_var = "time",
-##D                              y1_var = "y1",
-##D                              y2_var = "y2")
-##D # result summary
-##D summary(results_bprem)
-##D # plot fitted results
-##D plot_BEND(data = SimData_BPREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y1",
-##D           y2_var = "y2",
-##D           results = results_bprem)
-## End(Not run)
+## No test: 
+# load simulated data
+data(SimData_BPREM)
+# plot observed data
+plot_BEND(data = SimData_BPREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y1",
+          y2_var = "y2")
+# fit Bayes_BPREM()
+results_bprem <- Bayes_BPREM(data = SimData_BPREM,
+                             id_var = "id",
+                             time_var = "time",
+                             y1_var = "y1",
+                             y2_var = "y2")
+# result summary
+summary(results_bprem)
+# plot fitted results
+plot_BEND(data = SimData_BPREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y1",
+          y2_var = "y2",
+          results = results_bprem)
+## End(No test)
 
 
 
@@ -74,30 +74,30 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_PCREM)
-##D # plot observed data
-##D plot_BEND(data = SimData_PCREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y")
-##D # fit Bayes_CREM()
-##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
-##D                             ind_id_var = "id",
-##D                             cross_id_var = "teacherid",
-##D                             time_var = "time",
-##D                             y_var = "y",
-##D                             form="piecewise")
-##D # result summary
-##D summary(results_pcrem)
-##D # plot fitted results
-##D plot_BEND(data = SimData_PCREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_pcrem)
-## End(Not run)
+## No test: 
+# load simulated data
+data(SimData_PCREM)
+# plot observed data
+plot_BEND(data = SimData_PCREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y")
+# fit Bayes_CREM()
+results_pcrem <- Bayes_CREM(data = SimData_PCREM,
+                            ind_id_var = "id",
+                            cross_id_var = "teacherid",
+                            time_var = "time",
+                            y_var = "y",
+                            form="piecewise")
+# result summary
+summary(results_pcrem)
+# plot fitted results
+plot_BEND(data = SimData_PCREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_pcrem)
+## End(No test)
 
 
 
@@ -117,81 +117,81 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_PREM)
-##D # plot observed data
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y")
-##D 
-##D # PREM ---------------------------------------------------------------------------------
-##D # fit Bayes_PREM()
-##D results_prem <- Bayes_PREM(data = SimData_PREM,
-##D                            id_var = "id",
-##D                            time_var = "time",
-##D                            y_var = "y")
-##D # result summary
-##D summary(results_prem)
-##D # plot fitted results
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_prem)
-##D 
-##D # CI-PREM ---------------------------------------------------------------------------------
-##D # fit Bayes_PREM()
-##D results_ciprem <- Bayes_PREM(data = SimData_PREM,
-##D                              id_var = "id",
-##D                              time_var = "time",
-##D                              y_var = "y",
-##D                              outcome_predictive_vars = "outcome_pred_1")
-##D # result summary
-##D summary(results_ciprem)
-##D # plot fitted results
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_ciprem)
-##D 
-##D # PREMM ---------------------------------------------------------------------------------
-##D # fit Bayes_PREM()
-##D results_premm <- Bayes_PREM(data = SimData_PREM,
-##D                             id_var = "id",
-##D                             time_var = "time",
-##D                             y_var = "y",
-##D                             n_class = 2)
-##D # result summary
-##D summary(results_premm)
-##D # plot fitted results
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_premm)
-##D 
-##D 
-##D # CI-PREMM ---------------------------------------------------------------------------------
-##D # fit Bayes_PREM()
-##D results_cipremm <- Bayes_PREM(data = SimData_PREM,
-##D                               id_var = "id",
-##D                               time_var = "time",
-##D                               y_var = "y",
-##D                               n_class = 2,
-##D                               class_predictive_vars = c("class_pred_1", "class_pred_2"),
-##D                               outcome_predictive_vars = "outcome_pred_1")
-##D # result summary
-##D summary(results_cipremm)
-##D # plot fitted results
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_cipremm)
-## End(Not run)
+## No test: 
+# load simulated data
+data(SimData_PREM)
+# plot observed data
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y")
+
+# PREM ---------------------------------------------------------------------------------
+# fit Bayes_PREM()
+results_prem <- Bayes_PREM(data = SimData_PREM,
+                           id_var = "id",
+                           time_var = "time",
+                           y_var = "y")
+# result summary
+summary(results_prem)
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_prem)
+
+# CI-PREM ---------------------------------------------------------------------------------
+# fit Bayes_PREM()
+results_ciprem <- Bayes_PREM(data = SimData_PREM,
+                             id_var = "id",
+                             time_var = "time",
+                             y_var = "y",
+                             outcome_predictive_vars = "outcome_pred_1")
+# result summary
+summary(results_ciprem)
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_ciprem)
+
+# PREMM ---------------------------------------------------------------------------------
+# fit Bayes_PREM()
+results_premm <- Bayes_PREM(data = SimData_PREM,
+                            id_var = "id",
+                            time_var = "time",
+                            y_var = "y",
+                            n_class = 2)
+# result summary
+summary(results_premm)
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_premm)
+
+
+# CI-PREMM ---------------------------------------------------------------------------------
+# fit Bayes_PREM()
+results_cipremm <- Bayes_PREM(data = SimData_PREM,
+                              id_var = "id",
+                              time_var = "time",
+                              y_var = "y",
+                              n_class = 2,
+                              class_predictive_vars = c("class_pred_1", "class_pred_2"),
+                              outcome_predictive_vars = "outcome_pred_1")
+# result summary
+summary(results_cipremm)
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_cipremm)
+## End(No test)
 
 
 
@@ -211,27 +211,21 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_PREM)
-##D # plot observed data
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y")
-##D 
-##D # fit Bayes_PREM()
-##D results_prem <- Bayes_PREM(data = SimData_PREM,
-##D                            id_var = "id",
-##D                            time_var = "time",
-##D                            y_var = "y")
-##D # plot fitted results
-##D plot_BEND(data = SimData_PREM,
-##D           id_var = "id",
-##D           time_var = "time",
-##D           y_var = "y",
-##D           results = results_prem)
-## End(Not run)
+# load simulated data
+data(SimData_PREM)
+# plot observed data
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y")
+# load fitted model results
+data(results_prem)
+# plot fitted results
+plot_BEND(data = SimData_PREM,
+          id_var = "id",
+          time_var = "time",
+          y_var = "y",
+          results = results_prem)
 
 
 
@@ -252,18 +246,10 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_BPREM)
-##D # fit Bayes_BPREM()
-##D results_bprem <- Bayes_BPREM(data = SimData_BPREM,
-##D                              id_var = "id",
-##D                              time_var = "time",
-##D                              y1_var = "y1",
-##D                              y2_var = "y2")
-##D # result summary
-##D summary(results_bprem)
-## End(Not run)
+# load fitted model results
+data(results_bprem)
+# result summary
+summary(results_bprem)
 
 
 
@@ -283,19 +269,10 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_PCREM)
-##D # fit Bayes_CREM()
-##D results_pcrem <- Bayes_CREM(data = SimData_PCREM,
-##D                             ind_id_var = "id",
-##D                             cross_id_var = "teacherid",
-##D                             time_var = "time",
-##D                             y_var = "y",
-##D                             form="piecewise")
-##D # result summary
-##D # summary(results_pcrem)
-## End(Not run)
+# load fitted model results
+data(results_pcrem)
+# result summary
+summary(results_pcrem)
 
 
 
@@ -315,17 +292,10 @@ base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 
 ### ** Examples
 
-## Not run: 
-##D # load simulated data
-##D data(SimData_PREM)
-##D # fit Bayes_PREM()
-##D results_prem <- Bayes_PREM(data = SimData_PREM,
-##D                            id_var = "id",
-##D                            time_var = "time",
-##D                            y_var = "y")
-##D # result summary
-##D summary(results_prem)
-## End(Not run)
+# load fitted model results
+data(results_prem)
+# result summary
+summary(results_prem)
 
 
 

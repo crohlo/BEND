@@ -7,6 +7,9 @@ SimData_BPREM           Simulated data for a BPREM
 SimData_PCREM           Simulated data for a PCREM
 SimData_PREM            Simulated data for a PREM + Extensions
 plot_BEND               Plot a BEND Model (PREM, CREM, BPREM)
+results_bprem           Fitted results for a BPREM
+results_pcrem           Fitted results for a PCREM
+results_prem            Fitted results for a PREM
 summary.BPREM           Summarize the results of a bivariate piecewise
                         random effects model (BPREM)
 summary.CREM            Summarize the results of a crossed random

@@ -10,10 +10,16 @@
 * checking for file ‘BEND/DESCRIPTION’ ... OK
 * this is package ‘BEND’ version ‘1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... [9s/26s] NOTE
+* checking CRAN incoming feasibility ... [8s/42s] NOTE
 Maintainer: ‘Corissa T. Rohloff <corissa.wurth@gmail.com>’
 
 New submission
+
+Found the following (possibly) invalid URLs:
+  URL: http://conservancy.umn.edu/handle/11299/252533 (moved to https://conservancy.umn.edu/handle/11299/252533)
+    From: DESCRIPTION
+    Status: 200
+    Message: OK
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -58,6 +64,7 @@ New submission
 * checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... OK
 * checking examples ... OK
+* checking examples with --run-donttest ... [379m/382m] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... OK
 * checking for non-standard things in the check directory ... OK

@@ -22,7 +22,8 @@ Bayes_PREM(
   iters_sampling = 30000,
   thin = 15,
   save_full_chains = FALSE,
-  save_conv_chains = FALSE
+  save_conv_chains = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -61,6 +62,8 @@ Bayes_PREM(
 \item{save_full_chains}{Logical indicating whether the MCMC chains from rjags should be saved (default = FALSE). Note, this should not be used regularly as it will result in an object with a large file size.}
 
 \item{save_conv_chains}{Logical indicating whether the MCMC chains from rjags should be saved but only for the parameters monitored for convergence (default = FALSE). This would be useful for plotting traceplots for relevant model parameters to evaluate convergence behavior. Note, this should not be used regularly as it will result in an object with a large file size.}
+
+\item{verbose}{Logical controlling whether progress messages/bars are generated (default = TRUE).}
 }
 \value{
 A list (an object of class \code{PREM}) with elements:
@@ -89,7 +92,7 @@ See Lock et al. (2018) and Lamm (2022) for more details.
 For more information on the model equation and priors implemented in this function, see Lamm et al. (2022; CI-PREMM) and Lock et al. (2018; PREMM).
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PREM)
 # plot observed data
