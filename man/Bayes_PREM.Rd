@@ -89,7 +89,7 @@ See Lock et al. (2018) and Lamm (2022) for more details.
 For more information on the model equation and priors implemented in this function, see Lamm et al. (2022; CI-PREMM) and Lock et al. (2018; PREMM).
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PREM)
 # plot observed data

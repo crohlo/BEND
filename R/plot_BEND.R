@@ -16,10 +16,12 @@
 #' @param legend_pos (optional) Option to change legend position (default = "topright").
 #' @param ... (optional) Other parameters to pass to the `plot()` function.
 #'
+#' @returns No return value, called to generate plot.
+#'
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load simulated data
 #' data(SimData_PREM)
 #' # plot observed data
@@ -28,11 +30,8 @@
 #'           time_var = "time",
 #'           y_var = "y")
 #'
-#' # fit Bayes_PREM()
-#' results_prem <- Bayes_PREM(data = SimData_PREM,
-#'                            id_var = "id",
-#'                            time_var = "time",
-#'                            y_var = "y")
+#' load(results_prem)
+#'
 #' # plot fitted results
 #' plot_BEND(data = SimData_PREM,
 #'           id_var = "id",

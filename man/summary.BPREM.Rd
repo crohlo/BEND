@@ -18,7 +18,7 @@ Prints estimates for key parameters in the BPREM. Also returns a list of these v
 Provides a summary of a BPREM model, as returned by \code{Bayes_BPREM()}.
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_BPREM)
 # fit Bayes_BPREM()

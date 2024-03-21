@@ -11,7 +11,7 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load simulated data
 #' data(SimData_PCREM)
 #' # fit Bayes_CREM()
@@ -22,7 +22,7 @@
 #'                             y_var = "y",
 #'                             form="piecewise")
 #' # result summary
-#' # summary(results_pcrem)
+#' summary(results_pcrem)
 #' }
 #'
 #' @export

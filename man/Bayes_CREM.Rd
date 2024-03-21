@@ -67,7 +67,7 @@ For more information on the model equation and priors implemented in this functi
 Note, this function differs from the above reference by estimating the covariances between the random effects parameters. The variance-covariance matrices of the individual and group random effects have a scaled inverse-Wishart prior (see Peralta et al., 2022).
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PCREM)
 # plot observed data

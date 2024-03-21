@@ -11,7 +11,7 @@
 #' @author Corissa T. Rohloff
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load simulated data
 #' data(SimData_BPREM)
 #' # fit Bayes_BPREM()

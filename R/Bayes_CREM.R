@@ -16,6 +16,7 @@
 #' @param thin (optional) Thinning interval for posterior sampling (default = 15).
 #' @param save_full_chains Logical indicating whether the MCMC chains from rjags should be saved (default = FALSE). Note, this should not be used regularly as it will result in an object with a large file size.
 #' @param save_conv_chains Logical indicating whether the MCMC chains from rjags should be saved but only for the parameters monitored for convergence (default = FALSE). This would be useful for plotting traceplots for relevant model parameters to evaluate convergence behavior. Note, this should not be used regularly as it will result in an object with a large file size.
+#' @param verbose Logical controlling whether progress messages/bars are generated (default = TRUE).
 #'
 #' @returns A list (an object of class `CREM`) with elements:
 #' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
@@ -40,7 +41,7 @@
 #' Rohloff, C. T., Kohli, N., & Lock, E. F. (2024). Identifiability and estimability of Bayesian linear and nonlinear crossed random effects models. British Journal of Mathematical and Statistical Psychology. https://doi.org/10.1111/bmsp.12334
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # load simulated data
 #' data(SimData_PCREM)
 #' # plot observed data
@@ -73,12 +74,17 @@ Bayes_CREM <- function(data,
                        form="linear",
                        fixed_effects=NULL,
                        iters_adapt=5000, iters_burn_in=50000, iters_sampling=50000, thin=15,
-                       save_full_chains=FALSE, save_conv_chains=FALSE){
+                       save_full_chains=FALSE, save_conv_chains=FALSE,
+                       verbose=TRUE){
 
   # START OF SETUP ----
 
   ## Initial data check
   data <- as.data.frame(data)
+
+  ## Control progress messages/bars
+  if(verbose) progress_bar = "text"
+  if(!verbose) progress_bar = "none"
 
   ## Start tracking run time
   run_time_total_start <- Sys.time()
@@ -154,7 +160,7 @@ Bayes_CREM <- function(data,
     for(i in 1:n_chains){initial_vals[[i]]$beta_mean <- fixed_effects}
   }
 
-  cat("Calibrating MCMC...\n")
+  if(verbose) cat("Calibrating MCMC...\n")
   if(!is.null(fixed_effects)) full_model <- rjags::jags.model(full_spec,
                                                               data = data_list,
                                                               inits = initial_vals,
@@ -168,15 +174,16 @@ Bayes_CREM <- function(data,
                                                              quiet = TRUE)
 
   # burn-in
-  cat("Burn in of jags model...\n")
-  update(full_model, iters_burn_in)
+  if(verbose) cat("Burn in of jags model...\n")
+  update(full_model, iters_burn_in, progress.bar=progress_bar)
 
   # sampling
-  cat("Collecting samples...\n")
+  if(verbose) cat("Collecting samples...\n")
   full_out <- rjags::jags.samples(full_model,
                                   variable.names = param_recovery_full,
                                   n.iter = iters_sampling,
-                                  thin = thin)
+                                  thin = thin,
+                                  progress.bar=progress_bar)
 
   # Compiling Full Results -----
 

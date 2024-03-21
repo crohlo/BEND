@@ -44,11 +44,14 @@ plot_BEND(
 
 \item{...}{(optional) Other parameters to pass to the \code{plot()} function.}
 }
+\value{
+No return value, called to generate plot.
+}
 \description{
 Generates a "spaghetti plot" of observed longitudinal trajectories for each individual. If the results from a \code{BEND} function are supplied, the trajectory defined by the mean parameters is shown in bold. If fitting a mixture (\code{PREMM} or \code{CI-PREMM}) or bivariate model (\code{BPREM}), the mean trajectories for classes or outcomes will be distinguished by color.
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PREM)
 # plot observed data

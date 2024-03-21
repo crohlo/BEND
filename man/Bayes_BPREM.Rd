@@ -58,7 +58,7 @@ Estimates a Bayesian bivariate piecewise random effects models (BPREM) for longi
 For more information on the model equation and priors implemented in this function, see Peralta et al. (2022).
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_BPREM)
 # plot observed data

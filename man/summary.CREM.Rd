@@ -18,7 +18,7 @@ Prints estimates for key parameters in the CREM. Also returns a list of these va
 Provides a summary of a CREM model, as returned by \code{Bayes_CREM()}.
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PCREM)
 # fit Bayes_CREM()
@@ -29,7 +29,7 @@ results_pcrem <- Bayes_CREM(data = SimData_PCREM,
                             y_var = "y",
                             form="piecewise")
 # result summary
-# summary(results_pcrem)
+summary(results_pcrem)
 }
 
 }

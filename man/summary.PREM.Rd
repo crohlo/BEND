@@ -18,7 +18,7 @@ Prints estimates for key parameters in the PREM. Also returns a list of these va
 Provides a summary of a PREM model, as returned by \code{Bayes_PREM()}.
 }
 \examples{
-\dontrun{
+\donttest{
 # load simulated data
 data(SimData_PREM)
 # fit Bayes_PREM()
