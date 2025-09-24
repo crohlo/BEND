@@ -273,9 +273,20 @@ Bayes_PREM <- function(data,
     if(n_cov_outcome_predictive>0) data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
     if(n_cov_outcome_predictive>0) data_list$outcome_predictive_covariates <- outcome_predictive_covariates
 
+    ## Set Seeds for Reproducible Code
+    initial_vals <- vector('list', n_chains)
+    seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+    # sensitive to set.seed()
+    for(i in 1:n_chains){
+      initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+      initial_vals[[i]]$.RNG.seed <- seeds[i]
+    }
+
+    ## Create JAGS model
     if(verbose) cat('Computing initial values...\n')
     init_fixed_model <- rjags::jags.model(init_fixed_spec,
                                           data=data_list,
+                                          inits = initial_vals,
                                           n.chains=n_chains,
                                           n.adapt=500,
                                           quiet=TRUE)
@@ -395,6 +406,15 @@ Bayes_PREM <- function(data,
     if(n_cov_outcome_predictive>0) data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
     if(n_cov_outcome_predictive>0) data_list$outcome_predictive_covariates <- outcome_predictive_covariates
 
+    ## Set Seeds for Reproducible Code
+    seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+    # sensitive to set.seed()
+    for(i in 1:n_chains){
+      initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+      initial_vals[[i]]$.RNG.seed <- seeds[i]
+    }
+
+    ## Create JAGS model
     if(verbose) cat('Calibrating MCMC...\n')
     full_model <- rjags::jags.model(full_spec,
                                     data=data_list,
@@ -446,9 +466,20 @@ Bayes_PREM <- function(data,
       if(cp_prior=='binomial') data_list$binom_prob <- binom_prob
       if(cp_prior=='uniform') data_list$aux_prob <- aux_prob
 
+      ## Set Seeds for Reproducible Code
+      initial_vals <- vector('list', n_chains)
+      seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+      # sensitive to set.seed()
+      for(i in 1:n_chains){
+        initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+        initial_vals[[i]]$.RNG.seed <- seeds[i]
+      }
+
+      ## Create JAGS model
       if(verbose) cat('Computing initial values...\n')
       init_fixed_model <- rjags::jags.model(init_fixed_spec,
                                             data=data_list,
+                                            inits = initial_vals,
                                             n.chains=n_chains,
                                             n.adapt=500,
                                             quiet=TRUE)
@@ -555,6 +586,15 @@ Bayes_PREM <- function(data,
       if(cp_prior=='binomial') data_list$binom_prob <- binom_prob
       if(cp_prior=='uniform') data_list$aux_prob <- aux_prob
 
+      ## Set Seeds for Reproducible Code
+      seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+      # sensitive to set.seed()
+      for(i in 1:n_chains){
+        initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+        initial_vals[[i]]$.RNG.seed <- seeds[i]
+      }
+
+      ## Create JAGS model
       if(verbose) cat('Calibrating MCMC...\n')
       full_model <- rjags::jags.model(full_spec,
                                       data=data_list,
@@ -623,9 +663,20 @@ Bayes_PREM <- function(data,
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$outcome_predictive_covariates <- outcome_predictive_covariates
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
 
+      ## Set Seeds for Reproducible Code
+      initial_vals <- vector('list', n_chains)
+      seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+      # sensitive to set.seed()
+      for(i in 1:n_chains){
+        initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+        initial_vals[[i]]$.RNG.seed <- seeds[i]
+      }
+
+      ## Create JAGS model
       if(verbose) cat('Computing initial values...\n')
       init_fixed_model <- rjags::jags.model(init_fixed_spec,
                                             data=data_list,
+                                            inits = initial_vals,
                                             n.chains=n_chains,
                                             n.adapt=500,
                                             quiet=TRUE)
@@ -774,6 +825,15 @@ Bayes_PREM <- function(data,
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$outcome_predictive_covariates <- outcome_predictive_covariates
       if(mod_type=='CI_PREMM_Full' | mod_type=='CI_PREMM_Outcome_Predictive') data_list$n_cov_outcome_predictive <- n_cov_outcome_predictive
 
+      ## Set Seeds for Reproducible Code
+      seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+      # sensitive to set.seed()
+      for(i in 1:n_chains){
+        initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+        initial_vals[[i]]$.RNG.seed <- seeds[i]
+      }
+
+      ## Create JAGS model
       if(verbose) cat('Calibrating MCMC...\n')
       full_model <- rjags::jags.model(full_spec,
                                       data=data_list,

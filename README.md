@@ -4,6 +4,7 @@
 # BEND
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of BEND is to provide a set of models to estimate nonlinear
@@ -60,4 +61,11 @@ You can install the development version of BEND from
 # install.packages("devtools")
 library(devtools)
 install_github("crohlo/BEND")
+```
+
+or directly from the [CRAN](https://cran.r-project.org/) repository
+with:
+
+``` r
+install.packages("BEND")
 ```

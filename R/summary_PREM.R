@@ -64,7 +64,7 @@ summary.PREM <- function(object, ...){
   my_rownames <- rep(NA, 4+4*max_cp)
   my_rownames[1] = "Intercept Mean"
   my_rownames[2] = "Slope Mean"
-  my_rownames[max_cp*2+2+1] = "Interept Var"
+  my_rownames[max_cp*2+2+1] = "Intercept Var"
   my_rownames[max_cp*2+2+2] = "Slope Var"
   for(k in 1:max_cp){
     my_rownames[2*k+1] = paste0("Changepoint ", k, " Mean")

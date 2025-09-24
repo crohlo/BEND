@@ -48,3 +48,9 @@ You can install the development version of BEND from [GitHub](https://github.com
 library(devtools)
 install_github("crohlo/BEND")
 ```
+
+or directly from the [CRAN](https://cran.r-project.org/) repository with:
+
+``` r
+install.packages("BEND")
+```

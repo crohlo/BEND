@@ -160,18 +160,22 @@ Bayes_CREM <- function(data,
     for(i in 1:n_chains){initial_vals[[i]]$beta_mean <- fixed_effects}
   }
 
+  ## Set Seeds for Reproducible Code
+  seeds <- sample(1:10, n_chains, replace = FALSE) # randomly generate non-repeating integers
+                                                   # sensitive to set.seed()
+  for(i in 1:n_chains){
+    initial_vals[[i]]$.RNG.name <- "base::Wichmann-Hill" # arbitrary
+    initial_vals[[i]]$.RNG.seed <- seeds[i]
+  }
+
+  ## Create JAGS model
   if(verbose) cat("Calibrating MCMC...\n")
-  if(!is.null(fixed_effects)) full_model <- rjags::jags.model(full_spec,
-                                                              data = data_list,
-                                                              inits = initial_vals,
-                                                              n.chains = n_chains,
-                                                              n.adapt = iters_adapt,
-                                                              quiet = TRUE)
-  if(is.null(fixed_effects)) full_model <- rjags::jags.model(full_spec,
-                                                             data = data_list,
-                                                             n.chains = n_chains,
-                                                             n.adapt = iters_adapt,
-                                                             quiet = TRUE)
+  full_model <- rjags::jags.model(full_spec,
+                                  data = data_list,
+                                  inits = initial_vals,
+                                  n.chains = n_chains,
+                                  n.adapt = iters_adapt,
+                                  quiet = TRUE)
 
   # burn-in
   if(verbose) cat("Burn in of jags model...\n")
