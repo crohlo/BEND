@@ -2,9 +2,12 @@
 % Please edit documentation in R/summary_CREM.R
 \name{summary.CREM}
 \alias{summary.CREM}
+\alias{print.summary.CREM}
 \title{Summarize the results of a crossed random effects model (CREM)}
 \usage{
 \method{summary}{CREM}(object, ...)
+
+\method{print}{summary.CREM}(object, ...)
 }
 \arguments{
 \item{object}{An object of class "CREM" (returned by \code{Bayes_CREM(...)}).}
@@ -12,7 +15,7 @@
 \item{...}{Additional arguments.}
 }
 \value{
-Prints estimates for key parameters in the CREM. Also returns a list of these values.
+Returns a list of key parameter estimates.
 }
 \description{
 Provides a summary of a CREM model, as returned by \code{Bayes_CREM()}.

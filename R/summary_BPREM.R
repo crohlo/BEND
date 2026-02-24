@@ -6,7 +6,7 @@
 #' @param object An object of class "BPREM" (returned by `Bayes_BPREM(...)`).
 #' @param ... Additional arguments.
 #'
-#' @returns Prints estimates for key parameters in the BPREM. Also returns a list of these values.
+#' @returns Returns a list of key parameter estimates.
 #'
 #' @author Corissa T. Rohloff
 #'
@@ -63,31 +63,42 @@ summary.BPREM <- function(object, ...){
 
   colnames(error_cov_mat) <- rownames(error_cov_mat) <- paste0(c("Outcome 1: ", "Outcome 2: "), "Error")
 
-  # PRINT output -----
+  ## return value
+  out <- list("fix_eff_est" = fix_eff_est,
+              "ran_eff_cov_mat" = ran_eff_cov_mat,
+              "ran_eff_corr_mat" = ran_eff_corr_mat,
+              "error_cov_mat" = error_cov_mat,
+              "error_corr" = object$Parameter_Estimates[(2*(n_param*2)+2*n_covar+3+1),"Mean"],
+              "msrf" = object$Convergence$multivariate_psrf,
+              "mean_psrf" = object$Convergence$mean_psrf,
+              "DIC" = object$Model_Fit$dic)
+  class(out) <- c("summary.BPREM", class(object))
+  return(out)
+}
+
+#' @rdname summary.BPREM
+#' @export
+print.summary.BPREM <- function(object, ...){
+
   cat("Fixed Effect Parameters:\n")
-  print(fix_eff_est, digits=3)
+  print(round(object$fix_eff_est,3))
   cat("\n")
   cat("Random Effect Parameters:\n")
   cat("Covariance Matrix:\n")
-  print(ran_eff_cov_mat, digits=3, na.print="")
+  print(round(object$ran_eff_cov_mat,3), na.print="")
   cat("\n")
   cat("Correlation Matrix:\n")
-  print(ran_eff_corr_mat, digits=3, na.print="")
+  print(round(object$ran_eff_corr_mat,3), na.print="")
   cat("\n")
   cat("Error:\n")
   cat("Covariance Matrix:\n")
-  print(error_cov_mat, digits=3, na.print="")
+  print(round(object$error_cov_mat,3), na.print="")
   cat("\n")
-  cat("Error Corr:", object$Parameter_Estimates[(2*(n_param*2)+2*n_covar+3+1),"Mean"], "\n")
-  cat("Gelman's msrf:", round(object$Convergence$multivariate_psrf, 3), "\n")
-  cat("Mean psrf:", round(object$Convergence$mean_psrf, 3), "\n")
-  cat("DIC:", object$Model_Fit$dic)
-  return(invisible(list("fix_eff_est" = fix_eff_est,
-                        "ran_eff_cov_mat" = ran_eff_cov_mat,
-                        "ran_eff_corr_mat" = ran_eff_corr_mat,
-                        "error_cov_mat" = error_cov_mat,
-                        "error_corr" = object$Parameter_Estimates[(2*(n_param*2)+2*n_covar+3+1),"Mean"],
-                        "msrf" = object$Convergence$multivariate_psrf,
-                        "mean_psrf" = object$Convergence$mean_psrf,
-                        "DIC" = object$Model_Fit$dic)))
+  cat("Error Corr:", round(object$error_corr,3), "\n")
+  cat("Gelman's msrf:", round(object$msrf, 3), "\n")
+  cat("Mean psrf:", round(object$mean_psrf, 3), "\n")
+  cat("DIC:", round(object$DIC,3))
+  cat("\n")
+
+  invisible(object)
 }

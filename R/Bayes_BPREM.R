@@ -16,10 +16,14 @@
 #' @param verbose Logical controlling whether progress messages/bars are generated (default = TRUE).
 #'
 #' @returns A list (an object of class `BPREM`) with elements:
+#' \item{Call}{A list of all specified function arguments.}
+#' \item{Sample Size}{Number of subjects (`n_subj`) and number of timepoints (`n_time`) in the dataset.}
+#' \item{Data}{Dataset used for estimation.}
 #' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
 #' \item{Model_Fit}{Deviance (`deviance`), effective number of parameters (`pD`), and Deviance information criterion (`dic`) to assess model fit.}
-#' \item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+#' \item{Fitted_Values}{Data frame with the fitted values for y1 and y2 at each timepoint for each individual.}
 #' \item{Parameter_Estimates}{Data frame with posterior mean and 95% credible intervals for each model parameter.}
+#' \item{Random_Coefficients}{List object with data frames providing random effects and random coefficients for each individual.}
 #' \item{Run_Time}{Total run time for model fitting.}
 #' \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
 #' \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
@@ -35,12 +39,6 @@
 #' \donttest{
 #' # load simulated data
 #' data(SimData_BPREM)
-#' # plot observed data
-#' plot_BEND(data = SimData_BPREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y1",
-#'           y2_var = "y2")
 #' # fit Bayes_BPREM()
 #' results_bprem <- Bayes_BPREM(data = SimData_BPREM,
 #'                              id_var = "id",
@@ -50,12 +48,7 @@
 #' # result summary
 #' summary(results_bprem)
 #' # plot fitted results
-#' plot_BEND(data = SimData_BPREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y1",
-#'           y2_var = "y2",
-#'           results = results_bprem)
+#' plot(results_bprem)
 #' }
 #'
 #' @import stats
@@ -71,6 +64,10 @@ Bayes_BPREM <- function(data,
 
   ## Initial data check
   data <- as.data.frame(data)
+
+  ## Check that number of rows is the same for each id_var
+  rows_per_id <- table(data[,id_var])
+  if(length(unique(rows_per_id)) != 1L) stop("The number of rows should be the same for each individual. \nSee ?Bayes_PREM for more information.")
 
   ## Control progress messages/bars
   if(verbose) progress_bar = "text"
@@ -138,7 +135,7 @@ Bayes_BPREM <- function(data,
   full_spec <- textConnection(bivariate_pw)
 
   ## Variables to extract from full model
-  param_recovery_full <- c('beta', 'beta_mean',
+  param_recovery_full <- c('beta', 'beta_mean', 'beta_rand',
                            'var_b', 'cov_b',
                            'cor_b', 'rho',
                            'mu_y', 'sigma2_error',
@@ -222,9 +219,24 @@ Bayes_BPREM <- function(data,
 
   ## Fitted Values
   y_mean <- summary(full_out$mu_y, FUN='mean')[[1]]
+  fit_vals <- cbind(data[,id_var], data[,time_var], data[,y1_var], data[,y2_var],
+                    as.vector(t(y_mean[,,1])),
+                    as.vector(t(y_mean[,,2])))
+  fit_vals <- as.data.frame(fit_vals)
+  names(fit_vals) <- c(id_var, time_var, y1_var, y2_var, "y1_fitted", "y2_fitted")
 
-  ## Parameter Estimates
-  sum_mcmc <- summary(mcmc_list) # parameter estimates
+  ## Random Effects and Coefficients
+  ranef_b <- cbind(unique(data[,id_var]), summary(full_out$beta_rand, FUN='mean')[[1]])
+  ranef_b <- as.data.frame(ranef_b)
+  names(ranef_b) <- c(id_var, gsub("var_", "", beta_var_param))
+
+  rancoef <- cbind(unique(data[,id_var]), summary(full_out$beta, FUN='mean')[[1]])
+  rancoef <- as.data.frame(rancoef)
+  names(rancoef) <- c(id_var, gsub("var_", "", beta_var_param))
+
+  ran_ef_coef <- list("ranef_b" = ranef_b,
+                      "rancoef" = rancoef)
+
   ## Parameter Estimates
   sum_mcmc <- summary(mcmc_list) # parameter estimates
   param_est <- data.frame(Mean = sum_mcmc$statistics[,1],
@@ -235,11 +247,15 @@ Bayes_BPREM <- function(data,
   run_time_total_end <- Sys.time()
   run_time_total <- run_time_total_end - run_time_total_start
 
-  my_results <- list('Convergence' = convergence,
+  my_results <- list('Call' = as.list(match.call()),
+                     'Sample_Size' = list(n_subj=n_subj, n_time=n_time),
+                     'Data' = data,
+                     'Convergence' = convergence,
                      'Model_Fit' = model_fit,
-                     'Fitted_Values'=y_mean,
-                     'Parameter_Estimates'=param_est,
-                     'Run_Time'=format(run_time_total))
+                     'Fitted_Values' = fit_vals,
+                     'Parameter_Estimates' = param_est,
+                     'Random_Coefficients' = ran_ef_coef,
+                     'Run_Time' = format(run_time_total))
   if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
   if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list[,1:47]}
   class(my_results) <- 'BPREM'

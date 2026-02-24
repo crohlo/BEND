@@ -1,6 +1,6 @@
 Package: BEND
 Title: Bayesian Estimation of Nonlinear Data (BEND)
-Version: 1.1
+Version: 2.0
 Authors@R: c(
   person("Corissa T.", "Rohloff", email = "corissa.wurth@gmail.com", role = c("aut","cre"), comment = c(ORCID = "0000-0003-3228-4653")),
   person("Rik", "Lamm", email = "rzlamm@gmail.com", role = "aut", comment = c(ORCID = "0000-0002-3317-6243")),
@@ -16,7 +16,7 @@ URL: https://github.com/crohlo/BEND
 BugReports: https://github.com/crohlo/BEND/issues
 Depends: R (>= 3.6.3)
 Imports: 
-    coda (>= 0.19.4),
+    coda (>= 0.19.4.1),
     label.switching (>= 1.8),
-    rjags (>= 4.14)
+    rjags (>= 4.17)
 LazyData: true

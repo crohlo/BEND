@@ -19,11 +19,15 @@
 #' @param verbose Logical controlling whether progress messages/bars are generated (default = TRUE).
 #'
 #' @returns A list (an object of class `CREM`) with elements:
+#' \item{Call}{A list of all specified function arguments.}
+#' \item{Sample Size}{Number of subjects (`n_subj`), number of groups (`n_group`) and number of timepoints (`n_time`) in the dataset.}
+#' \item{Data}{Dataset used for estimation.}
 #' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
 #' \item{Model_Fit}{Deviance (`deviance`), effective number of parameters (`pD`), and Deviance information criterion (`dic`) to assess model fit.}
-#' \item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+#' \item{Fitted_Values}{Data frame with the fitted values at each timepoint for each individual.}
 #' \item{Functional_Form}{Functional form fitted.}
 #' \item{Parameter_Estimates}{Data frame with posterior mean and 95% credible intervals for each model parameter.}
+#' \item{Random_Coefficients}{List object with data frames providing individual random effects, group random effects, and random coefficients for each individual and group.}
 #' \item{Run_Time}{Total run time for model fitting.}
 #' \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
 #' \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
@@ -44,11 +48,6 @@
 #' \donttest{
 #' # load simulated data
 #' data(SimData_PCREM)
-#' # plot observed data
-#' plot_BEND(data = SimData_PCREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y")
 #' # fit Bayes_CREM()
 #' results_pcrem <- Bayes_CREM(data = SimData_PCREM,
 #'                             ind_id_var = "id",
@@ -59,11 +58,7 @@
 #' # result summary
 #' summary(results_pcrem)
 #' # plot fitted results
-#' plot_BEND(data = SimData_PCREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y",
-#'           results = results_pcrem)
+#' plot(results_pcrem)
 #' }
 #'
 #' @import stats
@@ -140,7 +135,7 @@ Bayes_CREM <- function(data,
   omega_b <- diag(n_beta)
 
   ## Variables to extract from full model
-  param_recovery_full <- c('beta_ir', 'beta_mean',
+  param_recovery_full <- c('beta_ir', 'beta_mean', 'b0', 'g0',
                            'cov_b', 'var_b',
                            'cov_g', 'var_g',
                            'mu_y', 'sigma2_error',
@@ -231,6 +226,26 @@ Bayes_CREM <- function(data,
 
   ## Fitted Values
   y_mean <- summary(full_out$mu_y, FUN='mean')[[1]]
+  fit_vals <- cbind(ind_id, cross_id, t, y, y_mean)
+  fit_vals <- as.data.frame(fit_vals)
+  names(fit_vals) <- c(ind_id_var, cross_id_var, time_var, y_var, "fitted")
+
+  ## Random Effects and Coefficients
+  ranef_b <- cbind(unique(ind_id), summary(full_out$b0, FUN='mean')[[1]])
+  ranef_b <- as.data.frame(ranef_b)
+  names(ranef_b) <- c(ind_id_var, gsub("var_", "", grep("^var_b", param_names, value = TRUE)))
+
+  ranef_g <- cbind(unique(cross_id), summary(full_out$g0, FUN='mean')[[1]])
+  ranef_g <- as.data.frame(ranef_g)
+  names(ranef_g) <- c(cross_id_var, gsub("var_", "", grep("^var_g", param_names, value = TRUE)))
+
+  rancoef <- cbind(ind_id, cross_id, summary(full_out$beta_ir, FUN='mean')[[1]])
+  rancoef <- as.data.frame(rancoef)
+  names(rancoef) <- c(ind_id_var, cross_id_var, gsub("var_", "", grep("^var_b", param_names, value = TRUE)))
+
+  ran_ef_coef <- list("ranef_b" = ranef_b,
+                      "ranef_g" = ranef_g,
+                      "rancoef" = rancoef)
 
   ## Parameter Estimates
   sum_mcmc <- summary(mcmc_list) # parameter estimates
@@ -242,12 +257,16 @@ Bayes_CREM <- function(data,
   run_time_total_end <- Sys.time()
   run_time_total <- run_time_total_end - run_time_total_start
 
-  my_results <- list('Convergence' = convergence,
+  my_results <- list('Call' = as.list(match.call()),
+                     'Sample_Size' = list(n_subj=n_subj, n_group=n_group, n_time=length(t)),
+                     'Data' = data,
+                     'Convergence' = convergence,
                      'Model_Fit' = model_fit,
-                     'Fitted_Values'=y_mean,
-                     'Functional_Form'=form,
-                     'Parameter_Estimates'=param_est,
-                     'Run_Time'=format(run_time_total))
+                     'Fitted_Values' = fit_vals,
+                     'Functional_Form' = form,
+                     'Parameter_Estimates' = param_est,
+                     'Random_Coefficients' = ran_ef_coef,
+                     'Run_Time' = format(run_time_total))
   if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
   if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list}
   class(my_results) <- 'CREM'

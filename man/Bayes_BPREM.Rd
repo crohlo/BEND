@@ -46,10 +46,14 @@ Bayes_BPREM(
 }
 \value{
 A list (an object of class \code{BPREM}) with elements:
+\item{Call}{A list of all specified function arguments.}
+\item{Sample Size}{Number of subjects (\code{n_subj}) and number of timepoints (\code{n_time}) in the dataset.}
+\item{Data}{Dataset used for estimation.}
 \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (\code{parameter_psrf}), Gelman multivariate scale reduction factor (\code{multivariate_psrf}), and mean PSRF (\code{mean_psrf}) to assess model convergence.}
 \item{Model_Fit}{Deviance (\code{deviance}), effective number of parameters (\code{pD}), and Deviance information criterion (\code{dic}) to assess model fit.}
-\item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+\item{Fitted_Values}{Data frame with the fitted values for y1 and y2 at each timepoint for each individual.}
 \item{Parameter_Estimates}{Data frame with posterior mean and 95\% credible intervals for each model parameter.}
+\item{Random_Coefficients}{List object with data frames providing random effects and random coefficients for each individual.}
 \item{Run_Time}{Total run time for model fitting.}
 \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
 \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
@@ -64,12 +68,6 @@ For more information on the model equation and priors implemented in this functi
 \donttest{
 # load simulated data
 data(SimData_BPREM)
-# plot observed data
-plot_BEND(data = SimData_BPREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y1",
-          y2_var = "y2")
 # fit Bayes_BPREM()
 results_bprem <- Bayes_BPREM(data = SimData_BPREM,
                              id_var = "id",
@@ -79,12 +77,7 @@ results_bprem <- Bayes_BPREM(data = SimData_BPREM,
 # result summary
 summary(results_bprem)
 # plot fitted results
-plot_BEND(data = SimData_BPREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y1",
-          y2_var = "y2",
-          results = results_bprem)
+plot(results_bprem)
 }
 
 }

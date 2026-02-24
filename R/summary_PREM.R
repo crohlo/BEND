@@ -6,7 +6,7 @@
 #' @param object An object of class "PREM" (returned by `Bayes_PREM(...)`).
 #' @param ... Additional arguments.
 #'
-#' @returns Prints estimates for key parameters in the PREM. Also returns a list of these values.
+#' @returns Returns a list of key parameter estimates.
 #'
 #' @author Corissa T. Rohloff
 #'
@@ -101,19 +101,30 @@ summary.PREM <- function(object, ...){
     coeff_addit <- rbind(coeff_addit, coeff_cov_cp, coeff_log_int)
   }
 
-  # PRINT output -----
+  ## return value
+  out <- list("class_dep_params" = coeff_mat,
+              "class_ind_params" = coeff_addit,
+              "msrf" = object$Convergence$multivariate_psrf,
+              "mean_psrf" = object$Convergence$mean_psrf,
+              "DIC" = object$Model_Fit$dic)
+  class(out) <- c("summary.PREM", class(object))
+  return(out)
+}
+
+#' @rdname summary.PREM
+#' @export
+print.summary.PREM <- function(object, ...){
+
   cat("Class Dependent Parameters:\n")
-  print(coeff_mat, digits=3, na.print="")
+  print(round(object$class_dep_params,3), na.print="")
   cat("\n")
   cat("Class Independent Parameters:\n")
-  print(coeff_addit, digits=3)
+  print(round(object$class_ind_params,3))
   cat("\n")
-  cat("Gelman's msrf:", round(object$Convergence$multivariate_psrf, 3), "\n")
-  cat("Mean psrf:", round(object$Convergence$mean_psrf, 3), "\n")
-  cat("DIC:", object$Model_Fit$dic)
-  return(invisible(list("class_dep_params" = coeff_mat,
-                        "class_ind_params" = coeff_addit,
-                        "msrf" = object$Convergence$multivariate_psrf,
-                        "mean_psrf" = object$Convergence$mean_psrf,
-                        "DIC" = object$Model_Fit$dic)))
+  cat("Gelman's msrf:", round(object$msrf, 3), "\n")
+  cat("Mean psrf:", round(object$mean_psrf, 3), "\n")
+  cat("DIC:", round(object$DIC,3))
+  cat("\n")
+
+  invisible(object)
 }

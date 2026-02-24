@@ -27,10 +27,14 @@
 #' @param verbose Logical controlling whether progress messages/bars are generated (default = TRUE).
 #'
 #' @returns A list (an object of class `PREM`) with elements:
+#' \item{Call}{A list of all specified function arguments.}
+#' \item{Sample Size}{Number of subjects (`n_subj`) and number of timepoints (`n_time`) in the dataset.}
+#' \item{Data}{Dataset used for estimation.}
 #' \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (`parameter_psrf`), Gelman multivariate scale reduction factor (`multivariate_psrf`), and mean PSRF (`mean_psrf`) to assess model convergence.}
 #' \item{Model_Fit}{Deviance (`deviance`), effective number of parameters (`pD`), and Deviance information criterion (`dic`) to assess model fit.}
-#' \item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+#' \item{Fitted_Values}{Data frame with the fitted values at each timepoint for each individual.}
 #' \item{Parameter_Estimates}{Data frame with posterior mean and 95% credible intervals for each model parameter.}
+#' \item{Random_Coefficients}{List object with data frames providing random coefficients for each individual.}
 #' \item{Run_Time}{Total run time for model fitting.}
 #' \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
 #' \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
@@ -52,11 +56,6 @@
 #' \donttest{
 #' # load simulated data
 #' data(SimData_PREM)
-#' # plot observed data
-#' plot_BEND(data = SimData_PREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y")
 #'
 #' # PREM ---------------------------------------------------------------------------------
 #' # fit Bayes_PREM()
@@ -67,11 +66,7 @@
 #' # result summary
 #' summary(results_prem)
 #' # plot fitted results
-#' plot_BEND(data = SimData_PREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y",
-#'           results = results_prem)
+#' plot(results_prem)
 #'
 #' # CI-PREM ---------------------------------------------------------------------------------
 #' # fit Bayes_PREM()
@@ -83,11 +78,7 @@
 #' # result summary
 #' summary(results_ciprem)
 #' # plot fitted results
-#' plot_BEND(data = SimData_PREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y",
-#'           results = results_ciprem)
+#' plot(results_ciprem)
 #'
 #' # PREMM ---------------------------------------------------------------------------------
 #' # fit Bayes_PREM()
@@ -99,11 +90,7 @@
 #' # result summary
 #' summary(results_premm)
 #' # plot fitted results
-#' plot_BEND(data = SimData_PREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y",
-#'           results = results_premm)
+#' plot(results_premm)
 #'
 #'
 #' # CI-PREMM ---------------------------------------------------------------------------------
@@ -118,11 +105,7 @@
 #' # result summary
 #' summary(results_cipremm)
 #' # plot fitted results
-#' plot_BEND(data = SimData_PREM,
-#'           id_var = "id",
-#'           time_var = "time",
-#'           y_var = "y",
-#'           results = results_cipremm)
+#' plot(results_cipremm)
 #' }
 #'
 #' @import stats
@@ -142,6 +125,10 @@ Bayes_PREM <- function(data,
 
   ## Initial data check
   data <- as.data.frame(data)
+
+  ## Check that number of rows is the same for each id_var
+  rows_per_id <- table(data[,id_var])
+  if(length(unique(rows_per_id)) != 1L) stop("The number of rows should be the same for each individual. \nSee ?Bayes_PREM for more information.")
 
   ## Control progress messages/bars
   if(verbose) progress_bar = "text"
@@ -922,20 +909,38 @@ Bayes_PREM <- function(data,
 
   ## Fitted Values
   y_mean <- summary(full_out$mu_y, FUN='mean')[[1]]
+  fit_vals <- cbind(data[,id_var], data[,time_var], data[,y_var], as.vector(t(y_mean)))
+  fit_vals <- as.data.frame(fit_vals)
+  names(fit_vals) <- c(id_var, time_var, y_var, "fitted")
+
+  ## Random Coefficients
+  rancoef <- cbind(unique(data[,id_var]),
+                   summary(full_out$beta, FUN='mean')[[1]],
+                   summary(full_out$cp, FUN='mean')[[1]])
+  rancoef <- as.data.frame(rancoef)
+  names(rancoef) <- c(id_var,
+                      paste0("beta_", 0:(max_beta-1)),
+                      paste0("cp_", 1:max_cp))
+  ran_ef_coef <- list("rancoef" = rancoef)
 
   ## Class Information
   # each of these is fixed to 1 for PREM
   class_membership <- rep(1, n_subj)
+  names(class_membership) <- unique(data[,id_var])
   individ_class_probability <- matrix(1, nrow=n_subj, ncol=n_class) # conditional on logistic model (when applicable) and growth curve
+  rownames(individ_class_probability) <- unique(data[,id_var])
   unconditional_class_probability <- 1
+  names(unconditional_class_probability) <- "Class 1"
   if(n_class>1){
     for(i in 1:n_subj){class_membership[i] <- as.numeric(names(which.max(table(full_out$class[i,,]))))}
     for(i in 1:n_subj){individ_class_probability[i,1:n_class] <- prop.table(table(factor(full_out$class[i,,], levels = 1:n_class)))}
     if(n_cov_class_predictive==0){
       unconditional_class_probability <- apply(full_out$class_prob, c(1), FUN='mean') # not based on growth curve part of the model
+      names(unconditional_class_probability) <- paste0("Class ", 1:n_class)
     }
     if(n_cov_class_predictive>0){
       unconditional_class_probability <- apply(full_out$logistic_class_prob, c(1), FUN='mean')
+      names(unconditional_class_probability) <- unique(data[,id_var])
     }
   }
   class_info <- list('class_membership'=class_membership,
@@ -1018,12 +1023,16 @@ Bayes_PREM <- function(data,
   run_time_total_end <- Sys.time()
   run_time_total <- run_time_total_end - run_time_total_start
 
-  my_results <- list('Convergence'=convergence,
-                     'Model_Fit'=model_fit,
-                     'Fitted_Values'=y_mean,
-                     'Class_Information'=class_info,
-                     'Parameter_Estimates'=param_est,
-                     'Run_Time'=format(run_time_total))
+  my_results <- list('Call' = as.list(match.call()),
+                     'Sample_Size' = list(n_subj=n_subj, n_time=n_time),
+                     'Data' = data,
+                     'Convergence' = convergence,
+                     'Model_Fit' = model_fit,
+                     'Fitted_Values' = fit_vals,
+                     'Class_Information' = class_info,
+                     'Parameter_Estimates' = param_est,
+                     'Random_Coefficients' = ran_ef_coef,
+                     'Run_Time' = format(run_time_total))
   if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
   if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list}
   class(my_results)='PREM'

@@ -67,10 +67,14 @@ Bayes_PREM(
 }
 \value{
 A list (an object of class \code{PREM}) with elements:
+\item{Call}{A list of all specified function arguments.}
+\item{Sample Size}{Number of subjects (\code{n_subj}) and number of timepoints (\code{n_time}) in the dataset.}
+\item{Data}{Dataset used for estimation.}
 \item{Convergence}{Potential scale reduction factor (PSRF) for each parameter (\code{parameter_psrf}), Gelman multivariate scale reduction factor (\code{multivariate_psrf}), and mean PSRF (\code{mean_psrf}) to assess model convergence.}
 \item{Model_Fit}{Deviance (\code{deviance}), effective number of parameters (\code{pD}), and Deviance information criterion (\code{dic}) to assess model fit.}
-\item{Fitted_Values}{Vector giving the fitted value at each timepoint for each individual (same length as long data).}
+\item{Fitted_Values}{Data frame with the fitted values at each timepoint for each individual.}
 \item{Parameter_Estimates}{Data frame with posterior mean and 95\% credible intervals for each model parameter.}
+\item{Random_Coefficients}{List object with data frames providing random coefficients for each individual.}
 \item{Run_Time}{Total run time for model fitting.}
 \item{Full_MCMC_Chains}{If save_full_chains=TRUE, raw MCMC chains from rjags.}
 \item{Convergence_MCMC_Chains}{If save_conv_chains=TRUE, raw MCMC chains from rjags but only for the parameters monitored for convergence.}
@@ -95,11 +99,6 @@ For more information on the model equation and priors implemented in this functi
 \donttest{
 # load simulated data
 data(SimData_PREM)
-# plot observed data
-plot_BEND(data = SimData_PREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y")
 
 # PREM ---------------------------------------------------------------------------------
 # fit Bayes_PREM()
@@ -110,11 +109,7 @@ results_prem <- Bayes_PREM(data = SimData_PREM,
 # result summary
 summary(results_prem)
 # plot fitted results
-plot_BEND(data = SimData_PREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y",
-          results = results_prem)
+plot(results_prem)
 
 # CI-PREM ---------------------------------------------------------------------------------
 # fit Bayes_PREM()
@@ -126,11 +121,7 @@ results_ciprem <- Bayes_PREM(data = SimData_PREM,
 # result summary
 summary(results_ciprem)
 # plot fitted results
-plot_BEND(data = SimData_PREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y",
-          results = results_ciprem)
+plot(results_ciprem)
 
 # PREMM ---------------------------------------------------------------------------------
 # fit Bayes_PREM()
@@ -142,11 +133,7 @@ results_premm <- Bayes_PREM(data = SimData_PREM,
 # result summary
 summary(results_premm)
 # plot fitted results
-plot_BEND(data = SimData_PREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y",
-          results = results_premm)
+plot(results_premm)
 
 
 # CI-PREMM ---------------------------------------------------------------------------------
@@ -161,11 +148,7 @@ results_cipremm <- Bayes_PREM(data = SimData_PREM,
 # result summary
 summary(results_cipremm)
 # plot fitted results
-plot_BEND(data = SimData_PREM,
-          id_var = "id",
-          time_var = "time",
-          y_var = "y",
-          results = results_cipremm)
+plot(results_cipremm)
 }
 
 }

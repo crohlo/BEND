@@ -6,7 +6,7 @@
 #' @param object An object of class "CREM" (returned by `Bayes_CREM(...)`).
 #' @param ... Additional arguments.
 #'
-#' @returns Prints estimates for key parameters in the CREM. Also returns a list of these values.
+#' @returns Returns a list of key parameter estimates.
 #'
 #' @author Corissa T. Rohloff
 #'
@@ -63,26 +63,37 @@ summary.CREM <- function(object, ...){
 
   colnames(ran_eff_g_mat) <- rownames(ran_eff_g_mat) <- param_names
 
-  # PRINT output -----
+  ## return value
+  out <- list("fix_eff_est" = fix_eff_est,
+              "ran_eff_b_mat" = ran_eff_b_mat,
+              "ran_eff_g_mat" = ran_eff_g_mat,
+              "error_var" = object$Parameter_Estimates[(3*n_param+2*n_covar+1),"Mean"],
+              "msrf" = object$Convergence$multivariate_psrf,
+              "mean_psrf" = object$Convergence$mean_psrf,
+              "DIC" = object$Model_Fit$dic)
+  class(out) <- c("summary.CREM", class(object))
+  return(out)
+}
+
+#' @rdname summary.CREM
+#' @export
+print.summary.CREM <- function(object, ...){
+
   cat("Fixed Effect Parameters:\n")
-  print(fix_eff_est, digits=3)
+  print(round(object$fix_eff_est,3))
   cat("\n")
   cat("Random Effect Parameters:\n")
   cat("Individual Random Effects Covariance Matrix:\n")
-  print(ran_eff_b_mat, digits=3, na.print="")
+  print(round(object$ran_eff_b_mat,3), na.print="")
   cat("\n")
   cat("Group Random Effects Covariance Matrix:\n")
-  print(ran_eff_g_mat, digits=3, na.print="")
+  print(round(object$ran_eff_g_mat,3), na.print="")
   cat("\n")
-  cat("Error Var:", object$Parameter_Estimates[(3*n_param+2*n_covar+1),"Mean"], "\n")
-  cat("Gelman's msrf:", round(object$Convergence$multivariate_psrf, 3), "\n")
-  cat("Mean psrf:", round(object$Convergence$mean_psrf, 3), "\n")
-  cat("DIC:", object$Model_Fit$dic)
-  return(invisible(list("fix_eff_est" = fix_eff_est,
-                        "ran_eff_b_mat" = ran_eff_b_mat,
-                        "ran_eff_g_mat" = ran_eff_g_mat,
-                        "error_var" = object$Parameter_Estimates[(3*n_param+2*n_covar+1),"Mean"],
-                        "msrf" = object$Convergence$multivariate_psrf,
-                        "mean_psrf" = object$Convergence$mean_psrf,
-                        "DIC" = object$Model_Fit$dic)))
+  cat("Error Var:", round(object$error_var,3), "\n")
+  cat("Gelman's msrf:", round(object$msrf, 3), "\n")
+  cat("Mean psrf:", round(object$mean_psrf, 3), "\n")
+  cat("DIC:", round(object$DIC,3))
+  cat("\n")
+
+  invisible(object)
 }
