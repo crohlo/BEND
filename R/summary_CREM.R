@@ -18,9 +18,11 @@
 #'
 #' @export
 summary.CREM <- function(object, ...){
-  # Setup ----
+
+  x <- object
+
   # determine form
-  form <- object$Functional_Form
+  form <- x$Functional_Form
 
   # determine number of parameters
   if(form=="linear")                           n_param <- 2
@@ -32,68 +34,94 @@ summary.CREM <- function(object, ...){
 
   # define parameters for labeling
   if(form=="linear")       param_names <- c("Intercept", "Slope")
+  if(form=="linear")       names(param_names) <- c("0", "1")
   if(form=="quadratic")    param_names <- c("Intercept", "Linear Slope", "Quadratic Slope")
+  if(form=="quadratic")    names(param_names) <- c("0", "1", "2")
   if(form=="exponential")  param_names <- c("Intercept", "Total Change", "Growth Rate")
+  if(form=="exponential")  names(param_names) <- c("0", "1", "2")
   if(form=="piecewise")    param_names <- c("Intercept", "Slope", "Change in Slope", "Changepoint")
+  if(form=="piecewise")    names(param_names) <- c("0", "1", "2", "g")
 
   # FIXED EFFECTS -----
-  fix_eff_est <- matrix(object$Parameter_Estimates[1:n_param,"Mean"], ncol=1)
-  colnames(fix_eff_est) <- "Estimate"
+  fix_eff_est <- x$Parameter_Estimates[1:n_param,]
+  colnames(fix_eff_est) <- c("Estimate", "Lower CI", "Upper CI")
   rownames(fix_eff_est) <- paste0(param_names, " Mean")
 
   # RANDOM EFFECTS -----
 
   ## INDIVIDUALS -----
-  ran_eff_b_mat <- diag(n_param)
-  diag(ran_eff_b_mat) <- object$Parameter_Estimates[(n_param+(1:n_param)),"Mean"]
+  ran_eff_b_var_mat <- x$Parameter_Estimates[(n_param+(1:n_param)),]
+  colnames(ran_eff_b_var_mat) <- c("Estimate", "Lower CI", "Upper CI")
+  rownames(ran_eff_b_var_mat) <- paste0(param_names, " Var")
 
-  ran_eff_b_mat[upper.tri(ran_eff_b_mat)] <- object$Parameter_Estimates[(2*n_param+(1:n_covar)),"Mean"] # covariances on upper triangle
-  ran_eff_b_mat[lower.tri(ran_eff_b_mat)] <- t(ran_eff_b_mat)[lower.tri(ran_eff_b_mat)] # copy to lower triangle
-  ran_eff_b_mat[upper.tri(ran_eff_b_mat)] <- NA
-
-  colnames(ran_eff_b_mat) <- rownames(ran_eff_b_mat) <- param_names
+  ran_eff_b_cov_mat <- x$Parameter_Estimates[(2*n_param+(1:n_covar)),]
+  colnames(ran_eff_b_cov_mat) <- c("Estimate", "Lower CI", "Upper CI")
+  # get rownames
+  ss <- sub("cp", "g", sub("cov_b_", "", rownames(ran_eff_b_cov_mat))) ## replace cp with g to make following code simpler
+  rownames(ran_eff_b_cov_mat) <- paste0("Cov(", param_names[substr(ss,1,1)], ", ", param_names[substr(ss,2,2)], ")")
 
   ## GROUPS -----
-  ran_eff_g_mat <- diag(n_param)
-  diag(ran_eff_g_mat) <- object$Parameter_Estimates[(2*n_param+n_covar+(1:n_param)),"Mean"]
+  ran_eff_g_var_mat <- x$Parameter_Estimates[(2*n_param+n_covar+(1:n_param)),]
+  colnames(ran_eff_g_var_mat) <- c("Estimate", "Lower CI", "Upper CI")
+  rownames(ran_eff_g_var_mat) <- paste0(param_names, " Var")
 
-  ran_eff_g_mat[upper.tri(ran_eff_g_mat)] <- object$Parameter_Estimates[(3*n_param+n_covar+(1:n_covar)),"Mean"] # covariances on upper triangle
-  ran_eff_g_mat[lower.tri(ran_eff_g_mat)] <- t(ran_eff_g_mat)[lower.tri(ran_eff_g_mat)] # copy to lower triangle
-  ran_eff_g_mat[upper.tri(ran_eff_g_mat)] <- NA
+  ran_eff_g_cov_mat <- x$Parameter_Estimates[(3*n_param+n_covar+(1:n_covar)),]
+  colnames(ran_eff_g_cov_mat) <- c("Estimate", "Lower CI", "Upper CI")
+  # get rownames
+  ss <- sub("cp", "g", sub("cov_g_", "", rownames(ran_eff_g_cov_mat))) ## replace cp with g to make following code simpler
+  rownames(ran_eff_g_cov_mat) <- paste0("Cov(", param_names[substr(ss,1,1)], ", ", param_names[substr(ss,2,2)], ")")
 
-  colnames(ran_eff_g_mat) <- rownames(ran_eff_g_mat) <- param_names
+  ## ERROR -----
+  error_mat <- x$Parameter_Estimates[(3*n_param+2*n_covar+1),]
+  colnames(error_mat) <- c("Estimate", "Lower CI", "Upper CI")
+  rownames(error_mat) <- c("Error Var")
 
   ## return value
-  out <- list("fix_eff_est" = fix_eff_est,
-              "ran_eff_b_mat" = ran_eff_b_mat,
-              "ran_eff_g_mat" = ran_eff_g_mat,
-              "error_var" = object$Parameter_Estimates[(3*n_param+2*n_covar+1),"Mean"],
-              "msrf" = object$Convergence$multivariate_psrf,
-              "mean_psrf" = object$Convergence$mean_psrf,
-              "DIC" = object$Model_Fit$dic)
-  class(out) <- c("summary.CREM", class(object))
+  out <- list("data" = x$Call$data,
+              "y_var" = x$Call$y_var,
+              "ind_id_var" = x$Call$ind_id_var,
+              "cross_id_var" = x$Call$cross_id_var,
+              "fix_eff_est" = fix_eff_est,
+              "ran_eff_b_var_mat" = ran_eff_b_var_mat,
+              "ran_eff_b_cov_mat" = ran_eff_b_cov_mat,
+              "ran_eff_g_var_mat" = ran_eff_g_var_mat,
+              "ran_eff_g_cov_mat" = ran_eff_g_cov_mat,
+              "error_var" = error_mat,
+              "msrf" = x$Convergence$multivariate_psrf,
+              "mean_psrf" = x$Convergence$mean_psrf,
+              "DIC" = x$Model_Fit$dic)
+  class(out) <- c("summary.CREM", class(out))
   return(out)
 }
 
 #' @rdname summary.CREM
+#' @param x An object of class "summary.CREM".
 #' @export
-print.summary.CREM <- function(object, ...){
+print.summary.CREM <- function(x, ...){
 
+  cat("Bayesian crossed random effects model\n")
+  cat("Data:", x$data, "\n")
+  cat("Outcome:", x$y_var, "\n")
+  cat("Individuals:", x$ind_id_var, "\n")
+  cat("Group:", x$cross_id_var, "\n")
+  cat("\n")
   cat("Fixed Effect Parameters:\n")
-  print(round(object$fix_eff_est,3))
+  print(round(x$fix_eff_est,3))
   cat("\n")
   cat("Random Effect Parameters:\n")
-  cat("Individual Random Effects Covariance Matrix:\n")
-  print(round(object$ran_eff_b_mat,3), na.print="")
+  cat("Individual Random Effects Variance-Covariance:\n")
+  print(round(rbind(x$ran_eff_b_var_mat, x$ran_eff_b_cov_mat),3), na.print="")
   cat("\n")
-  cat("Group Random Effects Covariance Matrix:\n")
-  print(round(object$ran_eff_g_mat,3), na.print="")
+  cat("Group Random Effects Variance-Covariance:\n")
+  print(round(rbind(x$ran_eff_g_var_mat, x$ran_eff_g_cov_mat),3), na.print="")
   cat("\n")
-  cat("Error Var:", round(object$error_var,3), "\n")
-  cat("Gelman's msrf:", round(object$msrf, 3), "\n")
-  cat("Mean psrf:", round(object$mean_psrf, 3), "\n")
-  cat("DIC:", round(object$DIC,3))
+  cat("Error Variance:\n")
+  print(round(x$error_var,3), na.print="")
+  cat("\n")
+  cat("Gelman's msrf:", round(x$msrf, 3), "\n")
+  cat("Mean psrf:", round(x$mean_psrf, 3), "\n")
+  cat("DIC:", round(x$DIC,3))
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }

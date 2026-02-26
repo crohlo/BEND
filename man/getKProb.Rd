@@ -6,14 +6,14 @@
 \alias{print.getKProb.PREM}
 \title{Extract changepoint probabilities}
 \usage{
-getKProb(object, ...)
+getKProb(x, ...)
 
-\method{getKProb}{PREM}(object, ...)
+\method{getKProb}{PREM}(x, ...)
 
-\method{print}{getKProb.PREM}(object, ...)
+\method{print}{getKProb.PREM}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "PREM".}
+\item{x}{An object of class "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -29,9 +29,6 @@ data(results_prem)
 # get changepoint probabilities
 getKProb(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

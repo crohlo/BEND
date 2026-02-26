@@ -5,7 +5,7 @@
 \title{Plot the results of a piecewise random effects model (PREM)}
 \usage{
 \method{plot}{PREM}(
-  object,
+  x,
   xlab = "X",
   ylab = "Y",
   colors = NULL,
@@ -15,7 +15,7 @@
 )
 }
 \arguments{
-\item{object}{An object of class "PREM" (returned by \code{Bayes_PREM(...)}).}
+\item{x}{An object of class "PREM" (returned by \code{Bayes_PREM(...)}).}
 
 \item{xlab}{X-axis label for the generated plot.}
 

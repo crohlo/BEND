@@ -8,18 +8,18 @@
 \alias{print.getCoef}
 \title{Extract random coefficients}
 \usage{
-getCoef(object, ...)
+getCoef(x, ...)
 
-\method{getCoef}{BPREM}(object, ...)
+\method{getCoef}{BPREM}(x, ...)
 
-\method{getCoef}{CREM}(object, ...)
+\method{getCoef}{CREM}(x, ...)
 
-\method{getCoef}{PREM}(object, ...)
+\method{getCoef}{PREM}(x, ...)
 
-\method{print}{getCoef}(object, ...)
+\method{print}{getCoef}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM", "CREM", or "PREM".}
+\item{x}{An object of class "BPREM", "CREM", or "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -35,9 +35,6 @@ data(results_prem)
 # get random coefficients
 getCoef(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM, Bayes_CREM, Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

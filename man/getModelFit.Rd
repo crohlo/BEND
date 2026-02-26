@@ -8,18 +8,18 @@
 \alias{print.getModelFit}
 \title{Extract model fit}
 \usage{
-getModelFit(object, ...)
+getModelFit(x, ...)
 
-\method{getModelFit}{BPREM}(object, ...)
+\method{getModelFit}{BPREM}(x, ...)
 
-\method{getModelFit}{CREM}(object, ...)
+\method{getModelFit}{CREM}(x, ...)
 
-\method{getModelFit}{PREM}(object, ...)
+\method{getModelFit}{PREM}(x, ...)
 
-\method{print}{getModelFit}(object, ...)
+\method{print}{getModelFit}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM", "CREM", or "PREM".}
+\item{x}{An object of class "BPREM", "CREM", or "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -35,9 +35,6 @@ data(results_prem)
 # get model fit
 getModelFit(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM, Bayes_CREM, Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

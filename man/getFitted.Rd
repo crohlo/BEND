@@ -8,18 +8,18 @@
 \alias{print.getFitted}
 \title{Extract fitted values}
 \usage{
-getFitted(object, ...)
+getFitted(x, ...)
 
-\method{getFitted}{BPREM}(object, ...)
+\method{getFitted}{BPREM}(x, ...)
 
-\method{getFitted}{CREM}(object, ...)
+\method{getFitted}{CREM}(x, ...)
 
-\method{getFitted}{PREM}(object, ...)
+\method{getFitted}{PREM}(x, ...)
 
-\method{print}{getFitted}(object, ...)
+\method{print}{getFitted}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM", "CREM", or "PREM".}
+\item{x}{An object of class "BPREM", "CREM", or "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -35,9 +35,6 @@ data(results_prem)
 # get fitted values
 getFitted(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM, Bayes_CREM, Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

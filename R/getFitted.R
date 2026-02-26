@@ -3,14 +3,12 @@
 #' @description
 #' Extracts the individual fitted values from a fitted model of class "BPREM", "CREM", or "PREM".
 #'
-#' @param object An object of class "BPREM", "CREM", or "PREM".
+#' @param x An object of class "BPREM", "CREM", or "PREM".
 #' @param ... Additional arguments.
 #'
 #' @returns Returns a data frame of the fitted values for each individual and timepoint.
 #'
 #' @author Corissa T. Rohloff
-#'
-#' @seealso [Bayes_PREM, Bayes_CREM, Bayes_PREM]
 #'
 #' @examples
 #' # load fitted model results
@@ -19,13 +17,13 @@
 #' getFitted(results_prem)
 #'
 #' @export
-getFitted <- function(object, ...) UseMethod(("getFitted"))
+getFitted <- function(x, ...) UseMethod(("getFitted"))
 
 #' @rdname getFitted
 #' @export
-getFitted.BPREM <- function(object, ...){
+getFitted.BPREM <- function(x, ...){
 
-  out <- object$Fitted_Values
+  out <- x$Fitted_Values
   class(out) <- c("getFitted.BPREM", class(out))
   return(out)
 
@@ -33,9 +31,9 @@ getFitted.BPREM <- function(object, ...){
 
 #' @rdname getFitted
 #' @export
-getFitted.CREM <- function(object, ...){
+getFitted.CREM <- function(x, ...){
 
-  out <- object$Fitted_Values
+  out <- x$Fitted_Values
   class(out) <- c("getFitted.CREM", class(out))
   return(out)
 
@@ -43,9 +41,9 @@ getFitted.CREM <- function(object, ...){
 
 #' @rdname getFitted
 #' @export
-getFitted.PREM <- function(object, ...){
+getFitted.PREM <- function(x, ...){
 
-  out <- object$Fitted_Values
+  out <- x$Fitted_Values
   class(out) <- c("getFitted.PREM", class(out))
   return(out)
 
@@ -53,11 +51,11 @@ getFitted.PREM <- function(object, ...){
 
 #' @rdname getFitted
 #' @export
-print.getFitted <- function(object, ...){
+print.getFitted <- function(x, ...){
 
-  print(object, na.print="")
+  print(x, na.print="")
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }
 

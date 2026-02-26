@@ -7,12 +7,14 @@
 \usage{
 \method{summary}{CREM}(object, ...)
 
-\method{print}{summary.CREM}(object, ...)
+\method{print}{summary.CREM}(x, ...)
 }
 \arguments{
 \item{object}{An object of class "CREM" (returned by \code{Bayes_CREM(...)}).}
 
 \item{...}{Additional arguments.}
+
+\item{x}{An object of class "summary.CREM".}
 }
 \value{
 Returns a list of key parameter estimates.

@@ -1003,20 +1003,21 @@ Bayes_PREM <- function(data,
   names(param_est) <- paste0('Class_', 1:n_class)
 
   param_est$error_var <- apply(full_out$sigma2_error, c(1), 'mean')
+  param_est$error_var_CI <- apply(full_out$sigma2_error, c(1), 'quantile', probs=c(0.025,0.975))
 
   if(n_cov_outcome_predictive>0){
-    outcome_predictive_covariate_alpha <- apply(full_out$outcome_predictive_covariate_alpha, c(1), 'mean')
-    param_est$outcome_predictive_covariates <- outcome_predictive_covariate_alpha
+    param_est$outcome_predictive_covariates <- apply(full_out$outcome_predictive_covariate_alpha, c(1), 'mean')
+    param_est$outcome_predictive_covariates_CI <- apply(full_out$outcome_predictive_covariate_alpha, c(1), 'quantile', probs=c(0.025,0.975))
     names(param_est$outcome_predictive_covariates) <- outcome_predictive_vars
   }
 
   if(n_cov_class_predictive>0){
-    class_predictive_covariate_lambda <- apply(full_out$class_predictive_covariate_lambda, c(1), 'mean')
-    param_est$class_predictive_covariates <- class_predictive_covariate_lambda
+    param_est$class_predictive_covariates <- apply(full_out$class_predictive_covariate_lambda, c(1), 'mean')
+    param_est$class_predictive_covariates_CI <- apply(full_out$class_predictive_covariate_lambda, c(1), 'quantile', probs=c(0.025,0.975))
     names(param_est$class_predictive_covariates) <- class_predictive_vars
 
-    logistic_intercept <- apply(full_out$logistic_intercept, c(1), 'mean')
-    param_est$logistic_intercept <- logistic_intercept
+    param_est$logistic_intercept <- apply(full_out$logistic_intercept, c(1), 'mean')
+    param_est$logistic_intercept_CI <- apply(full_out$logistic_intercept, c(1), 'quantile', probs=c(0.025,0.975))
   }
 
   ## Stop tracking run time

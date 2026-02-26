@@ -3,7 +3,7 @@
 #' @description
 #' Provides a fitted plot of a BPREM model, as returned by `Bayes_BPREM()`.
 #'
-#' @param object An object of class "BPREM" (returned by `Bayes_BPREM(...)`).
+#' @param x An object of class "BPREM" (returned by `Bayes_BPREM(...)`).
 #' @param xlab X-axis label for the generated plot.
 #' @param ylab Y-axis label for the generated plot.
 #' @param colors Colors for each class outcome. By default, up to 2 colors are provided in the following order: "blue" (outcome 1), "red" (outcome 2).
@@ -24,11 +24,13 @@
 #' @import graphics
 #'
 #' @export
-plot.BPREM <- function(object,
+plot.BPREM <- function(x,
                        xlab='X', ylab='Y',
                        colors=NULL, mean_colors=NULL,
                        legend_pos="topright", ...){
   # Setup ----
+
+  object <- x
 
   data <- object$Data
   id_var <- object$Call$id_var

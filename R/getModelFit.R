@@ -3,14 +3,12 @@
 #' @description
 #' Extracts the model fit information from a fitted model of class "BPREM", "CREM", or "PREM".
 #'
-#' @param object An object of class "BPREM", "CREM", or "PREM".
+#' @param x An object of class "BPREM", "CREM", or "PREM".
 #' @param ... Additional arguments.
 #'
 #' @returns Returns a vector of the model fit information (deviance, pD, DIC).
 #'
 #' @author Corissa T. Rohloff
-#'
-#' @seealso [Bayes_PREM, Bayes_CREM, Bayes_PREM]
 #'
 #' @examples
 #' # load fitted model results
@@ -19,13 +17,13 @@
 #' getModelFit(results_prem)
 #'
 #' @export
-getModelFit <- function(object, ...) UseMethod(("getModelFit"))
+getModelFit <- function(x, ...) UseMethod(("getModelFit"))
 
 #' @rdname getModelFit
 #' @export
-getModelFit.BPREM <- function(object, ...){
+getModelFit.BPREM <- function(x, ...){
 
-  out <- unlist(object$Model_Fit)
+  out <- unlist(x$Model_Fit)
   class(out) <- c("getModelFit.BPREM", class(out))
   return(out)
 
@@ -33,9 +31,9 @@ getModelFit.BPREM <- function(object, ...){
 
 #' @rdname getModelFit
 #' @export
-getModelFit.CREM <- function(object, ...){
+getModelFit.CREM <- function(x, ...){
 
-  out <- unlist(object$Model_Fit)
+  out <- unlist(x$Model_Fit)
   class(out) <- c("getModelFit.CREM", class(out))
   return(out)
 
@@ -43,9 +41,9 @@ getModelFit.CREM <- function(object, ...){
 
 #' @rdname getModelFit
 #' @export
-getModelFit.PREM <- function(object, ...){
+getModelFit.PREM <- function(x, ...){
 
-  out <- unlist(object$Model_Fit)
+  out <- unlist(x$Model_Fit)
   class(out) <- c("getModelFit.PREM", class(out))
   return(out)
 
@@ -53,11 +51,11 @@ getModelFit.PREM <- function(object, ...){
 
 #' @rdname getModelFit
 #' @export
-print.getModelFit <- function(object, ...){
+print.getModelFit <- function(x, ...){
 
-  print(round(object,2), na.print="")
+  print(round(x,2), na.print="")
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }
 

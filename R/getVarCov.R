@@ -3,14 +3,12 @@
 #' @description
 #' Extracts the random effects variance-covariance matrix from a fitted model of class "BPREM", "CREM", or "PREM".
 #'
-#' @param object An object of class "BPREM", "CREM", or "PREM".
+#' @param x An object of class "BPREM", "CREM", or "PREM".
 #' @param ... Additional arguments.
 #'
 #' @returns Returns a list of the random effects variance-covariance matrices.
 #'
 #' @author Corissa T. Rohloff
-#'
-#' @seealso [Bayes_PREM, Bayes_CREM, Bayes_PREM]
 #'
 #' @examples
 #' # load fitted model results
@@ -19,11 +17,11 @@
 #' getVarCov(results_prem)
 #'
 #' @export
-getVarCov <- function(object, ...) UseMethod(("getVarCov"))
+getVarCov <- function(x, ...) UseMethod(("getVarCov"))
 
 #' @rdname getVarCov
 #' @export
-getVarCov.BPREM <- function(object, ...){
+getVarCov.BPREM <- function(x, ...){
 
   # determine number of parameters
   n_param <- 4
@@ -34,22 +32,22 @@ getVarCov.BPREM <- function(object, ...){
 
   ## COVARIANCE MATRIX
   ran_eff_cov_mat <- diag(n_param*2)
-  diag(ran_eff_cov_mat) <- object$Parameter_Estimates[((n_param*2)+(1:(n_param*2))),"Mean"]
+  diag(ran_eff_cov_mat) <- x$Parameter_Estimates[((n_param*2)+(1:(n_param*2))),"Mean"]
 
-  ran_eff_cov_mat[upper.tri(ran_eff_cov_mat)] <- object$Parameter_Estimates[(2*(n_param*2)+(1:n_covar)),"Mean"] # covariances on upper triangle
+  ran_eff_cov_mat[upper.tri(ran_eff_cov_mat)] <- x$Parameter_Estimates[(2*(n_param*2)+(1:n_covar)),"Mean"] # covariances on upper triangle
   ran_eff_cov_mat[lower.tri(ran_eff_cov_mat)] <- t(ran_eff_cov_mat)[lower.tri(ran_eff_cov_mat)] # copy to lower triangle
   ran_eff_cov_mat[upper.tri(ran_eff_cov_mat)] <- NA
 
-  colnames(ran_eff_cov_mat) <- rownames(ran_eff_cov_mat) <- paste0(rep(paste0(c(object$Call$y1_var, object$Call$y2_var), ": "), e=4), rep(param_names,2))
+  colnames(ran_eff_cov_mat) <- rownames(ran_eff_cov_mat) <- paste0(rep(paste0(c(x$Call$y1_var, x$Call$y2_var), ": "), e=4), rep(param_names,2))
 
   ## CORRELATION MATRIX
   ran_eff_corr_mat <- diag(n_param*2)
 
-  ran_eff_corr_mat[upper.tri(ran_eff_corr_mat)] <- object$Parameter_Estimates[(2*(n_param*2)+n_covar+3+(1:n_covar)),"Mean"] # covariances on upper triangle
+  ran_eff_corr_mat[upper.tri(ran_eff_corr_mat)] <- x$Parameter_Estimates[(2*(n_param*2)+n_covar+3+(1:n_covar)),"Mean"] # covariances on upper triangle
   ran_eff_corr_mat[lower.tri(ran_eff_corr_mat)] <- t(ran_eff_corr_mat)[lower.tri(ran_eff_corr_mat)] # copy to lower triangle
   ran_eff_corr_mat[upper.tri(ran_eff_corr_mat)] <- NA
 
-  colnames(ran_eff_corr_mat) <- rownames(ran_eff_corr_mat) <- paste0(rep(paste0(c(object$Call$y1_var, object$Call$y2_var), ": "), e=4), rep(param_names,2))
+  colnames(ran_eff_corr_mat) <- rownames(ran_eff_corr_mat) <- paste0(rep(paste0(c(x$Call$y1_var, x$Call$y2_var), ": "), e=4), rep(param_names,2))
 
   out <- list(cov_mat = ran_eff_cov_mat,
               cor_mat = ran_eff_corr_mat)
@@ -59,10 +57,10 @@ getVarCov.BPREM <- function(object, ...){
 
 #' @rdname getVarCov
 #' @export
-getVarCov.CREM <- function(object, ...){
+getVarCov.CREM <- function(x, ...){
 
   # determine form
-  form <- object$Functional_Form
+  form <- x$Functional_Form
   # determine number of parameters
   if(form=="linear")                           n_param <- 2
   if(form=="quadratic" | form=="exponential")  n_param <- 3
@@ -77,9 +75,9 @@ getVarCov.CREM <- function(object, ...){
 
   ## INDIVIDUALS
   ran_eff_b_mat <- diag(n_param)
-  diag(ran_eff_b_mat) <- object$Parameter_Estimates[(n_param+(1:n_param)),"Mean"]
+  diag(ran_eff_b_mat) <- x$Parameter_Estimates[(n_param+(1:n_param)),"Mean"]
 
-  ran_eff_b_mat[upper.tri(ran_eff_b_mat)] <- object$Parameter_Estimates[(2*n_param+(1:n_covar)),"Mean"] # covariances on upper triangle
+  ran_eff_b_mat[upper.tri(ran_eff_b_mat)] <- x$Parameter_Estimates[(2*n_param+(1:n_covar)),"Mean"] # covariances on upper triangle
   ran_eff_b_mat[lower.tri(ran_eff_b_mat)] <- t(ran_eff_b_mat)[lower.tri(ran_eff_b_mat)] # copy to lower triangle
   ran_eff_b_mat[upper.tri(ran_eff_b_mat)] <- NA
 
@@ -87,9 +85,9 @@ getVarCov.CREM <- function(object, ...){
 
   ## GROUPS
   ran_eff_g_mat <- diag(n_param)
-  diag(ran_eff_g_mat) <- object$Parameter_Estimates[(2*n_param+n_covar+(1:n_param)),"Mean"]
+  diag(ran_eff_g_mat) <- x$Parameter_Estimates[(2*n_param+n_covar+(1:n_param)),"Mean"]
 
-  ran_eff_g_mat[upper.tri(ran_eff_g_mat)] <- object$Parameter_Estimates[(3*n_param+n_covar+(1:n_covar)),"Mean"] # covariances on upper triangle
+  ran_eff_g_mat[upper.tri(ran_eff_g_mat)] <- x$Parameter_Estimates[(3*n_param+n_covar+(1:n_covar)),"Mean"] # covariances on upper triangle
   ran_eff_g_mat[lower.tri(ran_eff_g_mat)] <- t(ran_eff_g_mat)[lower.tri(ran_eff_g_mat)] # copy to lower triangle
   ran_eff_g_mat[upper.tri(ran_eff_g_mat)] <- NA
 
@@ -103,16 +101,16 @@ getVarCov.CREM <- function(object, ...){
 
 #' @rdname getVarCov
 #' @export
-getVarCov.PREM <- function(object, ...){
+getVarCov.PREM <- function(x, ...){
 
   # determine number of classes
-  n_class <- length(unique(object$Class_Information$class_membership))
+  n_class <- length(unique(x$Class_Information$class_membership))
 
   # determine number of changepoints in each class (based on final model results)
   changepoints <- c()
   for(i in 1:n_class){
     class_num <- paste0("Class_", i)
-    changepoints[i] <- which.max(object$Parameter_Estimates[[class_num]]$K_prob)-1
+    changepoints[i] <- which.max(x$Parameter_Estimates[[class_num]]$K_prob)-1
   }
 
   # pull variances for each class
@@ -122,14 +120,14 @@ getVarCov.PREM <- function(object, ...){
     cp_num <- paste0("K_", changepoints)[i]
     varcor_vec <- c()
     # random effects
-    varcor_vec[1] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[1]
-    varcor_vec[2] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[2]
+    varcor_vec[1] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[1]
+    varcor_vec[2] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[2]
     # if there are changepoints (beyond linear)
     if(changepoints[i]>0){
       for(k in 1:changepoints[i]){
         # random effects
-        varcor_vec[2*k+1] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_var[k]
-        varcor_vec[2*k+2] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[k+2]
+        varcor_vec[2*k+1] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_var[k]
+        varcor_vec[2*k+2] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_var[k+2]
       }
     }
     n_var <- length(varcor_vec)
@@ -162,41 +160,41 @@ getVarCov.PREM <- function(object, ...){
 
 #' @rdname getVarCov
 #' @export
-print.getVarCov.BPREM <- function(object, ...){
+print.getVarCov.BPREM <- function(x, ...){
 
   cat("Random Effects Variance-Covariance Matrix\n")
-  print(round(object$cov_mat,3), na.print="")
+  print(round(x$cov_mat,3), na.print="")
   cat("\n")
   cat("Random Effects Correlation Matrix\n")
-  print(round(object$cor_mat,3), na.print="")
+  print(round(x$cor_mat,3), na.print="")
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }
 
 #' @rdname getVarCov
 #' @export
-print.getVarCov.CREM <- function(object, ...){
+print.getVarCov.CREM <- function(x, ...){
 
   cat("Random Effects Variance-Covariance Matrix for Individuals\n")
-  print(round(object$ind_mat,3), na.print="")
+  print(round(x$ind_mat,3), na.print="")
   cat("\n")
   cat("Random Effects Variance-Covariance Matrix for Groups\n")
-  print(round(object$grp_mat,3), na.print="")
+  print(round(x$grp_mat,3), na.print="")
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }
 
 #' @rdname getVarCov
 #' @export
-print.getVarCov.PREM <- function(object, ...){
+print.getVarCov.PREM <- function(x, ...){
 
-  for(i in 1:length(object)){
+  for(i in 1:length(x)){
     cat(paste0("Random Effects Variance-Covariance Matrix for Class ",i,"\n"))
-    print(round(object[[i]],3), na.print="")
+    print(round(x[[i]],3), na.print="")
     cat("\n")
   }
 
-  invisible(object)
+  invisible(x)
 }

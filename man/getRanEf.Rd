@@ -7,16 +7,16 @@
 \alias{print.getRanEf}
 \title{Extract random effects}
 \usage{
-getRanEf(object, ...)
+getRanEf(x, ...)
 
-\method{getRanEf}{BPREM}(object, ...)
+\method{getRanEf}{BPREM}(x, ...)
 
-\method{getRanEf}{CREM}(object, ...)
+\method{getRanEf}{CREM}(x, ...)
 
-\method{print}{getRanEf}(object, ...)
+\method{print}{getRanEf}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM" or "CREM".}
+\item{x}{An object of class "BPREM" or "CREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -32,9 +32,6 @@ data(results_bprem)
 # get random effects
 getRanEf(results_bprem)
 
-}
-\seealso{
-\link{Bayes_BPREM, Bayes_CREM}
 }
 \author{
 Corissa T. Rohloff

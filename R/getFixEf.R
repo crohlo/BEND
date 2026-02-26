@@ -3,14 +3,12 @@
 #' @description
 #' Extracts the fixed effects parameter estimates from a fitted model of class "BPREM", "CREM", or "PREM".
 #'
-#' @param object An object of class "BPREM", "CREM", or "PREM".
+#' @param x An object of class "BPREM", "CREM", or "PREM".
 #' @param ... Additional arguments.
 #'
-#' @returns Returns a vector or dataframe of fixed effects parameter values.
+#' @returns Returns a vector or data frame of fixed effects parameter values.
 #'
 #' @author Corissa T. Rohloff
-#'
-#' @seealso [Bayes_PREM, Bayes_CREM, Bayes_PREM]
 #'
 #' @examples
 #' # load fitted model results
@@ -19,19 +17,19 @@
 #' getFixEf(results_bprem)
 #'
 #' @export
-getFixEf <- function(object, ...) UseMethod(("getFixEf"))
+getFixEf <- function(x, ...) UseMethod(("getFixEf"))
 
 #' @rdname getFixEf
 #' @export
-getFixEf.BPREM <- function(object, ...) {
+getFixEf.BPREM <- function(x, ...) {
 
   # determine number of parameters
   n_param <- 4
   # define parameters for labeling
   param_names <- c("Intercept", "Slope", "Change in Slope", "Changepoint")
 
-  fix_eff_est <- matrix(object$Parameter_Estimates[1:(n_param*2),"Mean"], ncol=2)
-  colnames(fix_eff_est) <- c(object$Call$y1_var, object$Call$y2_var)
+  fix_eff_est <- matrix(x$Parameter_Estimates[1:(n_param*2),"Mean"], ncol=2)
+  colnames(fix_eff_est) <- c(x$Call$y1_var, x$Call$y2_var)
   rownames(fix_eff_est) <- paste0(param_names)
   fix_eff_est <- as.data.frame(fix_eff_est)
 
@@ -42,10 +40,10 @@ getFixEf.BPREM <- function(object, ...) {
 
 #' @rdname getFixEf
 #' @export
-getFixEf.CREM <- function(object, ...){
+getFixEf.CREM <- function(x, ...){
 
   # determine form
-  form <- object$Functional_Form
+  form <- x$Functional_Form
   # determine number of parameters
   if(form=="linear")                           n_param <- 2
   if(form=="quadratic" | form=="exponential")  n_param <- 3
@@ -56,7 +54,7 @@ getFixEf.CREM <- function(object, ...){
   if(form=="exponential")  param_names <- c("Intercept", "Total Change", "Growth Rate")
   if(form=="piecewise")    param_names <- c("Intercept", "Slope", "Change in Slope", "Changepoint")
 
-  fix_eff_est <- object$Parameter_Estimates[1:n_param,"Mean"]
+  fix_eff_est <- x$Parameter_Estimates[1:n_param,"Mean"]
   names(fix_eff_est) <- param_names
 
   out <- list(fixef = fix_eff_est)
@@ -66,16 +64,16 @@ getFixEf.CREM <- function(object, ...){
 
 #' @rdname getFixEf
 #' @export
-getFixEf.PREM <- function(object, ...){
+getFixEf.PREM <- function(x, ...){
 
   # determine number of classes
-  n_class <- length(unique(object$Class_Information$class_membership))
+  n_class <- length(unique(x$Class_Information$class_membership))
 
   # determine number of changepoints in each class (based on final model results)
   changepoints <- c()
   for(i in 1:n_class){
     class_num <- paste0("Class_", i)
-    changepoints[i] <- which.max(object$Parameter_Estimates[[class_num]]$K_prob)-1
+    changepoints[i] <- which.max(x$Parameter_Estimates[[class_num]]$K_prob)-1
   }
   max_cp <- max(changepoints)
 
@@ -85,14 +83,14 @@ getFixEf.PREM <- function(object, ...){
     class_num <- paste0("Class_", i)
     cp_num <- paste0("K_", changepoints)[i]
     # fixed effects
-    fixef_mat[1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[1]
-    fixef_mat[2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[2]
+    fixef_mat[1,i] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[1]
+    fixef_mat[2,i] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[2]
     # if there are changepoints (beyond linear)
     if(changepoints[i]>0){
       for(k in 1:changepoints[i]){
         # fixed effects
-        fixef_mat[2*k+1,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_mean[k]
-        fixef_mat[2*k+2,i] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[k+2]
+        fixef_mat[2*k+1,i] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_mean[k]
+        fixef_mat[2*k+2,i] <- x$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[k+2]
       }
     }
   }
@@ -114,11 +112,11 @@ getFixEf.PREM <- function(object, ...){
 
 #' @rdname getFixEf
 #' @export
-print.getFixEf <- function(object, ...){
+print.getFixEf <- function(x, ...){
 
   cat("Fixed Effects Parameters\n")
-  print(object$fixef, na.print="")
+  print(x$fixef, na.print="")
   cat("\n")
 
-  invisible(object)
+  invisible(x)
 }

@@ -7,12 +7,14 @@
 \usage{
 \method{summary}{BPREM}(object, ...)
 
-\method{print}{summary.BPREM}(object, ...)
+\method{print}{summary.BPREM}(x, ...)
 }
 \arguments{
 \item{object}{An object of class "BPREM" (returned by \code{Bayes_BPREM(...)}).}
 
 \item{...}{Additional arguments.}
+
+\item{x}{An object of class "summary.BPREM".}
 }
 \value{
 Returns a list of key parameter estimates.

@@ -3,7 +3,7 @@
 #' @description
 #' Provides a fitted plot of a PREM model, as returned by `Bayes_PREM()`.
 #'
-#' @param object An object of class "PREM" (returned by `Bayes_PREM(...)`).
+#' @param x An object of class "PREM" (returned by `Bayes_PREM(...)`).
 #' @param xlab X-axis label for the generated plot.
 #' @param ylab Y-axis label for the generated plot.
 #' @param colors Colors for each class (`PREMM` or `CI-PREMM`). By default, up to 5 colors are provided in the following order: "blue" (class 1), "red" (class 2), "green" (class 3), "gold" (class 4), "gray" (class 5).
@@ -24,11 +24,13 @@
 #' @import graphics
 #'
 #' @export
-plot.PREM <- function(object,
+plot.PREM <- function(x,
                       xlab='X', ylab='Y',
                       colors=NULL, mean_colors=NULL,
                       legend_pos="topright", ...){
   # Setup ----
+
+  object <- x
 
   data <- object$Data
   id_var <- object$Call$id_var

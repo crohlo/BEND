@@ -5,7 +5,7 @@
 \title{Plot the results of a bivariate piecewise random effects model (BPREM)}
 \usage{
 \method{plot}{BPREM}(
-  object,
+  x,
   xlab = "X",
   ylab = "Y",
   colors = NULL,
@@ -15,7 +15,7 @@
 )
 }
 \arguments{
-\item{object}{An object of class "BPREM" (returned by \code{Bayes_BPREM(...)}).}
+\item{x}{An object of class "BPREM" (returned by \code{Bayes_BPREM(...)}).}
 
 \item{xlab}{X-axis label for the generated plot.}
 

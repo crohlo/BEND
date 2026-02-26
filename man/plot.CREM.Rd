@@ -5,7 +5,7 @@
 \title{Plot the results of a crossed random effects model (CREM)}
 \usage{
 \method{plot}{CREM}(
-  object,
+  x,
   xlab = "X",
   ylab = "Y",
   colors = NULL,
@@ -15,11 +15,17 @@
 )
 }
 \arguments{
-\item{object}{An object of class "CREM" (returned by \code{Bayes_CREM(...)}).}
+\item{x}{An object of class "CREM" (returned by \code{Bayes_CREM(...)}).}
 
 \item{xlab}{X-axis label for the generated plot.}
 
 \item{ylab}{Y-axis label for the generated plot.}
+
+\item{colors}{Color for observed trajectories (optional). Default is "grey".}
+
+\item{mean_colors}{Colors for the trajectory defined by the mean parameters for each outcome (optional). Default is "black".}
+
+\item{legend_pos}{(optional) Option to change legend position (default = "topright").}
 
 \item{...}{(optional) Other parameters to pass to the \code{plot()} function.}
 }
@@ -31,9 +37,9 @@ Provides a fitted plot of a CREM model, as returned by \code{Bayes_CREM()}.
 }
 \examples{
 # load fitted model results
-data(results_crem)
+data(results_pcrem)
 # plot fitted results
-plot(results_crem)
+plot(results_pcrem)
 
 }
 \author{

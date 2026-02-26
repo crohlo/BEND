@@ -10,22 +10,22 @@
 \alias{print.getVarCov.PREM}
 \title{Extract random effects variance-covariance matrix}
 \usage{
-getVarCov(object, ...)
+getVarCov(x, ...)
 
-\method{getVarCov}{BPREM}(object, ...)
+\method{getVarCov}{BPREM}(x, ...)
 
-\method{getVarCov}{CREM}(object, ...)
+\method{getVarCov}{CREM}(x, ...)
 
-\method{getVarCov}{PREM}(object, ...)
+\method{getVarCov}{PREM}(x, ...)
 
-\method{print}{getVarCov.BPREM}(object, ...)
+\method{print}{getVarCov.BPREM}(x, ...)
 
-\method{print}{getVarCov.CREM}(object, ...)
+\method{print}{getVarCov.CREM}(x, ...)
 
-\method{print}{getVarCov.PREM}(object, ...)
+\method{print}{getVarCov.PREM}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM", "CREM", or "PREM".}
+\item{x}{An object of class "BPREM", "CREM", or "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -41,9 +41,6 @@ data(results_prem)
 # get random effects variance-covariance matrices
 getVarCov(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM, Bayes_CREM, Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

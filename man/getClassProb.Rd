@@ -6,14 +6,14 @@
 \alias{print.getClassProb.PREM}
 \title{Extract class probabilities}
 \usage{
-getClassProb(object, ...)
+getClassProb(x, ...)
 
-\method{getClassProb}{PREM}(object, ...)
+\method{getClassProb}{PREM}(x, ...)
 
-\method{print}{getClassProb.PREM}(object, ...)
+\method{print}{getClassProb.PREM}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "PREM".}
+\item{x}{An object of class "PREM".}
 
 \item{...}{Additional arguments.}
 }
@@ -29,9 +29,6 @@ data(results_prem)
 # get class probabilities
 getClassProb(results_prem)
 
-}
-\seealso{
-\link{Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff

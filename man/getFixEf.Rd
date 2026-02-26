@@ -8,23 +8,23 @@
 \alias{print.getFixEf}
 \title{Extract fixed effects parameter estimates}
 \usage{
-getFixEf(object, ...)
+getFixEf(x, ...)
 
-\method{getFixEf}{BPREM}(object, ...)
+\method{getFixEf}{BPREM}(x, ...)
 
-\method{getFixEf}{CREM}(object, ...)
+\method{getFixEf}{CREM}(x, ...)
 
-\method{getFixEf}{PREM}(object, ...)
+\method{getFixEf}{PREM}(x, ...)
 
-\method{print}{getFixEf}(object, ...)
+\method{print}{getFixEf}(x, ...)
 }
 \arguments{
-\item{object}{An object of class "BPREM", "CREM", or "PREM".}
+\item{x}{An object of class "BPREM", "CREM", or "PREM".}
 
 \item{...}{Additional arguments.}
 }
 \value{
-Returns a vector or dataframe of fixed effects parameter values.
+Returns a vector or data frame of fixed effects parameter values.
 }
 \description{
 Extracts the fixed effects parameter estimates from a fitted model of class "BPREM", "CREM", or "PREM".
@@ -35,9 +35,6 @@ data(results_bprem)
 # get fixed effects
 getFixEf(results_bprem)
 
-}
-\seealso{
-\link{Bayes_PREM, Bayes_CREM, Bayes_PREM}
 }
 \author{
 Corissa T. Rohloff
