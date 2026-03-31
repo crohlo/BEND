@@ -18,7 +18,7 @@ getKProb(x, ...)
 \item{...}{Additional arguments.}
 }
 \value{
-Returns a list of the changepoint probabilities for each class .
+Returns a list of the posterior probabilities for each possible number of changepoints, for each class.
 }
 \description{
 Extracts the K (number of changepoints) probabilities from a fitted model of class "PREM".

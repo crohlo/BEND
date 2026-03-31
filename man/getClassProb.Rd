@@ -18,10 +18,10 @@ getClassProb(x, ...)
 \item{...}{Additional arguments.}
 }
 \value{
-Returns a list of the class probabilities.
+Returns a list of the posterior class probabilities for each individual.
 }
 \description{
-Extracts the class probabilities from a fitted model of class "PREM".
+Extracts the posterior class probabilities for each individual from a fitted model of class "PREM".
 }
 \examples{
 # load fitted model results

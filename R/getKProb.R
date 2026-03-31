@@ -6,7 +6,7 @@
 #' @param x An object of class "PREM".
 #' @param ... Additional arguments.
 #'
-#' @returns Returns a list of the changepoint probabilities for each class .
+#' @returns Returns a list of the posterior probabilities for each possible number of changepoints, for each class.
 #'
 #' @author Corissa T. Rohloff
 #'

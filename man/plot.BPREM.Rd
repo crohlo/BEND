@@ -23,7 +23,7 @@
 
 \item{colors}{Colors for each class outcome. By default, up to 2 colors are provided in the following order: "blue" (outcome 1), "red" (outcome 2).}
 
-\item{mean_colors}{Colors for the trajectory defined by the mean parameters for each outcome. By default, up to 5 colors are provided in the following order: "darkblue" (outcome 1), "darkred" (outcome 2).}
+\item{mean_colors}{Colors for the trajectory defined by the mean parameters for each outcome. By default, up to 2 colors are provided in the following order: "darkblue" (outcome 1), "darkred" (outcome 2).}
 
 \item{legend_pos}{(optional) Option to change legend position (default = "topright").}
 

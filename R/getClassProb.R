@@ -1,12 +1,12 @@
 #' Extract class probabilities
 #'
 #' @description
-#' Extracts the class probabilities from a fitted model of class "PREM".
+#' Extracts the posterior class probabilities for each individual from a fitted model of class "PREM".
 #'
 #' @param x An object of class "PREM".
 #' @param ... Additional arguments.
 #'
-#' @returns Returns a list of the class probabilities.
+#' @returns Returns a list of the posterior class probabilities for each individual.
 #'
 #' @author Corissa T. Rohloff
 #'
