@@ -70,7 +70,7 @@ summary.BPREM <- function(object, ...){
   ## return value
   out <- list("data" = x$Call$data,
               "y1_var" = x$Call$y1_var,
-              "y2_var" = x$Call$y1_var,
+              "y2_var" = x$Call$y2_var,
               "fix_eff_est" = fix_eff_est,
               "ran_eff_var_mat" = ran_eff_var_mat,
               "ran_eff_cov_mat" = ran_eff_cov_mat,
