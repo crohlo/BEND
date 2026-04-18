@@ -1,3 +1,7 @@
+# BEND 2.0.1
+## Bug Fixes
+* Corrected typos in summary() output for BPREM.
+
 # BEND 2.0.0
 ## New Features
 * Updated output of all models to include additional useful information (i.e., random coefficient estimates).
