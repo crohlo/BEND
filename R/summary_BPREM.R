@@ -46,7 +46,7 @@ summary.BPREM <- function(object, ...){
   ran_eff_cov_mat <- x$Parameter_Estimates[(2*(n_param*2)+(1:n_covar)),]
   names(ran_eff_cov_mat) <- c("Estimate", "Lower CI", "Upper CI")
   # get rownames
-  ss <- sub("cp", "g", sub("cov_b_", "", rownames(ran_eff_cov_mat))) ## replace cp with g to make following code simpler
+  ss <- sub("cp", "g", gsub("cov_b_", "", rownames(ran_eff_cov_mat))) ## replace cp with g to make following code simpler
   rownames(ran_eff_cov_mat) <- paste0("Cov(Outcome ", substr(ss,1,1), ": ", param_names[substr(ss,2,2)],
                                       ", Outcome ", substr(ss,4,4), ": ", param_names[substr(ss,5,5)], ")")
 
@@ -54,7 +54,7 @@ summary.BPREM <- function(object, ...){
   ran_eff_corr_mat <- x$Parameter_Estimates[(2*(n_param*2)+n_covar+3+(1:n_covar)),]
   names(ran_eff_corr_mat) <- c("Estimate", "Lower CI", "Upper CI")
   # get rownames
-  ss <- sub("cp", "g", sub("corr_b_", "", rownames(ran_eff_corr_mat))) ## replace cp with g to make following code simpler
+  ss <- sub("cp", "g", gsub("corr_b_", "", rownames(ran_eff_corr_mat))) ## replace cp with g to make following code simpler
   rownames(ran_eff_corr_mat) <- paste0("Corr(Outcome ", substr(ss,1,1), ": ", param_names[substr(ss,2,2)],
                                       ", Outcome ", substr(ss,4,4), ": ", param_names[substr(ss,5,5)], ")")
 
