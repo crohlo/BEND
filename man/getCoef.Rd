@@ -2,19 +2,13 @@
 % Please edit documentation in R/getCoef.R
 \name{getCoef}
 \alias{getCoef}
-\alias{getCoef.BPREM}
-\alias{getCoef.CREM}
-\alias{getCoef.PREM}
+\alias{getCoef.BEND}
 \alias{print.getCoef}
 \title{Extract random coefficients}
 \usage{
 getCoef(x, ...)
 
-\method{getCoef}{BPREM}(x, ...)
-
-\method{getCoef}{CREM}(x, ...)
-
-\method{getCoef}{PREM}(x, ...)
+\method{getCoef}{BEND}(x, ...)
 
 \method{print}{getCoef}(x, ...)
 }

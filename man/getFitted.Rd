@@ -2,19 +2,13 @@
 % Please edit documentation in R/getFitted.R
 \name{getFitted}
 \alias{getFitted}
-\alias{getFitted.BPREM}
-\alias{getFitted.CREM}
-\alias{getFitted.PREM}
+\alias{getFitted.BEND}
 \alias{print.getFitted}
 \title{Extract fitted values}
 \usage{
 getFitted(x, ...)
 
-\method{getFitted}{BPREM}(x, ...)
-
-\method{getFitted}{CREM}(x, ...)
-
-\method{getFitted}{PREM}(x, ...)
+\method{getFitted}{BEND}(x, ...)
 
 \method{print}{getFitted}(x, ...)
 }

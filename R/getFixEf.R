@@ -34,7 +34,7 @@ getFixEf.BPREM <- function(x, ...) {
   fix_eff_est <- as.data.frame(fix_eff_est)
 
   out <- list(fixef = fix_eff_est)
-  class(out) <- c("getFixEf", class(out$fixef))
+  class(out) <- c("getFixEf.BPREM", "getFixEf.BEND", class(out$fixef))
   return(out)
 }
 
@@ -58,7 +58,7 @@ getFixEf.CREM <- function(x, ...){
   names(fix_eff_est) <- param_names
 
   out <- list(fixef = fix_eff_est)
-  class(out) <- c("getFixEf", class(out$fixef))
+  class(out) <- c("getFixEf.CREM", "getFixEf.BEND", class(out$fixef))
   return(out)
 }
 
@@ -106,13 +106,13 @@ getFixEf.PREM <- function(x, ...){
   rownames(fixef_mat) <- my_rownames
 
   out <- list(fixef = fixef_mat)
-  class(out) <- c("getFixEf", class(out$fixef))
+  class(out) <- c("getFixEf.PREM", "getFixEf.BEND", class(out$fixef))
   return(out)
 }
 
 #' @rdname getFixEf
 #' @export
-print.getFixEf <- function(x, ...){
+print.getFixEf.BEND <- function(x, ...){
 
   cat("Fixed Effects Parameters\n")
   print(x$fixef, na.print="")

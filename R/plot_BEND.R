@@ -16,7 +16,7 @@
 #' @param legend_pos (optional) Option to change legend position (default = "topright").
 #' @param ... (optional) Other parameters to pass to the `plot()` function.
 #'
-#' @returns No return value, called to generate plot.
+#' @returns No return value.
 #'
 #' @author Corissa T. Rohloff
 #'
@@ -291,8 +291,6 @@ plot_BEND <- function(data,
              lwd=4)
       legend(legend_pos, lty=1, col=colors[1:2], legend=c("Outcome 1", "Outcome 2"))
     }
-
-  return('Observed trajectories with fitted results')
 
   }
 }

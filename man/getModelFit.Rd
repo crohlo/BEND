@@ -2,21 +2,15 @@
 % Please edit documentation in R/getModelFit.R
 \name{getModelFit}
 \alias{getModelFit}
-\alias{getModelFit.BPREM}
-\alias{getModelFit.CREM}
-\alias{getModelFit.PREM}
-\alias{print.getModelFit}
+\alias{getModelFit.BEND}
+\alias{print.getModelFit.BEND}
 \title{Extract model fit}
 \usage{
 getModelFit(x, ...)
 
-\method{getModelFit}{BPREM}(x, ...)
+\method{getModelFit}{BEND}(x, ...)
 
-\method{getModelFit}{CREM}(x, ...)
-
-\method{getModelFit}{PREM}(x, ...)
-
-\method{print}{getModelFit}(x, ...)
+\method{print}{getModelFit.BEND}(x, ...)
 }
 \arguments{
 \item{x}{An object of class "BPREM", "CREM", or "PREM".}

@@ -182,6 +182,15 @@ Bayes_BPREM <- function(data,
 
   # Compiling Full Results -----
 
+  ## Call Info
+  call_info <- as.list(match.call())
+  def_args <- formals(sys.function())
+  for(arg in names(def_args)){
+    if(!(arg %in% names(call_info))){
+      call_info[[arg]] <- def_args[[arg]]
+    }
+  }
+
   ## Convergence
 
   # Setup the parameter vector
@@ -247,7 +256,7 @@ Bayes_BPREM <- function(data,
   run_time_total_end <- Sys.time()
   run_time_total <- run_time_total_end - run_time_total_start
 
-  my_results <- list('Call' = as.list(match.call()),
+  my_results <- list('Call' = call_info,
                      'Sample_Size' = list(n_subj=n_subj, n_time=n_time),
                      'Data' = data,
                      'Convergence' = convergence,
@@ -258,7 +267,7 @@ Bayes_BPREM <- function(data,
                      'Run_Time' = format(run_time_total))
   if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
   if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list[,1:47]}
-  class(my_results) <- 'BPREM'
+  class(my_results) <- c('BPREM', 'BEND')
   return(my_results)
 }
 

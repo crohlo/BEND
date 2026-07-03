@@ -4,7 +4,8 @@
 \alias{getRanEf}
 \alias{getRanEf.BPREM}
 \alias{getRanEf.CREM}
-\alias{print.getRanEf}
+\alias{print.getRanEf.BPREM}
+\alias{print.getRanEf.CREM}
 \title{Extract random effects}
 \usage{
 getRanEf(x, ...)
@@ -13,7 +14,9 @@ getRanEf(x, ...)
 
 \method{getRanEf}{CREM}(x, ...)
 
-\method{print}{getRanEf}(x, ...)
+\method{print}{getRanEf.BPREM}(x, ...)
+
+\method{print}{getRanEf.CREM}(x, ...)
 }
 \arguments{
 \item{x}{An object of class "BPREM" or "CREM".}

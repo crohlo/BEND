@@ -21,30 +21,10 @@ getCoef <- function(x, ...) UseMethod(("getCoef"))
 
 #' @rdname getCoef
 #' @export
-getCoef.BPREM <- function(x, ...){
+getCoef.BEND <- function(x, ...){
 
   out <- x$Random_Coefficients$rancoef
-  class(out) <- c("getCoef.BPREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getCoef
-#' @export
-getCoef.CREM <- function(x, ...){
-
-  out <- x$Random_Coefficients$rancoef
-  class(out) <- c("getCoef.CREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getCoef
-#' @export
-getCoef.PREM <- function(x, ...){
-
-  out <- x$Random_Coefficients$rancoef
-  class(out) <- c("getCoef.PREM", class(out))
+  class(out) <- c("getCoef.BEND", class(out))
   return(out)
 
 }

@@ -42,9 +42,25 @@ getRanEf.CREM <- function(x, ...){
 
 #' @rdname getRanEf
 #' @export
-print.getRanEf <- function(x, ...){
+print.getRanEf.BPREM <- function(x, ...){
 
-  print(x, na.print="")
+  cat("Random Effects\n")
+  print(x$ranef, na.print="")
+  cat("\n")
+
+  invisible(x)
+}
+
+#' @rdname getRanEf
+#' @export
+print.getRanEf.CREM <- function(x, ...){
+
+  cat("Individual Random Effects\n")
+  print(x$ranef_b, na.print="")
+  cat("\n")
+
+  cat("Group Random Effects\n")
+  print(x$ranef_g, na.print="")
   cat("\n")
 
   invisible(x)

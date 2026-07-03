@@ -855,6 +855,15 @@ Bayes_PREM <- function(data,
 
   # Compiling Full Results -----
 
+  ## Call Info
+  call_info <- as.list(match.call())
+  def_args <- formals(sys.function())
+  for(arg in names(def_args)){
+    if(!(arg %in% names(call_info))){
+      call_info[[arg]] <- def_args[[arg]]
+    }
+  }
+
   ## Convergence
   # growth parameters (class dependent)
   for(c in 1:n_class){
@@ -1024,7 +1033,7 @@ Bayes_PREM <- function(data,
   run_time_total_end <- Sys.time()
   run_time_total <- run_time_total_end - run_time_total_start
 
-  my_results <- list('Call' = as.list(match.call()),
+  my_results <- list('Call' = call_info,
                      'Sample_Size' = list(n_subj=n_subj, n_time=n_time),
                      'Data' = data,
                      'Convergence' = convergence,
@@ -1036,6 +1045,6 @@ Bayes_PREM <- function(data,
                      'Run_Time' = format(run_time_total))
   if(save_full_chains==TRUE){my_results$Full_MCMC_Chains=full_out}
   if(save_conv_chains==TRUE){my_results$Convergence_MCMC_Chains=mcmc_list}
-  class(my_results)='PREM'
+  class(my_results) <- c('PREM', 'BEND')
   return(my_results)
 }

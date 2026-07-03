@@ -21,39 +21,19 @@ getModelFit <- function(x, ...) UseMethod(("getModelFit"))
 
 #' @rdname getModelFit
 #' @export
-getModelFit.BPREM <- function(x, ...){
+getModelFit.BEND <- function(x, ...){
 
-  out <- unlist(x$Model_Fit)
-  class(out) <- c("getModelFit.BPREM", class(out))
+  out <- list(mod_fit = as.data.frame(x$Model_Fit))
+  class(out) <- c("getModelFit.BEND", class(out))
   return(out)
 
 }
 
 #' @rdname getModelFit
 #' @export
-getModelFit.CREM <- function(x, ...){
+print.getModelFit.BEND <- function(x, ...){
 
-  out <- unlist(x$Model_Fit)
-  class(out) <- c("getModelFit.CREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getModelFit
-#' @export
-getModelFit.PREM <- function(x, ...){
-
-  out <- unlist(x$Model_Fit)
-  class(out) <- c("getModelFit.PREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getModelFit
-#' @export
-print.getModelFit <- function(x, ...){
-
-  print(round(x,2), na.print="")
+  print(round(x$mod_fit,2), na.print="", row.names = FALSE)
   cat("\n")
 
   invisible(x)

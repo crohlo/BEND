@@ -21,30 +21,10 @@ getFitted <- function(x, ...) UseMethod(("getFitted"))
 
 #' @rdname getFitted
 #' @export
-getFitted.BPREM <- function(x, ...){
+getFitted.BEND <- function(x, ...){
 
   out <- x$Fitted_Values
-  class(out) <- c("getFitted.BPREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getFitted
-#' @export
-getFitted.CREM <- function(x, ...){
-
-  out <- x$Fitted_Values
-  class(out) <- c("getFitted.CREM", class(out))
-  return(out)
-
-}
-
-#' @rdname getFitted
-#' @export
-getFitted.PREM <- function(x, ...){
-
-  out <- x$Fitted_Values
-  class(out) <- c("getFitted.PREM", class(out))
+  class(out) <- c("getFitted.BEND", class(out))
   return(out)
 
 }

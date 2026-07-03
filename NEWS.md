@@ -1,3 +1,9 @@
+# BEND 2.1.0
+## New Features
+* Updates to class inheritance structure
+* Minor documentation updates
+
+
 # BEND 2.0.1
 ## Bug Fixes
 * Corrected typos in summary() output for BPREM.

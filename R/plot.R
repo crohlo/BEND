@@ -1,0 +1,363 @@
+#' Plot the results of a piecewise random effects model (PREM)
+#'
+#' @description
+#' Provides a fitted plot of a PREM model, as returned by `Bayes_PREM()`.
+#'
+#' @param x An object of class "PREM" (returned by `Bayes_PREM(...)`).
+#' @param xlab X-axis label for the generated plot.
+#' @param ylab Y-axis label for the generated plot.
+#' @param colors Colors for each class (`PREMM` or `CI-PREMM`). By default, up to 5 colors are provided in the following order: "blue" (class 1), "red" (class 2), "green" (class 3), "gold" (class 4), "gray" (class 5).
+#' @param mean_colors Colors for the trajectory defined by the mean parameters for each class (`PREMM` or `CI-PREMM`). By default, up to 5 colors are provided in the following order: "darkblue" (class 1), "darkred" (class 2), "darkgreen" (class 3), "gold4" (class 4), "darkgray" (class 5).
+#' @param legend_pos (optional) Option to change legend position (default = "topright").
+#' @param ... (optional) Other parameters to pass to the `plot()` function.
+#'
+#' @returns No return value.
+#'
+#' @author Corissa T. Rohloff
+#'
+#' @examples
+#' # load fitted model results
+#' data(results_prem)
+#' # plot fitted results
+#' plot(results_prem)
+#'
+#' @import graphics
+#'
+#' @export
+plot.PREM <- function(x,
+                      xlab='X', ylab='Y',
+                      colors=NULL, mean_colors=NULL,
+                      legend_pos="topright", ...){
+  # Setup ----
+
+  object <- x
+
+  data <- object$Data
+  id_var <- object$Call$id_var
+  time_var <- object$Call$time_var
+  y_var <- object$Call$y_var
+
+  if(is.null(colors)) colors <- c('blue','red','green','gold','gray')
+  if(is.null(mean_colors)) mean_colors = c('darkblue','darkred','darkgreen','gold4','darkgray')
+
+  ## outcome data - matrix form
+  y <- reshape(data[,c(id_var, time_var, y_var)],
+               idvar=id_var,
+               timevar=time_var,
+               direction='wide')
+  y <- unname(as.matrix(y[,names(y)!=id_var]))
+
+  ## time data - matrix form
+  ## should be the same dimensions as y
+  x <- matrix(data[,c(time_var)],
+              byrow=TRUE,
+              nrow=dim(y)[1],
+              ncol=dim(y)[2])
+
+  ## Define relevant variables
+  n_subj <- nrow(y)
+  n_time <- ncol(y)
+  xvec <- seq(min(x), max(x), length.out=100)
+
+  # Fitted Plot -----
+
+  # determine number of classes
+  n_class <- length(unique(object$Class_Information$class_membership))
+
+  # determine number of changepoints in each class (based on final model results)
+  changepoints <- c()
+  class_data <- data.frame()
+  for(i in 1:n_class){
+    class_num <- paste0("Class_", i)
+    changepoints[i] <- which.max(object$Parameter_Estimates[[class_num]]$K_prob)-1
+  }
+  max_cp <- max(changepoints)
+
+  # determine who is in each class
+  class_list <- list()
+  for(i in 1:n_class){
+    class_list[[i]] <- c(1:n_subj)[object$Class_Information$class_membership==i]
+  }
+
+  # class mean estimates
+  class_means <- list()
+  for(i in 1:n_class){
+    class_num <- paste0("Class_", i)
+    cp_num <- paste0("K_", changepoints)[i]
+    k <- changepoints[i]
+
+    if(k==0) I <- rep(0, max_cp)
+    if(k>0) I <- c(rep(1,k), rep(0,max_cp-k+2))
+    # i = k+1
+    int <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[1]
+    slope1 <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[2]
+
+    slope_cp <- rep(0,max_cp)
+    cp <- rep(0,max_cp)
+    if(k>0){
+      slope_cp[1:k] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$beta_mean[3:(k+2)]
+      cp[1:k] <- object$Parameter_Estimates[[class_num]]$K[[cp_num]]$cp_mean[1:k]
+    }
+
+    class_means[[i]] <- rep(0,100)
+    for(j in 1:100){
+      temp <- int + slope1*xvec[j]
+      if(k>0){
+        for(l in 1:k){
+          temp <- temp + slope_cp[l]*(max(0, xvec[j]-cp[l]))}
+      }
+      class_means[[i]][j] <- temp
+    }
+  }
+
+  plot(NULL, NULL,
+       xlim = c(min(x), max(x)),
+       ylim = c(min(y,na.rm=TRUE), max(y,na.rm=TRUE)),
+       ylab = ylab,
+       xlab = xlab, ...)
+  for(i in 1:n_class){
+    for(j in class_list[[i]]){
+      points(x[j,!is.na(y[j,])],
+             y[j,!is.na(y[j,])],
+             type = "l",
+             col=colors[i])
+    }
+    points(xvec,
+           class_means[[i]],
+           type='l',
+           col=mean_colors[i],
+           lwd=4)
+  }
+  legend(legend_pos, lty=1, col=colors[1:n_class], legend=paste0("Class ", 1:n_class))
+
+}
+
+#' Plot the results of a bivariate piecewise random effects model (BPREM)
+#'
+#' @description
+#' Provides a fitted plot of a BPREM model, as returned by `Bayes_BPREM()`.
+#'
+#' @param x An object of class "BPREM" (returned by `Bayes_BPREM(...)`).
+#' @param xlab X-axis label for the generated plot.
+#' @param ylab Y-axis label for the generated plot.
+#' @param colors Colors for each class outcome. By default, up to 2 colors are provided in the following order: "blue" (outcome 1), "red" (outcome 2).
+#' @param mean_colors Colors for the trajectory defined by the mean parameters for each outcome. By default, up to 2 colors are provided in the following order: "darkblue" (outcome 1), "darkred" (outcome 2).
+#' @param legend_pos (optional) Option to change legend position (default = "topright").
+#' @param ... (optional) Other parameters to pass to the `plot()` function.
+#'
+#' @returns No return value.
+#'
+#' @author Corissa T. Rohloff
+#'
+#' @examples
+#' # load fitted model results
+#' data(results_bprem)
+#' # plot fitted results
+#' plot(results_bprem)
+#'
+#' @import graphics
+#'
+#' @export
+plot.BPREM <- function(x,
+                       xlab='X', ylab='Y',
+                       colors=NULL, mean_colors=NULL,
+                       legend_pos="topright", ...){
+  # Setup ----
+
+  object <- x
+
+  data <- object$Data
+  id_var <- object$Call$id_var
+  time_var <- object$Call$time_var
+  y_var <- object$Call$y1_var
+  y2_var <- object$Call$y2_var
+
+  if(is.null(colors)) colors <- c('blue','red')
+  if(is.null(mean_colors)) mean_colors = c('darkblue','darkred')
+
+  ## outcome data - matrix form
+  y <- reshape(data[,c(id_var, time_var, y_var)],
+               idvar=id_var,
+               timevar=time_var,
+               direction='wide')
+  y <- unname(as.matrix(y[,names(y)!=id_var]))
+
+  y2 <- reshape(data[,c(id_var, time_var, y2_var)],
+                idvar=id_var,
+                timevar=time_var,
+                direction='wide')
+  y2 <- unname(as.matrix(y2[,names(y2)!=id_var]))
+
+  ## time data - matrix form
+  ## should be the same dimensions as y
+  x <- matrix(data[,c(time_var)],
+              byrow=TRUE,
+              nrow=dim(y)[1],
+              ncol=dim(y)[2])
+
+  ## Define relevant variables
+  n_subj <- nrow(y)
+  n_time <- ncol(y)
+  xvec <- seq(min(x), max(x), length.out=100)
+
+  # Fitted Plot -----
+
+  # pull fixed effect estimates
+  mean_est1 <- object$Parameter_Estimates$Mean[1:4]
+  mean_est2 <- object$Parameter_Estimates$Mean[5:8]
+
+  # define piecewise function
+  pw_eq <- function(x,est){
+    return(est[1] + est[2]*x + est[3]*(max(0, x-est[4])))
+  }
+
+  mean_traj1 <- rep(0,100)
+  mean_traj2 <- rep(0,100)
+  for(i in 1:100){
+    mean_traj1[i] <- pw_eq(xvec[i], mean_est1)
+    mean_traj2[i] <- pw_eq(xvec[i], mean_est2)
+  }
+
+  plot(x[1, !is.na(y[1,])],
+       y[1, !is.na(y[1,])],
+       type = "l",
+       col = "grey",
+       ylim = c(min(y,na.rm=TRUE), max(y,na.rm=TRUE)),
+       xlim= c(min(x,na.rm=TRUE), max(x,na.rm=TRUE)),
+       xlab = xlab,
+       ylab = ylab, ...)
+  for(i in 2:n_subj){
+    lines(x[i, !is.na(y[i,])],
+          y[i, !is.na(y[i,])],
+          type = "l",
+          col = colors[1])
+  }
+  for(i in 1:n_subj){
+    lines(x[i, !is.na(y2[i,])],
+          y2[i, !is.na(y2[i,])],
+          type = "l",
+          col = colors[2])
+  }
+  points(xvec,
+         mean_traj1,
+         type='l',
+         col=mean_colors[1],
+         lwd=4)
+  points(xvec,
+         mean_traj2,
+         type='l',
+         col=mean_colors[2],
+         lwd=4)
+  legend(legend_pos, lty=1, col=colors[1:2], legend=c(y_var, y2_var))
+
+}
+
+#' Plot the results of a crossed random effects model (CREM)
+#'
+#' @description
+#' Provides a fitted plot of a CREM model, as returned by `Bayes_CREM()`.
+#'
+#' @param x An object of class "CREM" (returned by `Bayes_CREM(...)`).
+#' @param xlab X-axis label for the generated plot.
+#' @param ylab Y-axis label for the generated plot.
+#' @param colors Color for observed trajectories (optional). Default is "grey".
+#' @param mean_colors Colors for the trajectory defined by the mean parameters for each outcome (optional). Default is "black".
+#' @param legend_pos (optional) Option to change legend position (default = "topright").
+#' @param ... (optional) Other parameters to pass to the `plot()` function.
+#'
+#' @returns No return value.
+#'
+#' @author Corissa T. Rohloff
+#'
+#' @examples
+#' # load fitted model results
+#' data(results_pcrem)
+#' # plot fitted results
+#' plot(results_pcrem)
+#'
+#' @import graphics
+#'
+#' @export
+plot.CREM <- function(x,
+                      xlab='X', ylab='Y',
+                      colors=NULL, mean_colors=NULL,
+                      legend_pos="topright", ...){
+  # Setup ----
+
+  if(is.null(colors)) colors <- c('grey')
+  if(is.null(mean_colors)) mean_colors = c('black')
+
+  object <- x
+
+  data <- object$Data
+  id_var <- object$Call$ind_id_var
+  time_var <- object$Call$time_var
+  y_var <- object$Call$y_var
+
+  ## outcome data - matrix form
+  y <- reshape(data[,c(id_var, time_var, y_var)],
+               idvar=id_var,
+               timevar=time_var,
+               direction='wide')
+  y <- unname(as.matrix(y[,names(y)!=id_var]))
+
+  ## time data - matrix form
+  ## should be the same dimensions as y
+  x <- matrix(data[,c(time_var)],
+              byrow=TRUE,
+              nrow=dim(y)[1],
+              ncol=dim(y)[2])
+
+  ## Define relevant variables
+  n_subj <- nrow(y)
+  n_time <- ncol(y)
+  xvec <- seq(min(x), max(x), length.out=100)
+
+  # Fitted Plot -----
+
+  # determine form
+  form <- object$Functional_Form
+
+  # determine number of parameters
+  if(form=="linear")                           n_param <- 2
+  if(form=="quadratic" | form=="exponential")  n_param <- 3
+  if(form=="piecewise")                        n_param <- 4
+
+  # pull fixed effect estimates
+  mean_est <- object$Parameter_Estimates$Mean[1:n_param]
+
+  # define functional form equation
+
+  fit_form_eq <- function(x,est){
+    if(form=="linear")       return(est[1] + est[2]*x)
+    if(form=="quadratic")    return(est[1] + est[2]*x + est[3]*(x^2))
+    if(form=="exponential")  return(est[1] + est[2]*(1-exp(-est[3]*x)))
+    if(form=="piecewise")    return(est[1] + est[2]*x + est[3]*(max(0, x-est[4])))
+  }
+
+  mean_traj <- rep(0,100)
+  for(i in 1:100){
+    mean_traj[i] <- fit_form_eq(xvec[i], mean_est)
+  }
+
+  plot(x[1, !is.na(y[1,])],
+       y[1, !is.na(y[1,])],
+       type = "l",
+       col = colors,
+       ylim = c(min(y,na.rm=TRUE), max(y,na.rm=TRUE)),
+       xlim= c(min(x,na.rm=TRUE), max(x,na.rm=TRUE)),
+       xlab = xlab,
+       ylab = ylab, ...)
+  for(i in 2:n_subj){
+    lines(x[i, !is.na(y[i,])],
+          y[i, !is.na(y[i,])],
+          type = "l",
+          col = colors)
+  }
+  points(xvec,
+         mean_traj,
+         type='l',
+         col=mean_colors,
+         lwd=4)
+
+}

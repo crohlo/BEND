@@ -5,7 +5,7 @@
 \alias{getFixEf.BPREM}
 \alias{getFixEf.CREM}
 \alias{getFixEf.PREM}
-\alias{print.getFixEf}
+\alias{print.getFixEf.BEND}
 \title{Extract fixed effects parameter estimates}
 \usage{
 getFixEf(x, ...)
@@ -16,7 +16,7 @@ getFixEf(x, ...)
 
 \method{getFixEf}{PREM}(x, ...)
 
-\method{print}{getFixEf}(x, ...)
+\method{print}{getFixEf.BEND}(x, ...)
 }
 \arguments{
 \item{x}{An object of class "BPREM", "CREM", or "PREM".}
