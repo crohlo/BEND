@@ -112,7 +112,6 @@ plot_BEND <- function(data,
       legend(legend_pos, lty=1, col=colors[1:2], legend=c("Outcome 1", "Outcome 2"))
     }
 
-    return('Observed trajectories')
   }
 
   # Fitted Plot -----

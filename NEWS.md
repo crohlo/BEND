@@ -1,3 +1,7 @@
+# BEND 2.1.1
+## New Features
+* Minor output updates
+
 # BEND 2.1.0
 ## New Features
 * Updates to class inheritance structure
